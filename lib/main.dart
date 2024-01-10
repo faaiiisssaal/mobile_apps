@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'onboarding/appwrapper.dart';
 
 Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  debugPaintSizeEnabled = true;
   runApp(const MyApp());
 }
 
@@ -16,11 +12,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: true,
+      // debugShowMaterialGrid: true,
       title: 'Flutter Demo',
-      home: AppWrapper(),
+      theme: ThemeData(
+        primaryColor: Colors.white, // Set your desired primary color
+        hintColor: Colors.lightBlueAccent,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.blue, // Set the default background color for ElevatedButton
+          ),
+        ),// Set your desired accent color
+        // Add more color-related properties as needed
+      ),
+      home: const AppWrapper(),
     );
   }
 }
