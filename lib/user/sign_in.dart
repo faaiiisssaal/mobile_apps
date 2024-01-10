@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+
+import '../background/userdata.dart';
+import '../body/nextscreen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -17,12 +21,57 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _dateController = TextEditingController();
   bool _useEmailAndPassword = true;
 
-  void _showCalendar(BuildContext context) {
-    showDatePicker(
+  UserData userData = UserData(
+    email: '',
+    password: '',
+    memberId: '',
+    dateOfBirth: DateTime.now(),
+  );
+
+  void _showCalendar(BuildContext context) async {
+    DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900, 1, 1),
       lastDate: DateTime.now(),
+    );
+
+    if (selectedDate != null) {
+      setState(() {
+        _dateController.text = DateFormat('MM/dd/yyyy').format(selectedDate);
+      });
+    }
+  }
+
+  void switchInputType() {
+    setState(() {
+      // Reset data based on the current input type
+      if (_useEmailAndPassword) {
+        // Reset Email/Password data
+        _emailController.clear();
+        _passwordController.clear();
+        userData.email = '';
+        userData.password = '';
+      } else {
+        // Reset Member ID/Date of Birth data
+        _memberController.clear();
+        _dateController.clear();
+        userData.memberId = '';
+        userData.dateOfBirth = DateTime.now();
+      }
+
+      // Switch input type
+      _useEmailAndPassword = !_useEmailAndPassword;
+    });
+  }
+
+  void signIn() {
+    // Navigate to the next screen and pass userData
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NextScreen(userData: userData),
+      ),
     );
   }
 
@@ -40,58 +89,59 @@ class _SignInScreenState extends State<SignInScreen> {
     );
 
     return SafeArea(
-      maintainBottomViewPadding: true,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    height: screenHeight * 0.2,
-                    alignment: Alignment.center,
-                    child: Image.asset(
-                      'asset/smilynks.png',
-                      filterQuality: FilterQuality.high,
-                      width: screenHeight * 0.2,
-                    ), // Replace with your logo
-                  ),
-                  SizedBox(height: screenHeight * 0.02), // 2% of screen height
-
-                  // Single Row - ID Member and Date Birth
-                  // Email and Password Section
-                  if (_useEmailAndPassword)
-                    buildEmailAndPasswordSection(),
-
-                  // ID Member and Date Birth Section
-                  if (!_useEmailAndPassword)
-                    buildIDMemberAndDateBirthSection(),
-
-                  SizedBox(height: screenHeight * 0.02), // 2% of screen height
-                  // Switch between Email/Password and ID Member/Date Birth
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _useEmailAndPassword = !_useEmailAndPassword;
-                      });
-                    },
-                    child: Container(
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      height: screenHeight * 0.2,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text(
-                        _useEmailAndPassword ? 'Switch to ID Member and Date Birth' : 'Switch to Email and Password',
-                        style: const TextStyle(
-                          color: Colors.blue,
+                      child: Image.asset(
+                        'asset/smilynks.png',
+                        filterQuality: FilterQuality.high,
+                        width: screenHeight * 0.2,
+                      ), // Replace with your logo
+                    ),
+                    SizedBox(height: screenHeight * 0.02), // 2% of screen height
+
+                    // Single Row - ID Member and Date Birth
+                    // Email and Password Section
+                    if (_useEmailAndPassword)
+                      buildEmailAndPasswordSection(),
+
+                    // ID Member and Date Birth Section
+                    if (!_useEmailAndPassword)
+                      buildIDMemberAndDateBirthSection(),
+
+                    SizedBox(height: screenHeight * 0.02), // 2% of screen height
+                    // Switch between Email/Password and ID Member/Date Birth
+                    GestureDetector(
+                      onTap: () {
+                        switchInputType();
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Text(
+                          _useEmailAndPassword ? 'Switch to Member ID' : 'Switch to Email',
+                          style: const TextStyle(
+                            color: Colors.blue,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -99,20 +149,19 @@ class _SignInScreenState extends State<SignInScreen> {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5),
           child: Text(
-            "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights are reserved.",
+            "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
             softWrap: true,
-            style: const TextStyle(
-              fontSize: 12.5
-            ),
+            style: const TextStyle(fontSize: 12.5),
             textAlign: TextAlign.center,
           ),
-        )
+        ),
       ),
     );
   }
 
   Widget buildEmailAndPasswordSection() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextFormField(
@@ -121,6 +170,11 @@ class _SignInScreenState extends State<SignInScreen> {
             hintText: 'Email',
             prefixIcon: Icon(Icons.email_outlined),
           ),
+          onChanged: (value) {
+            setState(() {
+              userData.email = value;
+            });
+          },
         ),
         const SizedBox(height: 10.0),
         TextFormField(
@@ -140,11 +194,16 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
             ),
           ),
+          onChanged: (value) {
+            setState(() {
+              userData.password = value;
+            });
+          },
         ),
         const SizedBox(height: 30.0),
         ElevatedButton(
           onPressed: () {
-            // Add sign-in logic for Email and Password
+            signIn();
           },
           child: const Text('Sign In'),
         ),
@@ -162,22 +221,16 @@ class _SignInScreenState extends State<SignInScreen> {
             hintText: 'ID Member',
             prefixIcon: Icon(Icons.person_outline_rounded),
           ),
+          onChanged: (value) {
+            setState(() {
+              userData.memberId = value;
+            });
+          },
         ),
         const SizedBox(height: 10.0),
         GestureDetector(
           onTap: () async {
-            DateTime? selectedDate = await showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(1900),
-              lastDate: DateTime.now(),
-            );
-
-            if (selectedDate != null) {
-              setState(() {
-                _dateController.text = DateFormat('MM/dd/yyyy').format(selectedDate);
-              });
-            }
+            _showCalendar(context);
           },
           child: AbsorbPointer(
             child: TextFormField(
@@ -192,11 +245,16 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(height: 30.0),
         ElevatedButton(
           onPressed: () {
-            // Add sign-in logic for ID Member and Date Birth
+            signIn();
           },
           child: const Text('Sign In'),
         ),
       ],
     );
   }
+
+  // String _formatDate(DateTime date) {
+  //   return DateFormat('yyyy-M-d').format(date);
+  // }
+
 }
