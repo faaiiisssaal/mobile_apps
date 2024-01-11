@@ -31,7 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         pageCount: 4),
     OnboardingPage(
         title: '24/7',
-        description: 'Smilynks app is ready 24/7 to enhance your experience',
+        description: 'Smilynks app is ready 24/7 to deliver our service',
         image: Image.asset('asset/alarm.png'),
         currentPage: 2,
         pageCount: 4),
