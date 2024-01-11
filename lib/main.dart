@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       // debugShowMaterialGrid: true,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Colors.white, // Set your desired primary color
+        primaryColor: Colors.black, // Set your desired primary color
         hintColor: Colors.lightBlueAccent,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

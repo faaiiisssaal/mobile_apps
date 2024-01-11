@@ -1,10 +1,9 @@
-import 'package:flutter/foundation.dart';
+import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-
 import '../background/userdata.dart';
-import '../body/nextscreen.dart';
+import '../body/home.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -38,7 +37,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (selectedDate != null) {
       setState(() {
-        _dateController.text = DateFormat('MM/dd/yyyy').format(selectedDate);
+        _dateController.text = DateFormat('yyyy-M-dd').format(selectedDate);
       });
     }
   }
@@ -70,9 +69,24 @@ class _SignInScreenState extends State<SignInScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => NextScreen(userData: userData),
+        builder: (context) => HomeScreen(userData: userData),
       ),
     );
+  }
+
+  String _appVersion = "Unknown"; // Default value
+
+  @override
+  void initState() {
+    super.initState();
+    _getAppVersion(); // Call this method to get the app version during initialization
+  }
+
+  Future<void> _getAppVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      _appVersion = packageInfo.version;
+    });
   }
 
   @override
@@ -84,7 +98,8 @@ class _SignInScreenState extends State<SignInScreen> {
         systemNavigationBarColor: Colors.white,
         systemNavigationBarDividerColor: Colors.white,
         statusBarColor: Colors.white, // Set your app's background color
-        statusBarIconBrightness: Brightness.dark, // Adjust icon color for contrast
+        statusBarIconBrightness:
+            Brightness.dark, // Adjust icon color for contrast
       ),
     );
 
@@ -112,18 +127,19 @@ class _SignInScreenState extends State<SignInScreen> {
                         width: screenHeight * 0.2,
                       ), // Replace with your logo
                     ),
-                    SizedBox(height: screenHeight * 0.02), // 2% of screen height
+                    SizedBox(
+                        height: screenHeight * 0.02), // 2% of screen height
 
                     // Single Row - ID Member and Date Birth
                     // Email and Password Section
-                    if (_useEmailAndPassword)
-                      buildEmailAndPasswordSection(),
+                    if (_useEmailAndPassword) buildEmailAndPasswordSection(),
 
                     // ID Member and Date Birth Section
                     if (!_useEmailAndPassword)
                       buildIDMemberAndDateBirthSection(),
 
-                    SizedBox(height: screenHeight * 0.02), // 2% of screen height
+                    SizedBox(
+                        height: screenHeight * 0.02), // 2% of screen height
                     // Switch between Email/Password and ID Member/Date Birth
                     GestureDetector(
                       onTap: () {
@@ -133,7 +149,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         alignment: Alignment.center,
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
-                          _useEmailAndPassword ? 'Switch to Member ID' : 'Switch to Email',
+                          _useEmailAndPassword
+                              ? 'Switch to Member ID'
+                              : 'Switch to Email',
                           style: const TextStyle(
                             color: Colors.blue,
                           ),
@@ -148,11 +166,22 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5),
-          child: Text(
-            "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
-            softWrap: true,
-            style: const TextStyle(fontSize: 12.5),
-            textAlign: TextAlign.center,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
+                maxLines: 1,
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 4.0),
+              Text(
+                'App Version: $_appVersion',
+                style: const TextStyle(fontSize: 12.5, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
       ),
@@ -169,6 +198,15 @@ class _SignInScreenState extends State<SignInScreen> {
           decoration: const InputDecoration(
             hintText: 'Email',
             prefixIcon: Icon(Icons.email_outlined),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
           ),
           onChanged: (value) {
             setState(() {
@@ -192,6 +230,15 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Icon(
                 _showPassword ? Icons.visibility : Icons.visibility_off,
               ),
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
             ),
           ),
           onChanged: (value) {
@@ -220,7 +267,21 @@ class _SignInScreenState extends State<SignInScreen> {
           decoration: const InputDecoration(
             hintText: 'ID Member',
             prefixIcon: Icon(Icons.person_outline_rounded),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
           ),
+          keyboardType: TextInputType.number,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            _MemberIdInputFormatter(),
+          ],
           onChanged: (value) {
             setState(() {
               userData.memberId = value;
@@ -238,6 +299,15 @@ class _SignInScreenState extends State<SignInScreen> {
               decoration: const InputDecoration(
                 hintText: 'Date Birth',
                 prefixIcon: Icon(Icons.date_range_outlined),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
               ),
             ),
           ),
@@ -252,9 +322,37 @@ class _SignInScreenState extends State<SignInScreen> {
       ],
     );
   }
+}
 
-  // String _formatDate(DateTime date) {
-  //   return DateFormat('yyyy-M-d').format(date);
-  // }
+class _MemberIdInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    String formattedValue = '';
 
+    // Allow only digits
+    for (int i = 0; i < newValue.text.length; i++) {
+      if (RegExp(r'\d').hasMatch(newValue.text[i])) {
+        formattedValue += newValue.text[i];
+      }
+    }
+
+    // Add hyphen automatically after 9 digits
+    if (formattedValue.length > 9) {
+      formattedValue =
+          '${formattedValue.substring(0, 9)}-${formattedValue.substring(9, formattedValue.length)}';
+    }
+
+    // Ensure max length is 11
+    if (formattedValue.length > 11) {
+      formattedValue = formattedValue.substring(0, 11);
+    }
+
+    return TextEditingValue(
+      text: formattedValue,
+      selection: TextSelection.collapsed(offset: formattedValue.length),
+    );
+  }
 }

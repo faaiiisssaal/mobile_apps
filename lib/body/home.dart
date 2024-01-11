@@ -1,19 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../background/userdata.dart';
 
-class NextScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   final UserData userData;
 
-  NextScreen({required this.userData});
+  const HomeScreen({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Data'),
+        title: const Text('User Data'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
