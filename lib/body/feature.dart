@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Feature extends StatefulWidget {
-  const Feature({super.key});
+class FeaturePage extends StatefulWidget {
+  const FeaturePage({super.key});
 
   @override
-  State<Feature> createState() => _FeatureState();
+  State<FeaturePage> createState() => _FeaturePageState();
 }
 
-class _FeatureState extends State<Feature> {
+class _FeaturePageState extends State<FeaturePage> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/body/history.dart';
+import 'package:helathcareapp/body/home.dart';
+import 'package:helathcareapp/body/profile.dart';
+import 'package:helathcareapp/body/qrcode.dart';
 import 'feature.dart';
 
 class NavBar extends StatefulWidget {
@@ -12,11 +16,11 @@ class _NavBarState extends State<NavBar> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const Feature(),
-    const Feature(),
-    const Feature(),
-    const Feature(),
-    const Feature(),
+    const HomePage(),
+    const FeaturePage(),
+    const QRCodePage(),
+    const HistoryPage(),
+    const ProfilePage(),
   ];
 
   @override
