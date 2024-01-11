@@ -49,6 +49,9 @@ class OnboardingPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 16.0),
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(
+                height: 15.0,
+              ),
               DotsIndicator(
                 dotsCount: pageCount,
                 position: currentPage.toInt(),

@@ -22,20 +22,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         description: '',
         image: Image.asset('asset/talking.png'),
         currentPage: 0,
-        pageCount: 3
-    ),
+        pageCount: 4),
     OnboardingPage(
-        title: 'Explore the Features',
+        title: 'Explore the App',
         description: 'Discover what you need',
         image: Image.asset('asset/inpatients.jpg'),
         currentPage: 1,
-        pageCount: 3),
+        pageCount: 4),
+    OnboardingPage(
+        title: '24/7',
+        description: 'Smilynks app is ready 24/7 to enhance your experience',
+        image: Image.asset('asset/alarm.png'),
+        currentPage: 2,
+        pageCount: 4),
     OnboardingPage(
         title: 'Get Started',
         description: "Let's Go",
         image: Image.asset('asset/happy.png'),
-        currentPage: 2,
-        pageCount: 3),
+        currentPage: 3,
+        pageCount: 4),
   ];
 
   @override
@@ -44,7 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: Stack(
         children: [
           PageView.builder(
-            controller: _pageController,
+              controller: _pageController,
               itemCount: _pages.length,
               onPageChanged: (index) {
                 setState(() {
@@ -53,8 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
               itemBuilder: (context, index) {
                 return _pages[index];
-              }
-          ),
+              }),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -64,29 +68,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   if (_currentPage != 0)
                     ElevatedButton(
-                        onPressed: () {
-                          _pageController.previousPage(
-                              duration: const Duration(milliseconds:  200),
-                              curve: Curves.easeInOut
-                          );
-                        },
-                        child: const Text('Previous'),
+                      onPressed: () {
+                        _pageController.previousPage(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeInOut);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.lightBlue,
+                          foregroundColor: Colors.white
+                      ),
+                      child: const Text('Previous'),
                     ),
                   const Spacer(),
                   if (_currentPage != _pages.length - 1)
                     ElevatedButton(
-                        onPressed: () {
-                          _pageController.nextPage(
-                              duration: const Duration(milliseconds:  200),
-                              curve: Curves.easeInOut
-                          );
-                        },
+                      onPressed: () {
+                        _pageController.nextPage(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeInOut);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.lightBlue,
+                          foregroundColor: Colors.white),
                       child: const Text('Next'),
                     ),
                   if (_currentPage == _pages.length - 1)
                     ElevatedButton(
-                        onPressed: widget.onDone,
-                        child: const Text('Get Started')
+                      onPressed: widget.onDone,
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.lightBlue,
+                          foregroundColor: Colors.white),
+                      child: const Text('Get Started'),
                     )
                 ],
               ),

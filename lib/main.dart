@@ -14,19 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // debugShowMaterialGrid: true,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: Colors.black, // Set your desired primary color
-        hintColor: Colors.lightBlueAccent,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.blue, // Set the default background color for ElevatedButton
-          ),
-        ),// Set your desired accent color
-        // Add more color-related properties as needed
-      ),
+      title: 'Smilynks',
       home: const AppWrapper(),
     );
   }

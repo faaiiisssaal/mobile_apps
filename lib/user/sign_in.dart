@@ -1,9 +1,10 @@
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../background/userdata.dart';
-import '../body/home.dart';
+import '../body/navbar.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -11,6 +12,7 @@ class SignInScreen extends StatefulWidget {
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
+
 
 class _SignInScreenState extends State<SignInScreen> {
   bool _showPassword = false;
@@ -69,7 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(userData: userData),
+        builder: (context) => const NavBar(),
       ),
     );
   }
@@ -120,15 +122,28 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Container(
                       height: screenHeight * 0.2,
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        'asset/smilynks.png',
-                        filterQuality: FilterQuality.high,
-                        width: screenHeight * 0.2,
-                      ), // Replace with your logo
+                      alignment: Alignment.bottomCenter,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Image.asset(
+                            'asset/smilynks.png',
+                            filterQuality: FilterQuality.high,
+                            width: screenHeight * 0.25,
+                          ),
+                          SizedBox(
+                              height: screenHeight * 0.02),
+                          Text(
+                              "Healthcare Management at Your Fingertips",
+                            style: GoogleFonts.lobster(
+
+                            ),
+                          )
+                        ],
+                      )// Replace with your logo
                     ),
                     SizedBox(
-                        height: screenHeight * 0.02), // 2% of screen height
+                        height: screenHeight * 0.1), // 2% of screen height
 
                     // Single Row - ID Member and Date Birth
                     // Email and Password Section
@@ -252,6 +267,10 @@ class _SignInScreenState extends State<SignInScreen> {
           onPressed: () {
             signIn();
           },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.lightBlue,
+            foregroundColor: Colors.white
+          ),
           child: const Text('Sign In'),
         ),
       ],
@@ -317,6 +336,10 @@ class _SignInScreenState extends State<SignInScreen> {
           onPressed: () {
             signIn();
           },
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.lightBlue,
+              foregroundColor: Colors.white
+          ),
           child: const Text('Sign In'),
         ),
       ],

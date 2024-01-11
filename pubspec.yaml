@@ -47,6 +47,7 @@ flutter:
 
   assets:
     - asset/smilynks.png
+    - asset/alarm.png
     - asset/happy.png
     - asset/talking.png
     - asset/inpatients.jpg
