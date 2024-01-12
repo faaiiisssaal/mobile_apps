@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,13 +16,36 @@ class _HomePageState extends State<HomePage> {
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
+
+            // the first row for greetings
             Expanded(
               flex: 15,
               child: Container(
-                // Your content for the first row
-                color: Colors.red,
+                width: double.infinity,
+                padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Hai, Faisal Setiadi",
+                      style: GoogleFonts.raleway(
+                        fontSize: 14
+                      ),
+                    ),
+                    Text(
+                      // "Terdaftar sebagai Third-Party Administration (TPA)",
+                      "Terdaftar sebagai Administration Service Only (ASO)",
+                      style: GoogleFonts.raleway(
+                          fontSize: 14
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
+
+            // the second row for provider
             Expanded(
               flex: 25,
               child: Container(
@@ -29,6 +53,8 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.green,
               ),
             ),
+
+            // the third row for information
             Expanded(
               flex: 40,
               child: Container(
@@ -36,6 +62,8 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.blue,
               ),
             ),
+
+            // the fourth row for about me
             Expanded(
               flex: 20,
               child: Container(

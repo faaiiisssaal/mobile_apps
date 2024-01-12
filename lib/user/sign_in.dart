@@ -1,10 +1,9 @@
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../background/userdata.dart';
-import '../body/navbar.dart';
+import 'peserta/navbar.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -13,18 +12,25 @@ class SignInScreen extends StatefulWidget {
   _SignInScreenState createState() => _SignInScreenState();
 }
 
-
 class _SignInScreenState extends State<SignInScreen> {
   bool _showPassword = false;
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _memberController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
-  bool _useEmailAndPassword = true;
+  final TextEditingController _insuranceEmailController =
+      TextEditingController();
+  final TextEditingController _insurancePassController =
+      TextEditingController();
+  final TextEditingController _companyEmailController = TextEditingController();
+  final TextEditingController _companyPassController = TextEditingController();
+  final TextEditingController _clientmemberController = TextEditingController();
+  final TextEditingController _clientdateController = TextEditingController();
+  bool _useCompany = true;
+  bool _useInsurance = true;
+  bool _useClient = true;
 
   UserData userData = UserData(
-    email: '',
-    password: '',
+    companyEmail: '',
+    companyPass: '',
+    insuranceEmail: '',
+    insurancePass: '',
     memberId: '',
     dateOfBirth: DateTime.now(),
   );
@@ -39,32 +45,118 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (selectedDate != null) {
       setState(() {
-        _dateController.text = DateFormat('yyyy-M-dd').format(selectedDate);
+        _clientdateController.text =
+            DateFormat('yyyy-M-dd').format(selectedDate);
       });
     }
   }
 
   void switchInputType() {
     setState(() {
-      // Reset data based on the current input type
-      if (_useEmailAndPassword) {
-        // Reset Email/Password data
-        _emailController.clear();
-        _passwordController.clear();
-        userData.email = '';
-        userData.password = '';
-      } else {
-        // Reset Member ID/Date of Birth data
-        _memberController.clear();
-        _dateController.clear();
+      if (_useClient) {
+        // Reset data based on the current input type (Client)
+        _clientmemberController.clear();
+        _clientdateController.clear();
         userData.memberId = '';
         userData.dateOfBirth = DateTime.now();
+      } else {
+        switchCompanyInputType();
+      }
+
+      // else if (_useInsurance) {
+      //   // Reset data based on the current input type (Company)
+      //   _insuranceEmailController.clear();
+      //   _insurancePassController.clear();
+      //   userData.insuranceEmail = '';
+      //   userData.insurancePass = '';
+      // } else {
+      //   // Reset data based on the current input type (Insurance)
+      //   _companyEmailController.clear();
+      //   _companyPassController.clear();
+      //   userData.companyEmail = '';
+      //   userData.companyPass = '';
+      // }
+
+      // Switch input type
+      _useClient = !_useClient;
+      _useCompany = false;
+      _useInsurance = false;
+    });
+  }
+
+  void switchCompanyInputType() {
+    setState(() {
+      if (_useCompany) {
+        // Reset data based on the current input type (Company)
+        _companyEmailController.clear();
+        _companyPassController.clear();
+        userData.companyEmail = '';
+        userData.companyPass = '';
+      } else {
+        // Reset data based on the current input type (Insurance)
+        _insuranceEmailController.clear();
+        _insurancePassController.clear();
+        userData.insuranceEmail = '';
+        userData.insurancePass = '';
       }
 
       // Switch input type
-      _useEmailAndPassword = !_useEmailAndPassword;
+      _useCompany = !_useCompany;
+      _useInsurance = !_useInsurance;
     });
   }
+
+  void switchToClient() {
+    setState(() {
+      _useClient = true;
+      _useCompany = false;
+      _useInsurance = false;
+    });
+  }
+
+  // void switchInputType() {
+  //   setState(() {
+  //     // Reset data based on the current input type
+  //     if (_useCompany) {
+  //       // Reset Email/Password Insurance
+  //       _companyEmailController.clear();
+  //       _companyPassController.clear();
+  //       userData.companyEmail = '';
+  //       userData.companyPass = '';
+  //     } else {
+  //       // Reset Member ID/Date of Birth Client
+  //       _clientmemberController.clear();
+  //       _clientdateController.clear();
+  //       userData.memberId = '';
+  //       userData.dateOfBirth = DateTime.now();
+  //     }
+  //
+  //     // Switch input type
+  //     _useCompany = !_useCompany;
+  //   });
+  // }
+  //
+  // void switchCompanyInputType() {
+  //   setState(() {
+  //     // Reset data based on the current input type
+  //     if (_useInsurance) {
+  //       // Reset Email/Password Insurance
+  //       _insuranceEmailController.clear();
+  //       _insurancePassController.clear();
+  //       userData.insuranceEmail = '';
+  //       userData.insurancePass = '';
+  //     } else {
+  //       // Reset Member ID/Date of Birth Client
+  //       _companyEmailController.clear();
+  //       _companyPassController.clear();
+  //       userData.companyEmail = '';
+  //       userData.companyPass = '';
+  //     }
+  //
+  //     // Switch company input type
+  //     _useInsurance = !_useInsurance;
+  //   });
+  // }
 
   void signIn() {
     // Navigate to the next screen and pass userData
@@ -121,58 +213,42 @@ class _SignInScreenState extends State<SignInScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      height: screenHeight * 0.2,
-                      alignment: Alignment.bottomCenter,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Image.asset(
-                            'asset/smilynks.png',
-                            filterQuality: FilterQuality.high,
-                            width: screenHeight * 0.25,
-                          ),
-                          SizedBox(
-                              height: screenHeight * 0.02),
-                          Text(
-                              "Healthcare Management at Your Fingertips",
-                            style: GoogleFonts.lobster(
-
+                        height: screenHeight * 0.2,
+                        alignment: Alignment.bottomCenter,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Image.asset(
+                              'asset/smilynks.png',
+                              filterQuality: FilterQuality.high,
+                              width: screenHeight * 0.35,
                             ),
-                          )
-                        ],
-                      )// Replace with your logo
-                    ),
+                          ],
+                        ) // Replace with your logo
+                        ),
                     SizedBox(
-                        height: screenHeight * 0.1), // 2% of screen height
+                      height: screenHeight * 0.1,
+                    ), // 2% of screen height
 
                     // Single Row - ID Member and Date Birth
-                    // Email and Password Section
-                    if (_useEmailAndPassword) buildEmailAndPasswordSection(),
 
-                    // ID Member and Date Birth Section
-                    if (!_useEmailAndPassword)
-                      buildIDMemberAndDateBirthSection(),
+
+                    // Client
+                    if (_useClient)
+                    buildClientSection(),
+
+                    // Insurance
+                    if (!_useCompany)
+                      buildInsuranceSection(),
+
+                    // Company
+                    if (_useCompany)
+                      buildCompanySection(),
 
                     SizedBox(
-                        height: screenHeight * 0.02), // 2% of screen height
-                    // Switch between Email/Password and ID Member/Date Birth
-                    GestureDetector(
-                      onTap: () {
-                        switchInputType();
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Text(
-                          _useEmailAndPassword
-                              ? 'Switch to Member ID'
-                              : 'Switch to Email',
-                          style: const TextStyle(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
+                      height: screenHeight * 0.02,
                     ),
+                    // 2% of screen height
                   ],
                 ),
               ),
@@ -203,88 +279,16 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget buildEmailAndPasswordSection() {
+  Widget buildClientSection() {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TextFormField(
-          controller: _emailController,
-          decoration: const InputDecoration(
-            hintText: 'Email',
-            prefixIcon: Icon(Icons.email_outlined),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-          ),
-          onChanged: (value) {
-            setState(() {
-              userData.email = value;
-            });
-          },
-        ),
-        const SizedBox(height: 10.0),
-        TextFormField(
-          controller: _passwordController,
-          obscureText: !_showPassword,
-          decoration: InputDecoration(
-            hintText: 'Password',
-            prefixIcon: const Icon(Icons.lock_outline_rounded),
-            suffixIcon: InkWell(
-              onTap: () {
-                setState(() {
-                  _showPassword = !_showPassword;
-                });
-              },
-              child: Icon(
-                _showPassword ? Icons.visibility : Icons.visibility_off,
-              ),
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-          ),
-          onChanged: (value) {
-            setState(() {
-              userData.password = value;
-            });
-          },
-        ),
-        const SizedBox(height: 30.0),
-        ElevatedButton(
-          onPressed: () {
-            signIn();
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.lightBlue,
-            foregroundColor: Colors.white
-          ),
-          child: const Text('Sign In'),
-        ),
-      ],
-    );
-  }
 
-  Widget buildIDMemberAndDateBirthSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+        // Client ID
         TextFormField(
-          controller: _memberController,
+          controller: _clientmemberController,
           decoration: const InputDecoration(
-            hintText: 'ID Member',
+            hintText: 'Client ID',
             prefixIcon: Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -308,15 +312,17 @@ class _SignInScreenState extends State<SignInScreen> {
           },
         ),
         const SizedBox(height: 10.0),
+
+        // Client DoB
         GestureDetector(
           onTap: () async {
             _showCalendar(context);
           },
           child: AbsorbPointer(
             child: TextFormField(
-              controller: _dateController,
+              controller: _clientdateController,
               decoration: const InputDecoration(
-                hintText: 'Date Birth',
+                hintText: 'Client DoB',
                 prefixIcon: Icon(Icons.date_range_outlined),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),
@@ -332,16 +338,244 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
         const SizedBox(height: 30.0),
+
+        // Sign In Button
         ElevatedButton(
           onPressed: () {
             signIn();
           },
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue,
-              foregroundColor: Colors.white
+              backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
+          child: const Text('Sign In'),
+        ),
+        const SizedBox(height: 10.0),
+
+        // Switch
+        GestureDetector(
+          onTap: () {
+            switchInputType();
+          },
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              _useClient ? 'Switch to Insurance' : 'Switch to Client',
+              style: const TextStyle(
+                color: Colors.blue,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildCompanySection() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        TextFormField(
+          controller: _companyEmailController,
+          decoration: const InputDecoration(
+            hintText: 'Company ID',
+            prefixIcon: Icon(Icons.person_outline_rounded),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+          ),
+          onChanged: (value) {
+            setState(() {
+              userData.companyEmail = value;
+            });
+          },
+        ),
+        const SizedBox(height: 10.0),
+        TextFormField(
+          controller: _companyPassController,
+          obscureText: !_showPassword,
+          decoration: InputDecoration(
+            hintText: 'Company Password',
+            prefixIcon: const Icon(Icons.lock_outline_rounded),
+            suffixIcon: InkWell(
+              onTap: () {
+                setState(() {
+                  _showPassword = !_showPassword;
+                });
+              },
+              child: Icon(
+                _showPassword ? Icons.visibility : Icons.visibility_off,
+              ),
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+          ),
+          onChanged: (value) {
+            setState(() {
+              userData.companyPass = value;
+            });
+          },
+        ),
+        const SizedBox(height: 30.0),
+        ElevatedButton(
+          onPressed: () {
+            signIn();
+          },
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
+          child: const Text('Sign In'),
+        ),
+        const SizedBox(height: 10.0),
+
+        GestureDetector(
+          onTap: () {
+            switchCompanyInputType();
+          },
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              _useCompany ? 'Switch to Insurance' : 'Switch to Company',
+              style: const TextStyle(
+                color: Colors.blue,
+              ),
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 10.0),
+        // Back to Client button
+        ElevatedButton(
+          onPressed: () {
+            switchToClient();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+          ),
+          child: const Text('Back to Client'),
+        ),
+      ],
+    );
+  }
+
+  Widget buildInsuranceSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        TextFormField(
+          controller: _insuranceEmailController,
+          decoration: const InputDecoration(
+            hintText: 'Insurance ID',
+            prefixIcon: Icon(Icons.person_outline_rounded),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+          ),
+          keyboardType: TextInputType.number,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            _MemberIdInputFormatter(),
+          ],
+          onChanged: (value) {
+            setState(() {
+              userData.memberId = value;
+            });
+          },
+        ),
+        const SizedBox(height: 10.0),
+        TextFormField(
+          controller: _insurancePassController,
+          obscureText: !_showPassword,
+          decoration: InputDecoration(
+            hintText: 'Insurance Password',
+            prefixIcon: const Icon(Icons.lock_outline_rounded),
+            suffixIcon: InkWell(
+              onTap: () {
+                setState(() {
+                  _showPassword = !_showPassword;
+                });
+              },
+              child: Icon(
+                _showPassword ? Icons.visibility : Icons.visibility_off,
+              ),
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+          ),
+          onChanged: (value) {
+            setState(() {
+              userData.insurancePass = value;
+            });
+          },
+        ),
+        const SizedBox(height: 30.0),
+        ElevatedButton(
+          onPressed: () {
+            signIn();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.lightBlue,
+            foregroundColor: Colors.white,
           ),
           child: const Text('Sign In'),
         ),
+        const SizedBox(height: 10.0),
+
+        GestureDetector(
+          onTap: () {
+            switchCompanyInputType();
+          },
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              _useCompany ? 'Switch to Insurance' : 'Switch to Company',
+              style: const TextStyle(
+                color: Colors.blue,
+              ),
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 10.0),
+        ElevatedButton(
+          onPressed: () {
+            switchToClient();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+          ),
+          child: const Text('Back to Client'),
+        ),
+
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'onboarding/appwrapper.dart';
 
@@ -12,10 +13,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: GoogleFonts.ralewayTextTheme(
+          Theme.of(context).textTheme,
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.blue,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey,
+          selectedIconTheme: IconThemeData(size: 64),
+        ),
+      ),
       title: 'Smilynks',
-      home: AppWrapper(),
+      home: const AppWrapper(),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/body/history.dart';
-import 'package:helathcareapp/body/home.dart';
-import 'package:helathcareapp/body/profile.dart';
-import 'package:helathcareapp/body/qrcode.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:helathcareapp/user/peserta/history.dart';
+import 'package:helathcareapp/user/peserta/home.dart';
+import 'package:helathcareapp/user/peserta/profile.dart';
 import 'feature.dart';
 
 class NavBar extends StatefulWidget {
@@ -18,7 +18,7 @@ class _NavBarState extends State<NavBar> {
   final List<Widget> _pages = [
     const HomePage(),
     const FeaturePage(),
-    const QRCodePage(),
+    // const QRViewExample(),
     const HistoryPage(),
     const ProfilePage(),
   ];
@@ -41,12 +41,19 @@ class _NavBarState extends State<NavBar> {
         ),
         bottomNavigationBar: Theme(
           data: ThemeData(
-            splashColor: Colors.white,
-            highlightColor: Colors.white,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
           ),
           child: BottomNavigationBar(
-            fixedColor: Colors.blueAccent,
+            backgroundColor: Colors.blue,
+            iconSize: 36,
             type: BottomNavigationBarType.fixed,
+            selectedLabelStyle: GoogleFonts.raleway(),
+            selectedFontSize: 14,
+            selectedItemColor: Colors.white,
+            unselectedLabelStyle: GoogleFonts.raleway(),
+            unselectedFontSize: 14,
+            unselectedItemColor: Colors.black,
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() {
@@ -55,23 +62,31 @@ class _NavBarState extends State<NavBar> {
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: Icon(
+                  Icons.home,
+                ),
                 label: 'Home',
+                backgroundColor: Colors.red
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.library_books),
+                icon: Icon(
+                  Icons.library_books,
+                ),
                 label: 'Feature',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.qr_code_2_outlined),
+                icon: Icon(Icons.qr_code_2_outlined,
+                ),
                 label: 'QR Code',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.history),
+                icon: Icon(Icons.history,
+                ),
                 label: 'History',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.person,
+                ),
                 label: 'Profile',
               ),
             ],
