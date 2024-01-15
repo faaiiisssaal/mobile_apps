@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:helathcareapp/user/perusahaan/navbar.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import '../background/userdata.dart';
+import 'asuransi/navbar.dart';
 import 'peserta/navbar.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -114,6 +116,26 @@ class _SignInScreenState extends State<SignInScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => const NavBar(),
+      ),
+    );
+  }
+
+  void signInInsurance() {
+    // Navigate to the next screen and pass userData
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const InsuranceNavBar(),
+      ),
+    );
+  }
+
+  void signInCompany() {
+    // Navigate to the next screen and pass userData
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const CompanyNavBar(),
       ),
     );
   }
@@ -387,7 +409,7 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(height: 30.0),
         ElevatedButton(
           onPressed: () {
-            signIn();
+            signInCompany();
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
@@ -496,7 +518,7 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(height: 30.0),
         ElevatedButton(
           onPressed: () {
-            signIn();
+            signInInsurance();
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.lightBlue,

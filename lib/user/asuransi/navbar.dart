@@ -5,14 +5,14 @@ import 'package:helathcareapp/user/peserta/home.dart';
 import 'package:helathcareapp/user/peserta/profile.dart';
 import 'package:helathcareapp/user/peserta/feature.dart';
 
-class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+class InsuranceNavBar extends StatefulWidget {
+  const InsuranceNavBar({super.key});
 
   @override
-  _NavBarState createState() => _NavBarState();
+  _InsuranceNavBarState createState() => _InsuranceNavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
+class _InsuranceNavBarState extends State<InsuranceNavBar> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
