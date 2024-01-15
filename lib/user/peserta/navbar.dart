@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/user/peserta/history.dart';
-import 'package:helathcareapp/user/peserta/home.dart';
-import 'package:helathcareapp/user/peserta/profile.dart';
-import 'package:helathcareapp/user/peserta/qrcode.dart';
-import 'feature.dart';
+import 'package:helathcareapp/user/peserta/history/history.dart';
+import 'package:helathcareapp/user/peserta/home/home.dart';
+import 'package:helathcareapp/user/peserta/profile/profile.dart';
+import 'package:helathcareapp/user/peserta/qr/qrcode.dart';
+import 'form/form.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key});
@@ -18,7 +18,7 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const FeaturePage(),
+    const FormPage(),
     const QRViewExample(),
     const HistoryPage(),
     const ProfilePage(),
