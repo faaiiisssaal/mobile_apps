@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:helathcareapp/user/peserta/history.dart';
 import 'package:helathcareapp/user/peserta/home.dart';
 import 'package:helathcareapp/user/peserta/profile.dart';
-import 'feature.dart';
+import 'package:helathcareapp/user/peserta/feature.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -72,7 +72,7 @@ class _NavBarState extends State<NavBar> {
                 icon: Icon(
                   Icons.library_books,
                 ),
-                label: 'Form',
+                label: 'Feature',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.qr_code_2_outlined,

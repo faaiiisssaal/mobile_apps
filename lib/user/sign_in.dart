@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,10 +15,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   bool _showPassword = false;
-  final TextEditingController _insuranceEmailController =
-      TextEditingController();
-  final TextEditingController _insurancePassController =
-      TextEditingController();
+  final TextEditingController _insuranceEmailController = TextEditingController();
+  final TextEditingController _insurancePassController = TextEditingController();
   final TextEditingController _companyEmailController = TextEditingController();
   final TextEditingController _companyPassController = TextEditingController();
   final TextEditingController _clientmemberController = TextEditingController();
@@ -45,8 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (selectedDate != null) {
       setState(() {
-        _clientdateController.text =
-            DateFormat('yyyy-M-dd').format(selectedDate);
+        _clientdateController.text = DateFormat('yyyy-M-dd').format(selectedDate);
       });
     }
   }
@@ -59,23 +57,19 @@ class _SignInScreenState extends State<SignInScreen> {
         _clientdateController.clear();
         userData.memberId = '';
         userData.dateOfBirth = DateTime.now();
+      } else if (_useInsurance) {
+        // Reset data based on the current input type (Company)
+        _insuranceEmailController.clear();
+        _insurancePassController.clear();
+        userData.insuranceEmail = '';
+        userData.insurancePass = '';
       } else {
-        switchCompanyInputType();
+        // Reset data based on the current input type (Insurance)
+        _companyEmailController.clear();
+        _companyPassController.clear();
+        userData.companyEmail = '';
+        userData.companyPass = '';
       }
-
-      // else if (_useInsurance) {
-      //   // Reset data based on the current input type (Company)
-      //   _insuranceEmailController.clear();
-      //   _insurancePassController.clear();
-      //   userData.insuranceEmail = '';
-      //   userData.insurancePass = '';
-      // } else {
-      //   // Reset data based on the current input type (Insurance)
-      //   _companyEmailController.clear();
-      //   _companyPassController.clear();
-      //   userData.companyEmail = '';
-      //   userData.companyPass = '';
-      // }
 
       // Switch input type
       _useClient = !_useClient;
@@ -114,50 +108,6 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
-  // void switchInputType() {
-  //   setState(() {
-  //     // Reset data based on the current input type
-  //     if (_useCompany) {
-  //       // Reset Email/Password Insurance
-  //       _companyEmailController.clear();
-  //       _companyPassController.clear();
-  //       userData.companyEmail = '';
-  //       userData.companyPass = '';
-  //     } else {
-  //       // Reset Member ID/Date of Birth Client
-  //       _clientmemberController.clear();
-  //       _clientdateController.clear();
-  //       userData.memberId = '';
-  //       userData.dateOfBirth = DateTime.now();
-  //     }
-  //
-  //     // Switch input type
-  //     _useCompany = !_useCompany;
-  //   });
-  // }
-  //
-  // void switchCompanyInputType() {
-  //   setState(() {
-  //     // Reset data based on the current input type
-  //     if (_useInsurance) {
-  //       // Reset Email/Password Insurance
-  //       _insuranceEmailController.clear();
-  //       _insurancePassController.clear();
-  //       userData.insuranceEmail = '';
-  //       userData.insurancePass = '';
-  //     } else {
-  //       // Reset Member ID/Date of Birth Client
-  //       _companyEmailController.clear();
-  //       _companyPassController.clear();
-  //       userData.companyEmail = '';
-  //       userData.companyPass = '';
-  //     }
-  //
-  //     // Switch company input type
-  //     _useInsurance = !_useInsurance;
-  //   });
-  // }
-
   void signIn() {
     // Navigate to the next screen and pass userData
     Navigator.push(
@@ -173,7 +123,8 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
-    _getAppVersion(); // Call this method to get the app version during initialization
+    _getAppVersion();
+    buildClientSection(); // Call this method to get the app version during initialization
   }
 
   Future<void> _getAppVersion() async {
@@ -192,8 +143,7 @@ class _SignInScreenState extends State<SignInScreen> {
         systemNavigationBarColor: Colors.white,
         systemNavigationBarDividerColor: Colors.white,
         statusBarColor: Colors.white, // Set your app's background color
-        statusBarIconBrightness:
-            Brightness.dark, // Adjust icon color for contrast
+        statusBarIconBrightness: Brightness.dark, // Adjust icon color for contrast
       ),
     );
 
@@ -208,7 +158,6 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Container(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -232,18 +181,22 @@ class _SignInScreenState extends State<SignInScreen> {
 
                     // Single Row - ID Member and Date Birth
 
-
-                    // Client
-                    if (_useClient)
-                    buildClientSection(),
-
-                    // Insurance
-                    if (!_useCompany)
-                      buildInsuranceSection(),
-
-                    // Company
-                    if (_useCompany)
-                      buildCompanySection(),
+                    if (_useClient) ...[
+                      buildClientSection(),
+                    ],
+                    if (!_useClient) ...[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          if (!_useClient && !_useCompany) ...[
+                            buildInsuranceSection(),
+                          ],
+                          if (_useCompany) ...[
+                            buildCompanySection(),
+                          ],
+                        ],
+                      ),
+                    ],
 
                     SizedBox(
                       height: screenHeight * 0.02,
@@ -283,7 +236,6 @@ class _SignInScreenState extends State<SignInScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-
         // Client ID
         TextFormField(
           controller: _clientmemberController,
@@ -354,6 +306,9 @@ class _SignInScreenState extends State<SignInScreen> {
         GestureDetector(
           onTap: () {
             switchInputType();
+            if (kDebugMode) {
+              print("Switch to Insurance");
+            }
           },
           child: Container(
             alignment: Alignment.center,
@@ -443,6 +398,9 @@ class _SignInScreenState extends State<SignInScreen> {
         GestureDetector(
           onTap: () {
             switchCompanyInputType();
+            if (kDebugMode) {
+              print("Switch to Insurance");
+            }
           },
           child: Container(
             alignment: Alignment.center,
@@ -547,10 +505,12 @@ class _SignInScreenState extends State<SignInScreen> {
           child: const Text('Sign In'),
         ),
         const SizedBox(height: 10.0),
-
         GestureDetector(
           onTap: () {
             switchCompanyInputType();
+            if (kDebugMode) {
+              print("Switch to Company");
+            }
           },
           child: Container(
             alignment: Alignment.center,
@@ -563,7 +523,6 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-
         const SizedBox(height: 10.0),
         ElevatedButton(
           onPressed: () {
@@ -575,7 +534,6 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           child: const Text('Back to Client'),
         ),
-
       ],
     );
   }
