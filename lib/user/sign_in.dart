@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/foundation.dart';
 import 'package:helathcareapp/user/perusahaan/navbar.dart';
 import 'package:package_info/package_info.dart';
@@ -111,11 +113,66 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void signIn() {
-    // Navigate to the next screen and pass userData
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const NavBar(),
+    final String enteredMemberId = _clientmemberController.text.trim();
+    final String enteredDoB = _clientdateController.text.trim();
+
+    // Verify against fake data
+    if (enteredMemberId == "610026424-2" && enteredDoB == "2023-9-30") {
+      // Successful login
+      if (kDebugMode) {
+        print("Client Login Successful");
+      }
+
+      // Clear form data
+      _clientmemberController.clear();
+      _clientdateController.clear();
+
+      // Show circular progress while transitioning
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
+
+      // Simulate some async operation before navigating (replace with your actual logic)
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.of(context).pop(); // Close the loading dialog
+        // Navigate to the home screen
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const NavBar()),
+        );
+      });
+    } else {
+      // Display an error message
+      if (kDebugMode) {
+        print("Client Login Error: Invalid Member ID or Date of Birth");
+      }
+
+      // Show a floating Snackbar for login error
+      _showFloatingSnackbar('Invalid Member ID or Date of Birth. Please try again.');
+    }
+  }
+
+  void _showFloatingSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+        ),
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.red,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        margin: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        behavior: SnackBarBehavior.floating,
+        elevation: 8.0,
       ),
     );
   }
@@ -156,6 +213,13 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
+  final GlobalKey<ScaffoldMessengerState> _clientScaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _companyScaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _insuranceScaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -183,7 +247,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-
                     // 1st Row "Logo" Position
                     Container(
                         height: screenHeight * 0.2,
@@ -197,8 +260,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               width: screenHeight * 0.35,
                             ),
                           ],
-                        )
-                    ),
+                        )),
 
                     SizedBox(
                       height: screenHeight * 0.1,
@@ -233,8 +295,6 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ],
         ),
-
-
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5),
           child: Column(
@@ -321,7 +381,12 @@ class _SignInScreenState extends State<SignInScreen> {
         // Sign In Button
         ElevatedButton(
           onPressed: () {
-            signIn();
+            if (_clientmemberController.text.isEmpty || _clientdateController.text.isEmpty) {
+              // Show a Snackbar for missing fields
+              _showFloatingSnackbar('Please fill in the form');
+            } else {
+              signIn();
+            }
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),

@@ -28,7 +28,7 @@ class _InsuranceHomePageState extends State<InsuranceHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Hai, Dorce",
+                      "Hai, Maylinda",
                       style: GoogleFonts.raleway(
                         fontSize: 14
                       ),

@@ -19,7 +19,7 @@ class _NavBarState extends State<NavBar> {
   final List<Widget> _pages = [
     const HomePage(),
     const FeaturePage(),
-    const ClientQRCode(),
+    const QRViewExample(),
     const HistoryPage(),
     const ProfilePage(),
   ];

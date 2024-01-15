@@ -22,9 +22,6 @@ class MyApp extends StatelessWidget {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.blue,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey,
-          selectedIconTheme: IconThemeData(size: 64),
         ),
       ),
       title: 'Smilynks',
@@ -32,3 +29,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
