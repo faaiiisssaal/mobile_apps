@@ -35,72 +35,56 @@ class _NavBarState extends State<NavBar> {
             ),
           ],
         ),
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.white, // start color
-                Colors.blue,
-                Colors.white, // middle color (white)
-                Colors.blue,
-                Colors.white, // end color
-              ],
-              stops: [0.0, 0.25, 0.5, 0.75, 1.0], // adjust stops accordingly
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+        bottomNavigationBar: Theme(
+          data: ThemeData(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
           ),
-          child: Theme(
-            data: ThemeData(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-            ),
-            child: BottomNavigationBar(
-              backgroundColor: Colors.transparent,
-              iconSize: 36,
-              type: BottomNavigationBarType.fixed,
-              selectedLabelStyle: GoogleFonts.raleway(),
-              selectedFontSize: 14,
-              selectedItemColor: Colors.white,
-              unselectedLabelStyle: GoogleFonts.raleway(),
-              unselectedFontSize: 14,
-              unselectedItemColor: Colors.black,
-              currentIndex: _currentIndex,
-              onTap: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                  ),
-                  label: 'Home',
+          child: BottomNavigationBar(
+            backgroundColor: const Color(0xFF33BFFF),
+            iconSize: 24,
+            type: BottomNavigationBarType.fixed,
+            selectedLabelStyle: GoogleFonts.raleway(),
+            selectedFontSize: 12,
+            selectedItemColor: Colors.white,
+            unselectedLabelStyle: GoogleFonts.raleway(),
+            unselectedFontSize: 12,
+            unselectedItemColor: Colors.black,
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.library_books,
-                  ),
-                  label: 'Form',
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.library_books,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.qr_code_2_outlined,
-                  ),
-                  label: 'QR Code',
+                label: 'Form',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.qr_code_2_outlined,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.history,
-                  ),
-                  label: 'History',
+                label: 'QR Code',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.history,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person,
-                  ),
-                  label: 'Profile',
+                label: 'History',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person,
                 ),
-              ],
-            ),
+                label: 'Profile',
+              ),
+            ],
           ),
         ),
       ),

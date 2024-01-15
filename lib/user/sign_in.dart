@@ -267,7 +267,7 @@ class _SignInScreenState extends State<SignInScreen> {
         TextFormField(
           controller: _clientmemberController,
           decoration: const InputDecoration(
-            hintText: 'Client ID',
+            hintText: 'Member No.',
             prefixIcon: Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -301,7 +301,7 @@ class _SignInScreenState extends State<SignInScreen> {
             child: TextFormField(
               controller: _clientdateController,
               decoration: const InputDecoration(
-                hintText: 'Client DoB',
+                hintText: 'Date of Birth',
                 prefixIcon: Icon(Icons.date_range_outlined),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),
@@ -325,7 +325,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
-          child: const Text('Sign In'),
+          child: const Text('Sign In As Client'),
         ),
         const SizedBox(height: 10.0),
 
@@ -465,7 +465,7 @@ class _SignInScreenState extends State<SignInScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextFormField(
-          controller: _insuranceEmailController,
+          controller: _companyEmailController,
           decoration: const InputDecoration(
             hintText: 'ID',
             prefixIcon: Icon(Icons.person_outline_rounded),
@@ -479,14 +479,9 @@ class _SignInScreenState extends State<SignInScreen> {
               borderSide: BorderSide(color: Colors.black),
             ),
           ),
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            _MemberIdInputFormatter(),
-          ],
           onChanged: (value) {
             setState(() {
-              userData.memberId = value;
+              userData.insuranceEmail = value;
             });
           },
         ),
