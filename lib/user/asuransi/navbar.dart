@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/user/peserta/history.dart';
-import 'package:helathcareapp/user/peserta/home.dart';
-import 'package:helathcareapp/user/peserta/profile.dart';
-import 'package:helathcareapp/user/peserta/feature.dart';
+import 'package:helathcareapp/user/asuransi/profile.dart';
+import 'package:helathcareapp/user/asuransi/data.dart';
+import 'package:helathcareapp/user/asuransi/home.dart';
+
 
 class InsuranceNavBar extends StatefulWidget {
   const InsuranceNavBar({super.key});
@@ -16,11 +16,9 @@ class _InsuranceNavBarState extends State<InsuranceNavBar> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const HomePage(),
-    const FeaturePage(),
-    // const QRViewExample(),
-    const HistoryPage(),
-    const ProfilePage(),
+    const InsuranceHomePage(),
+    const InsuranceDataPage(),
+    const InsuranceProfilePage(),
   ];
 
   @override
@@ -66,23 +64,11 @@ class _InsuranceNavBarState extends State<InsuranceNavBar> {
                   Icons.home,
                 ),
                 label: 'Home',
-                backgroundColor: Colors.red
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.library_books,
-                ),
-                label: 'Feature',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.qr_code_2_outlined,
                 ),
-                label: 'QR Code',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.history,
-                ),
-                label: 'History',
+                label: 'Data',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person,

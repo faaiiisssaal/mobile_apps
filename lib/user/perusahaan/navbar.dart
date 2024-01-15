@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/user/peserta/history.dart';
-import 'package:helathcareapp/user/peserta/home.dart';
-import 'package:helathcareapp/user/peserta/profile.dart';
-import 'package:helathcareapp/user/peserta/feature.dart';
+import 'package:helathcareapp/user/perusahaan/profile.dart';
+import 'package:helathcareapp/user/perusahaan/data.dart';
+import 'package:helathcareapp/user/perusahaan/home.dart';
 
 class CompanyNavBar extends StatefulWidget {
   const CompanyNavBar({super.key});
@@ -16,11 +15,9 @@ class _CompanyNavBarState extends State<CompanyNavBar> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const HomePage(),
-    const FeaturePage(),
-    // const QRViewExample(),
-    const HistoryPage(),
-    const ProfilePage(),
+    const CompanyHomePage(),
+    const CompanyDataPage(),
+    const CompanyProfilePage(),
   ];
 
   @override
@@ -69,20 +66,9 @@ class _CompanyNavBarState extends State<CompanyNavBar> {
                 backgroundColor: Colors.red
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.library_books,
-                ),
-                label: 'Feature',
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.qr_code_2_outlined,
                 ),
                 label: 'QR Code',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.history,
-                ),
-                label: 'History',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person,

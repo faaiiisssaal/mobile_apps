@@ -183,6 +183,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+
+                    // 1st Row "Logo" Position
                     Container(
                         height: screenHeight * 0.2,
                         alignment: Alignment.bottomCenter,
@@ -195,13 +197,14 @@ class _SignInScreenState extends State<SignInScreen> {
                               width: screenHeight * 0.35,
                             ),
                           ],
-                        ) // Replace with your logo
-                        ),
+                        )
+                    ),
+
                     SizedBox(
                       height: screenHeight * 0.1,
                     ), // 2% of screen height
 
-                    // Single Row - ID Member and Date Birth
+                    // 2nd Row - 3 Different Form with Switchable in Single Row
 
                     if (_useClient) ...[
                       buildClientSection(),
@@ -230,6 +233,8 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ],
         ),
+
+
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5),
           child: Column(
@@ -355,7 +360,7 @@ class _SignInScreenState extends State<SignInScreen> {
         TextFormField(
           controller: _companyEmailController,
           decoration: const InputDecoration(
-            hintText: 'Company ID',
+            hintText: 'ID',
             prefixIcon: Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -378,7 +383,7 @@ class _SignInScreenState extends State<SignInScreen> {
           controller: _companyPassController,
           obscureText: !_showPassword,
           decoration: InputDecoration(
-            hintText: 'Company Password',
+            hintText: 'Password',
             prefixIcon: const Icon(Icons.lock_outline_rounded),
             suffixIcon: InkWell(
               onTap: () {
@@ -413,7 +418,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
-          child: const Text('Sign In'),
+          child: const Text('Sign In As Company'),
         ),
         const SizedBox(height: 10.0),
 
@@ -441,6 +446,9 @@ class _SignInScreenState extends State<SignInScreen> {
         ElevatedButton(
           onPressed: () {
             switchToClient();
+            if (kDebugMode) {
+              print("Switch to Client");
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,
@@ -459,7 +467,7 @@ class _SignInScreenState extends State<SignInScreen> {
         TextFormField(
           controller: _insuranceEmailController,
           decoration: const InputDecoration(
-            hintText: 'Insurance ID',
+            hintText: 'ID',
             prefixIcon: Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -487,7 +495,7 @@ class _SignInScreenState extends State<SignInScreen> {
           controller: _insurancePassController,
           obscureText: !_showPassword,
           decoration: InputDecoration(
-            hintText: 'Insurance Password',
+            hintText: 'Password',
             prefixIcon: const Icon(Icons.lock_outline_rounded),
             suffixIcon: InkWell(
               onTap: () {
@@ -524,7 +532,7 @@ class _SignInScreenState extends State<SignInScreen> {
             backgroundColor: Colors.lightBlue,
             foregroundColor: Colors.white,
           ),
-          child: const Text('Sign In'),
+          child: const Text('Sign In As Insurance'),
         ),
         const SizedBox(height: 10.0),
         GestureDetector(
@@ -549,6 +557,9 @@ class _SignInScreenState extends State<SignInScreen> {
         ElevatedButton(
           onPressed: () {
             switchToClient();
+            if (kDebugMode) {
+              print("Switch to Client");
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,

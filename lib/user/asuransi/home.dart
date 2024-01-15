@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class InsuranceHomePage extends StatefulWidget {
+  const InsuranceHomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<InsuranceHomePage> createState() => _InsuranceHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _InsuranceHomePageState extends State<InsuranceHomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,14 +28,15 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Hai, Faisal Setiadi",
+                      "Hai, Dorce",
                       style: GoogleFonts.raleway(
                         fontSize: 14
                       ),
                     ),
                     Text(
+                      "ArtaGraha General Insurance",
                       // "Terdaftar sebagai Third-Party Administration (TPA)",
-                      "Terdaftar sebagai Administration Service Only (ASO)",
+                      // "Terdaftar sebagai Administration Service Only (ASO)",
                       style: GoogleFonts.raleway(
                           fontSize: 14
                       ),
