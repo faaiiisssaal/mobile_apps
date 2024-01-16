@@ -1,7 +1,6 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/foundation.dart';
-import 'package:helathcareapp/user/perusahaan/navbar.dart';
 import 'package:helathcareapp/user/peserta/profile/biometrics.dart';
 import 'package:helathcareapp/user/peserta/profile/profile.dart';
 import 'package:package_info/package_info.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import '../background/userdata.dart';
 import 'asuransi/navbar.dart';
+import 'badanusaha/navbar.dart';
 import 'peserta/navbar.dart';
 
 class SignInScreen extends StatefulWidget {

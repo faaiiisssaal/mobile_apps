@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/user/perusahaan/profile/profile.dart';
-import 'package:helathcareapp/user/perusahaan/data/data.dart';
-import 'package:helathcareapp/user/perusahaan/home/home.dart';
+import 'package:helathcareapp/user/badanusaha/profile/profile.dart';
+import 'data/data.dart';
+import 'home/home.dart';
 
 class CompanyNavBar extends StatefulWidget {
   const CompanyNavBar({super.key});

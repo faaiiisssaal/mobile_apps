@@ -49,8 +49,11 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               flex: 25,
               child: Container(
-                // Your content for the second row
                 color: Colors.green,
+                child: const LimitedBox(
+                  maxHeight: 0.8,
+                  child: Text("LALALA"),
+                ),
               ),
             ),
 
