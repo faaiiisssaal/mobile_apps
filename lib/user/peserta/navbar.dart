@@ -7,10 +7,10 @@ import 'package:helathcareapp/user/peserta/qr/qrcode.dart';
 import 'form/form.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key});
+  const NavBar({super.key});
 
   @override
-  _NavBarState createState() => _NavBarState();
+  createState() => _NavBarState();
 }
 
 class _NavBarState extends State<NavBar> {

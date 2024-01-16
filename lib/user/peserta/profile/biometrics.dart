@@ -28,7 +28,6 @@ Future<bool> showBiometricAuthenticationDialog(BuildContext context) async {
   try {
     authenticated = await localAuthentication.authenticate(
       localizedReason: 'Authenticate to access quick login',
-      // biometricOnly: true,
     );
   } catch (e) {
     if (kDebugMode) {

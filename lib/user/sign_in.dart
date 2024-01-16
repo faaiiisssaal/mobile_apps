@@ -16,7 +16,7 @@ class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
@@ -214,8 +214,18 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
+    // isBiometricsVisible();
     _getAppVersion(); // Call this method to get the app version during initialization
   }
+
+  bool isBiometricsButtonVisible = false;
+  // void isBiometricsVisible() {
+  //   if (showBiometricAuthenticationDialog(context) == true) {
+  //     isBiometricsButtonVisible == true;
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   Future<void> _getAppVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -404,36 +414,37 @@ class _SignInScreenState extends State<SignInScreen> {
           child: const Text('Sign In as Participants'),
         ),
         const SizedBox(height: 10.0),
-        ElevatedButton(
-          onPressed: () async {
-            if (QuickLoginStatus.quickLoginActivated) {
-              // Trigger biometric authentication logic
-              bool authenticated = await showBiometricAuthenticationDialog(context);
 
-              if (authenticated) {
-                // Biometric authentication successful
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const NavBar()),
-                );
-              } else {
-                // Biometric authentication failed or canceled
-                // Handle accordingly (e.g., show a message)
-                print("Biometric authentication failed or canceled.");
-              }
-            } else {
-              // Quick login is not activated, show a message or handle accordingly
-              print("Quick login is not activated.");
-            }
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-            // Set visibility based on Quick Login status
-            primary: QuickLoginStatus.quickLoginActivated ? Colors.green : Colors.transparent,
-          ),
-          child: const Text('Biometrics Login'),
-        ),
+        QuickLoginStatus.quickLoginActivated
+            ? ElevatedButton(
+                onPressed: () async {
+                  // Trigger biometric authentication logic
+                  bool authenticated = await showBiometricAuthenticationDialog(context);
+
+                  if (authenticated) {
+                    // Biometric authentication successful
+                    if (context.mounted) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NavBar()),
+                      );
+                    }
+
+                  } else {
+                    // Biometric authentication failed or canceled
+                    if (kDebugMode) {
+                      print("Biometric authentication failed or canceled.");
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Biometrics Login'),
+              )
+            : Container(),
+
         // Switch
         GestureDetector(
           onTap: () {

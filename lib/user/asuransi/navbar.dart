@@ -9,7 +9,7 @@ class InsuranceNavBar extends StatefulWidget {
   const InsuranceNavBar({super.key});
 
   @override
-  _InsuranceNavBarState createState() => _InsuranceNavBarState();
+  createState() => _InsuranceNavBarState();
 }
 
 class _InsuranceNavBarState extends State<InsuranceNavBar> {

@@ -8,7 +8,7 @@ class CompanyNavBar extends StatefulWidget {
   const CompanyNavBar({super.key});
 
   @override
-  _CompanyNavBarState createState() => _CompanyNavBarState();
+  createState() => _CompanyNavBarState();
 }
 
 class _CompanyNavBarState extends State<CompanyNavBar> {

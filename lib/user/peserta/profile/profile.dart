@@ -6,7 +6,7 @@ import 'package:package_info/package_info.dart';
 import 'biometrics.dart'; // Import the biometric_utils.dart file
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -123,6 +123,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).popUntil((route) => route.isFirst);
                                   Navigator.of(context).pushReplacementNamed('/login');
+                                  if (kDebugMode) {
+                                    print("QuickLoginStatus.quickLoginActivated: ${QuickLoginStatus.quickLoginActivated}");
+                                  }
+
                                 },
                                 child: const Text('Yes'),
                               ),
