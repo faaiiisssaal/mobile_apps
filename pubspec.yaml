@@ -64,6 +64,9 @@ flutter:
     - asset/whatsapp-logo.png
     - asset/contact-form.png
     - asset/open-book.png
+    - asset/247_services.png
+    - asset/benefits.png
+    - asset/hospital-building.png
 
   # fonts:
   #   - family: Schyler

@@ -46,14 +46,55 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // the second row for provider
-            Expanded(
-              flex: 25,
-              child: Container(
-                color: Colors.green,
-                child: const LimitedBox(
-                  maxHeight: 0.8,
-                  child: Text("LALALA"),
-                ),
+            // Expanded(
+            //   flex: 25,
+            //   child: Container(
+            //     color: Colors.green,
+            //     child: const LimitedBox(
+            //       maxHeight: 0.8,
+            //       child: Text("LALALA"),
+            //     ),
+            //   ),
+            // ),
+            Container(
+              height: 120,
+              padding: const EdgeInsets.all(10),
+              child: GridView(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                padding: const EdgeInsets.all(10),
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                          "asset/whatsapp-logo.png",
+                        height: 60,
+                      ),
+                      const Text("Provider")
+                    ],
+                  ),Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "asset/whatsapp-logo.png",
+                        height: 60,
+                      ),
+                      const Text("Provider")
+                    ],
+                  ),Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "asset/247_services.png",
+                        height: 60,
+                      ),
+                      const Text("Hotline 24/7")
+                    ],
+                  ),
+                ],
               ),
             ),
 
