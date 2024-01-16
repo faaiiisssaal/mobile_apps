@@ -62,6 +62,8 @@ flutter:
     - asset/google-logo.png
     - asset/apple-logo.png
     - asset/whatsapp-logo.png
+    - asset/contact-form.png
+    - asset/open-book.png
 
   # fonts:
   #   - family: Schyler

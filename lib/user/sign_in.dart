@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:helathcareapp/user/perusahaan/navbar.dart';
+import 'package:helathcareapp/user/peserta/profile/biometrics.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -110,6 +111,16 @@ class _SignInScreenState extends State<SignInScreen> {
       _useCompany = false;
       _useInsurance = false;
     });
+  }
+
+  void signInTemp() {
+    // Navigate to the next screen and pass userData
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const NavBar(),
+      ),
+    );
   }
 
   void signIn() {
@@ -351,7 +362,6 @@ class _SignInScreenState extends State<SignInScreen> {
           },
         ),
         const SizedBox(height: 10.0),
-
         // Client DoB
         GestureDetector(
           onTap: () async {
@@ -381,18 +391,48 @@ class _SignInScreenState extends State<SignInScreen> {
         // Sign In Button
         ElevatedButton(
           onPressed: () {
-            if (_clientmemberController.text.isEmpty || _clientdateController.text.isEmpty) {
-              // Show a Snackbar for missing fields
-              _showFloatingSnackbar('Please fill in the form');
-            } else {
-              signIn();
-            }
+            // if (_clientmemberController.text.isEmpty || _clientdateController.text.isEmpty) {
+            //   // Show a Snackbar for missing fields
+            //   _showFloatingSnackbar('Please fill in the form');
+            // } else {
+            //   signIn();
+            // }
+            signInTemp();
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
           child: const Text('Sign In As Client'),
         ),
         const SizedBox(height: 10.0),
+        ElevatedButton(
+          onPressed: () async {
+            if (isQuickLoginActivated) {
+              // Trigger biometric authentication logic
+              bool authenticated = await showBiometricAuthenticationDialog(context);
+
+              if (authenticated) {
+                // Biometric authentication successful
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const NavBar()),
+                );
+              } else {
+                // Biometric authentication failed or canceled
+                // Handle accordingly (e.g., show a message)
+                print("Biometric authentication failed or canceled.");
+              }
+            } else {
+              // Quick login is not activated, show a message or handle accordingly
+              print("Quick login is not activated.");
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+          ),
+          child: const Text('Biometrics Login'),
+        ),
+
 
         // Switch
         GestureDetector(

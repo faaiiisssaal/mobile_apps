@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
 bool isBiometricAvailable = false;
+bool isQuickLoginActivated = false;
+
 
 Future<void> checkBiometricAvailability() async {
   final LocalAuthentication localAuthentication = LocalAuthentication();
@@ -19,7 +21,7 @@ Future<void> checkBiometricAvailability() async {
   }
 }
 
-Future<void> showBiometricAuthenticationDialog(BuildContext context) async {
+Future<bool> showBiometricAuthenticationDialog(BuildContext context) async {
   final LocalAuthentication localAuthentication = LocalAuthentication();
   bool authenticated = false;
 
@@ -29,16 +31,10 @@ Future<void> showBiometricAuthenticationDialog(BuildContext context) async {
       // biometricOnly: true,
     );
   } catch (e) {
-    print("Error during biometric authentication: $e");
+    if (kDebugMode) {
+      print("Error during biometric authentication: $e");
+    }
   }
 
-  if (authenticated) {
-    // User successfully authenticated with biometrics
-    // Add your logic to proceed with quick login
-    print("Biometric authentication successful. Proceeding with quick login.");
-  } else {
-    // Biometric authentication failed or user canceled
-    // Handle accordingly (e.g., show a message)
-    print("Biometric authentication failed or canceled.");
-  }
+  return authenticated;
 }

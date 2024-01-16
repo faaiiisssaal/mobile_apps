@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helathcareapp/user/sign_in.dart';
 
 import 'onboarding/appwrapper.dart';
 
@@ -26,6 +27,11 @@ class MyApp extends StatelessWidget {
       ),
       title: 'Smilynks',
       home: const AppWrapper(),
+      initialRoute: "/",
+      routes: {
+        '/login': (context) => const SignInScreen(),
+        // Add more routes as needed
+      },
     );
   }
 }
