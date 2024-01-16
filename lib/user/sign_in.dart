@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:helathcareapp/user/perusahaan/navbar.dart';
 import 'package:helathcareapp/user/peserta/profile/biometrics.dart';
+import 'package:helathcareapp/user/peserta/profile/profile.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -213,8 +214,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
-    _getAppVersion();
-    buildClientSection(); // Call this method to get the app version during initialization
+    _getAppVersion(); // Call this method to get the app version during initialization
   }
 
   Future<void> _getAppVersion() async {
@@ -260,7 +260,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     // 1st Row "Logo" Position
                     Container(
-                        height: screenHeight * 0.2,
+                        height: screenHeight * 0.18,
                         alignment: Alignment.bottomCenter,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -317,12 +317,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 softWrap: true,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 4.0),
-              Text(
-                'App Version: $_appVersion',
-                style: const TextStyle(fontSize: 12.5, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
+              // const SizedBox(height: 4.0),
+              // Text(
+              //   'App Version: $_appVersion',
+              //   style: const TextStyle(fontSize: 12.5, color: Colors.grey),
+              //   textAlign: TextAlign.center,
+              // ),
             ],
           ),
         ),
@@ -401,12 +401,12 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
-          child: const Text('Sign In As Client'),
+          child: const Text('Sign In as Participants'),
         ),
         const SizedBox(height: 10.0),
         ElevatedButton(
           onPressed: () async {
-            if (isQuickLoginActivated) {
+            if (QuickLoginStatus.quickLoginActivated) {
               // Trigger biometric authentication logic
               bool authenticated = await showBiometricAuthenticationDialog(context);
 
@@ -427,13 +427,13 @@ class _SignInScreenState extends State<SignInScreen> {
             }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.red,
             foregroundColor: Colors.white,
+            // Set visibility based on Quick Login status
+            primary: QuickLoginStatus.quickLoginActivated ? Colors.green : Colors.transparent,
           ),
           child: const Text('Biometrics Login'),
         ),
-
-
         // Switch
         GestureDetector(
           onTap: () {
@@ -523,7 +523,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
-          child: const Text('Sign In As Company'),
+          child: const Text('Sign In as Enterprises'),
         ),
         const SizedBox(height: 10.0),
 
@@ -538,7 +538,7 @@ class _SignInScreenState extends State<SignInScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
-              _useCompany ? 'Switch to Insurance' : 'Switch to Company',
+              _useCompany ? 'Switch to Insurance' : 'Switch to Enterprises',
               style: const TextStyle(
                 color: Colors.blue,
               ),
@@ -632,7 +632,7 @@ class _SignInScreenState extends State<SignInScreen> {
             backgroundColor: Colors.lightBlue,
             foregroundColor: Colors.white,
           ),
-          child: const Text('Sign In As Insurance'),
+          child: const Text('Sign In as Insurance'),
         ),
         const SizedBox(height: 10.0),
         GestureDetector(
@@ -646,7 +646,7 @@ class _SignInScreenState extends State<SignInScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
-              _useCompany ? 'Switch to Insurance' : 'Switch to Company',
+              _useCompany ? 'Switch to Insurance' : 'Switch to Enterprise',
               style: const TextStyle(
                 color: Colors.blue,
               ),

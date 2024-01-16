@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'biometrics.dart'; // Import the biometric_utils.dart file
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class CompanyProfilePage extends StatefulWidget {
+  const CompanyProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<CompanyProfilePage> createState() => _CompanyProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _CompanyProfilePageState extends State<CompanyProfilePage> {
 
   String _appVersion = "Unknown";
 
