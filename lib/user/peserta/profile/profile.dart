@@ -13,7 +13,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   String _appVersion = "Unknown";
 
   Future<void> _getAppVersion() async {
@@ -49,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     // leading: Icon(Icons.perm_identity_outlined),
                     title: const Text('My Account'),
                     leading: Image.asset(
-                        "asset/employee.png",
+                      "asset/employee.png",
                       height: 24,
                       width: 24,
                     ),
@@ -76,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 24,
                       width: 24,
                     ),
-                    title: Text('About Smilynks'),
+                    title: const Text('About Smilynks'),
                   ),
                   ListTile(
                     leading: const Icon(Icons.fingerprint_rounded),
@@ -117,7 +116,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       } else {
                         // Handle accordingly (e.g., show a message)
                         if (kDebugMode) {
-                          print("Biometric authentication is not available or Quick Login is deactivated.");
+                          print(
+                              "Biometric authentication is not available or Quick Login is deactivated.");
                         }
                       }
                     },
@@ -142,9 +142,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Navigator.of(context).popUntil((route) => route.isFirst);
                                   Navigator.of(context).pushReplacementNamed('/login');
                                   if (kDebugMode) {
-                                    print("QuickLoginStatus.quickLoginActivated: ${QuickLoginStatus.quickLoginActivated}");
+                                    print(
+                                        "QuickLoginStatus.quickLoginActivated: ${QuickLoginStatus.quickLoginActivated}");
                                   }
-
                                 },
                                 child: const Text('Yes'),
                               ),
@@ -161,13 +161,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       );
                     },
                   ),
-
                 ],
               ),
             ),
           ],
         ),
-
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
           child: Column(

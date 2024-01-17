@@ -8,14 +8,13 @@ class OnboardingPage extends StatelessWidget {
   final int currentPage;
   final int pageCount;
 
-  const OnboardingPage({
-   super.key,
-    required this.title,
-    required this.description,
-    required this.image,
-    required this.currentPage,
-    required this.pageCount
-  });
+  const OnboardingPage(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.image,
+      required this.currentPage,
+      required this.pageCount});
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +34,7 @@ class OnboardingPage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold
-                ),
+                style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -55,10 +51,7 @@ class OnboardingPage extends StatelessWidget {
               DotsIndicator(
                 dotsCount: pageCount,
                 position: currentPage.toInt(),
-                decorator: const DotsDecorator(
-                  color: Colors.lightBlue,
-                  activeColor: Colors.red
-                ),
+                decorator: const DotsDecorator(color: Colors.lightBlue, activeColor: Colors.red),
               )
             ],
           )

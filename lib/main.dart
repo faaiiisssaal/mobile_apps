@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helathcareapp/user/sign_in.dart';
 
@@ -14,15 +15,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarContrastEnforced: true,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark,
+
+        statusBarColor: Colors.white, // Set your app's background color
+        statusBarIconBrightness: Brightness.dark, // Adjust icon color for contrast
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: GoogleFonts.ralewayTextTheme(
+        textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme,
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.blue,
         ),
       ),
       title: 'Smilynks',
@@ -35,4 +45,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

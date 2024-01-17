@@ -204,7 +204,7 @@ class _SignInScreenState extends State<SignInScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const CompanyNavBar(),
+        builder: (context) => const EnterpriseNavBar(),
       ),
     );
   }
@@ -214,18 +214,8 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
-    // isBiometricsVisible();
     _getAppVersion(); // Call this method to get the app version during initialization
   }
-
-  bool isBiometricsButtonVisible = false;
-  // void isBiometricsVisible() {
-  //   if (showBiometricAuthenticationDialog(context) == true) {
-  //     isBiometricsButtonVisible == true;
-  //   } else {
-  //     return;
-  //   }
-  // }
 
   Future<void> _getAppVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -244,15 +234,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.white,
-        systemNavigationBarDividerColor: Colors.white,
-        statusBarColor: Colors.white, // Set your app's background color
-        statusBarIconBrightness: Brightness.dark, // Adjust icon color for contrast
-      ),
-    );
 
     return SafeArea(
       child: Scaffold(
@@ -285,10 +266,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
                     SizedBox(
                       height: screenHeight * 0.1,
-                    ), // 2% of screen height
+                    ),
 
                     // 2nd Row - 3 Different Form with Switchable in Single Row
-
                     if (_useClient) ...[
                       buildClientSection(),
                     ],
@@ -429,7 +409,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         MaterialPageRoute(builder: (context) => const NavBar()),
                       );
                     }
-
                   } else {
                     // Biometric authentication failed or canceled
                     if (kDebugMode) {

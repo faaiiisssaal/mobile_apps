@@ -4,7 +4,6 @@ import 'package:helathcareapp/user/asuransi/profile.dart';
 import 'package:helathcareapp/user/asuransi/data.dart';
 import 'package:helathcareapp/user/asuransi/home.dart';
 
-
 class InsuranceNavBar extends StatefulWidget {
   const InsuranceNavBar({super.key});
 
@@ -44,13 +43,13 @@ class _InsuranceNavBarState extends State<InsuranceNavBar> {
           ),
           child: BottomNavigationBar(
             backgroundColor: Colors.blue,
-            iconSize: 36,
+            iconSize: 24,
             type: BottomNavigationBarType.fixed,
-            selectedLabelStyle: GoogleFonts.raleway(),
-            selectedFontSize: 14,
+            selectedLabelStyle: GoogleFonts.lato(),
+            selectedFontSize: 12,
             selectedItemColor: Colors.white,
-            unselectedLabelStyle: GoogleFonts.raleway(),
-            unselectedFontSize: 14,
+            unselectedLabelStyle: GoogleFonts.lato(),
+            unselectedFontSize: 12,
             unselectedItemColor: Colors.black,
             currentIndex: _currentIndex,
             onTap: (index) {
@@ -66,12 +65,14 @@ class _InsuranceNavBarState extends State<InsuranceNavBar> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.qr_code_2_outlined,
+                icon: Icon(
+                  Icons.qr_code_2_outlined,
                 ),
                 label: 'Data',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person,
+                icon: Icon(
+                  Icons.person,
                 ),
                 label: 'Profile',
               ),
@@ -82,4 +83,3 @@ class _InsuranceNavBarState extends State<InsuranceNavBar> {
     );
   }
 }
-

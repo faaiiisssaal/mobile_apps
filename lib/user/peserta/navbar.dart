@@ -44,10 +44,10 @@ class _NavBarState extends State<NavBar> {
             backgroundColor: const Color(0xFF33BFFF),
             iconSize: 24,
             type: BottomNavigationBarType.fixed,
-            selectedLabelStyle: GoogleFonts.raleway(),
+            selectedLabelStyle: GoogleFonts.lato(),
             selectedFontSize: 12,
             selectedItemColor: Colors.white,
-            unselectedLabelStyle: GoogleFonts.raleway(),
+            unselectedLabelStyle: GoogleFonts.lato(),
             unselectedFontSize: 12,
             unselectedItemColor: Colors.black,
             currentIndex: _currentIndex,
@@ -70,17 +70,20 @@ class _NavBarState extends State<NavBar> {
                 label: 'Form',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.qr_code_2_outlined,
+                icon: Icon(
+                  Icons.qr_code_2_outlined,
                 ),
                 label: 'QR Code',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.history,
+                icon: Icon(
+                  Icons.history,
                 ),
                 label: 'History',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person,
+                icon: Icon(
+                  Icons.person,
                 ),
                 label: 'Profile',
               ),

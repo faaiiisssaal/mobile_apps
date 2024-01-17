@@ -4,20 +4,20 @@ import 'package:helathcareapp/user/badanusaha/profile/profile.dart';
 import 'data/data.dart';
 import 'home/home.dart';
 
-class CompanyNavBar extends StatefulWidget {
-  const CompanyNavBar({super.key});
+class EnterpriseNavBar extends StatefulWidget {
+  const EnterpriseNavBar({super.key});
 
   @override
-  createState() => _CompanyNavBarState();
+  createState() => _EnterpriseNavBarState();
 }
 
-class _CompanyNavBarState extends State<CompanyNavBar> {
+class _EnterpriseNavBarState extends State<EnterpriseNavBar> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const CompanyHomePage(),
-    const CompanyDataPage(),
-    const CompanyProfilePage(),
+    const EnterpriseHomePage(),
+    const EnterpriseDataPage(),
+    const EnterpriseProfilePage(),
   ];
 
   @override
@@ -43,13 +43,13 @@ class _CompanyNavBarState extends State<CompanyNavBar> {
           ),
           child: BottomNavigationBar(
             backgroundColor: Colors.blue,
-            iconSize: 36,
+            iconSize: 24,
             type: BottomNavigationBarType.fixed,
-            selectedLabelStyle: GoogleFonts.raleway(),
-            selectedFontSize: 14,
+            selectedLabelStyle: GoogleFonts.lato(),
+            selectedFontSize: 12,
             selectedItemColor: Colors.white,
-            unselectedLabelStyle: GoogleFonts.raleway(),
-            unselectedFontSize: 14,
+            unselectedLabelStyle: GoogleFonts.lato(),
+            unselectedFontSize: 12,
             unselectedItemColor: Colors.black,
             currentIndex: _currentIndex,
             onTap: (index) {
@@ -59,19 +59,20 @@ class _CompanyNavBarState extends State<CompanyNavBar> {
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                label: 'Home',
-                backgroundColor: Colors.red
-              ),
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: 'Home',
+                  backgroundColor: Colors.red),
               BottomNavigationBarItem(
-                icon: Icon(Icons.qr_code_2_outlined,
+                icon: Icon(
+                  Icons.qr_code_2_outlined,
                 ),
                 label: 'QR Code',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person,
+                icon: Icon(
+                  Icons.person,
                 ),
                 label: 'Profile',
               ),
@@ -82,4 +83,3 @@ class _CompanyNavBarState extends State<CompanyNavBar> {
     );
   }
 }
-

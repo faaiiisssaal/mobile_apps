@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'biometrics.dart'; // Import the biometric_utils.dart file
 
-class CompanyProfilePage extends StatefulWidget {
-  const CompanyProfilePage({super.key});
+class EnterpriseProfilePage extends StatefulWidget {
+  const EnterpriseProfilePage({super.key});
 
   @override
-  State<CompanyProfilePage> createState() => _CompanyProfilePageState();
+  State<EnterpriseProfilePage> createState() => _EnterpriseProfilePageState();
 }
 
-class _CompanyProfilePageState extends State<CompanyProfilePage> {
-
+class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
   String _appVersion = "Unknown";
 
   Future<void> _getAppVersion() async {
@@ -96,13 +95,12 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                       } else {
                         // Handle accordingly (e.g., show a message)
                         if (kDebugMode) {
-                          print("Biometric authentication is not available or Quick Login is deactivated.");
+                          print(
+                              "Biometric authentication is not available or Quick Login is deactivated.");
                         }
                       }
                     },
                   ),
-
-
 
                   // ... Add more ListTiles as needed
                   ListTile(
@@ -139,13 +137,11 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                       );
                     },
                   ),
-
                 ],
               ),
             ),
           ],
         ),
-
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
           child: Column(

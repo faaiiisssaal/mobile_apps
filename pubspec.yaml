@@ -78,6 +78,8 @@ flutter:
     - asset/identification.png
     - asset/health-insurance.png
     - asset/healthcare.png
+    - asset/claim.png
+    - asset/placeholder.png
 
   # fonts:
   #   - family: Schyler

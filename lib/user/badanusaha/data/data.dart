@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CompanyDataPage extends StatefulWidget {
-  const CompanyDataPage({super.key});
+class EnterpriseDataPage extends StatefulWidget {
+  const EnterpriseDataPage({super.key});
 
   @override
-  State<CompanyDataPage> createState() => _CompanyDataPageState();
+  State<EnterpriseDataPage> createState() => _EnterpriseDataPageState();
 }
 
-class _CompanyDataPageState extends State<CompanyDataPage> {
+class _EnterpriseDataPageState extends State<EnterpriseDataPage> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();

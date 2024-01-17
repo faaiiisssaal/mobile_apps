@@ -18,11 +18,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        resizeToAvoidBottomInset: false,
-        body: Column(
+      child: SingleChildScrollView(
+        child: Column(
           children: [
+            // 1st row for Information
             SizedBox(
               child: ImageSlideshow(
                 indicatorColor: Colors.blue,
@@ -34,108 +33,129 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Image.asset(
                     'asset/whatsapp-logo.png',
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitHeight,
                   ),
                   Image.asset(
                     'asset/apple-logo.png',
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitHeight,
                   ),
                   Image.asset(
                     'asset/google-logo.png',
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitHeight,
                   ),
                 ],
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
 
-            // the first row for greetings
+            // 2nd row for username
             Container(
-              height: 60,
+              height: 50,
               color: const Color(0xFFdcdcdc),
               width: double.infinity,
-              padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
+              margin: const EdgeInsets.only(left: 10, right: 10),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Hai, Faisal Setiadi",
-                    style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     // "Terdaftar sebagai Third-Party Administration (TPA)",
                     "Terdaftar di Perusahaan ABCXYZ",
-                    style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
 
+            // 3rd row for nearby
             Container(
               height: 50,
               width: double.infinity,
-              padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.only(bottom: 5, left: 0, right: 10),
+              child: Row(
                 children: [
-                  Text(
-                    "Nearby ...",
-                    style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
+                  SizedBox(
+                    width: 50,
+                    child: Image.asset(
+                      "asset/placeholder.png",
+                      height: 50,
+                      width: 50,
+                    ),
                   ),
-
-                  Text(
-                    "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
-                    style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Nearby ...",
+                          style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
+                          style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
 
-            // the second row for provider
+            // 4th row for our product
             Container(
-              height: 250,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: GridView(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  childAspectRatio: 1.6,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.5,
+                  crossAxisSpacing: 0,
+                  mainAxisSpacing: 20,
                 ),
-                clipBehavior: Clip.antiAlias,
+                clipBehavior: Clip.hardEdge,
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: <Widget>[
                   InkWell(
                     onTap: () {
                       Navigator.push(
-                          context,
+                        context,
                         PageTransition(
-                          type: PageTransitionType.leftToRight, // Set the transition type left-to-right
+                          type: PageTransitionType
+                              .leftToRight, // Set the transition type left-to-right
                           duration: const Duration(milliseconds: 300),
                           reverseDuration: const Duration(milliseconds: 300),
                           child: const BenefitsPage(),
                         ),
                       );
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "asset/health-insurance.png",
-                            height: 60,
-                            color: Colors.red,
-                          ),
-                          const Text(
-                            "Benefits",
-                            style: TextStyle(
-                            ),
-                          )
-                        ],
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                            child: Image.asset(
+                          "asset/health-insurance.png",
+                          color: Colors.red,
+                          fit: BoxFit.fill,
+                        )),
+                        const Text(
+                          "Benefits",
+                          style: TextStyle(),
+                        )
+                      ],
                     ),
                   ),
                   InkWell(
@@ -143,31 +163,30 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         PageTransition(
-                          type: PageTransitionType.rightToLeft, // Set the transition type right-to-left
+                          type: PageTransitionType
+                              .rightToLeft, // Set the transition type right-to-left
                           duration: const Duration(milliseconds: 300),
                           reverseDuration: const Duration(milliseconds: 300),
                           child: const ClaimPage(),
                         ),
                       );
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "asset/healthcare.png",
-                            height: 60,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Image.asset(
+                            "asset/claim.png",
                             color: Colors.red,
+                            fit: BoxFit.fill,
                           ),
-                          const Text(
-                            "Claim",
-                            style: TextStyle(
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        const Text(
+                          "Claim",
+                          style: TextStyle(),
+                        )
+                      ],
                     ),
                   ),
                   InkWell(
@@ -175,31 +194,30 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         PageTransition(
-                          type: PageTransitionType.leftToRight, // Set the transition type left-to-right
+                          type: PageTransitionType
+                              .leftToRight, // Set the transition type left-to-right
                           duration: const Duration(milliseconds: 300),
                           reverseDuration: const Duration(milliseconds: 300),
                           child: const PolicyPage(),
                         ),
                       );
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Image.asset(
                             "asset/insurance-policy.png",
-                            height: 60,
                             color: Colors.red,
+                            fit: BoxFit.fill,
                           ),
-                          const Text(
-                            "Policy",
-                            style: TextStyle(
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        const Text(
+                          "Policy",
+                          style: TextStyle(),
+                        )
+                      ],
                     ),
                   ),
                   InkWell(
@@ -207,46 +225,62 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         PageTransition(
-                          type: PageTransitionType.rightToLeft, // Set the transition type right-to-left
+                          type: PageTransitionType
+                              .rightToLeft, // Set the transition type right-to-left
                           duration: const Duration(milliseconds: 300),
                           reverseDuration: const Duration(milliseconds: 300),
                           child: const HotlinePage(),
                         ),
                       );
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Image.asset(
                             "asset/247-services.png",
-                            height: 60,
                             color: Colors.red,
+                            fit: BoxFit.fill,
                           ),
-                          const Text(
-                              "Hotline 24/7",
-                            style: TextStyle(
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        const Text(
+                          "Hotline 24/7",
+                          style: TextStyle(),
+                        )
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
 
-            // the third row for information
-
-            // the fourth row for about me
-            Expanded(
-              flex: 15,
-              child: Container(
-                // Your content for the fourth row
-                color: Colors.yellow,
-                child: const Text("TEST"),
+            // 5th row for our location
+            Container(
+              height: 140,
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    child: Image.asset(
+                      "asset/247-services.png",
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Expanded(
+                      child: Text(
+                    "About Us\nSmilynlks\nJl. Pluit Kencana Raya No. 85A\nJakarta Utara, 14450, Indonesia\nTelp : +62 21 6624399\nFax : +62 21 6624299\nEmail : alarmcenter.1@smilynks.co.id",
+                    style: TextStyle(fontSize: 13),
+                    textAlign: TextAlign.justify,
+                  )),
+                ],
               ),
             ),
           ],

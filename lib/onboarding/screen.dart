@@ -70,13 +70,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ElevatedButton(
                       onPressed: () {
                         _pageController.previousPage(
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeInOut);
+                            duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightBlue,
-                          foregroundColor: Colors.white
-                      ),
+                          backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
                       child: const Text('Previous'),
                     ),
                   const Spacer(),
@@ -84,20 +81,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ElevatedButton(
                       onPressed: () {
                         _pageController.nextPage(
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeInOut);
+                            duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightBlue,
-                          foregroundColor: Colors.white),
+                          backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
                       child: const Text('Next'),
                     ),
                   if (_currentPage == _pages.length - 1)
                     ElevatedButton(
                       onPressed: widget.onDone,
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightBlue,
-                          foregroundColor: Colors.white),
+                          backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
                       child: const Text('Get Started'),
                     )
                 ],

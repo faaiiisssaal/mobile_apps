@@ -8,7 +8,6 @@ import 'package:local_auth/local_auth.dart';
 bool isBiometricAvailable = false;
 bool isQuickLoginActivated = false;
 
-
 Future<void> checkBiometricAvailability() async {
   final LocalAuthentication localAuthentication = LocalAuthentication();
   try {
