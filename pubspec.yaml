@@ -38,6 +38,7 @@ dependencies:
   permission_handler: ^11.1.0
   flutter_image_slideshow: ^0.1.6
   page_transition: ^2.1.0
+  flutter_plugin_android_lifecycle: ^2.0.0
 #  camera: ^0.8.0
 
 dev_dependencies:

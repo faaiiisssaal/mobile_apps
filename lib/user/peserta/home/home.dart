@@ -23,74 +23,72 @@ class _HomePageState extends State<HomePage> {
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
-            ImageSlideshow(
-              indicatorColor: Colors.blue,
-              onPageChanged: (value) {
-                debugPrint('Page changed: $value');
-              },
-              autoPlayInterval: 3000,
-              isLoop: true,
-              children: [
-                Image.asset(
-                  'asset/whatsapp-logo.png',
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  'asset/apple-logo.png',
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  'asset/google-logo.png',
-                  fit: BoxFit.cover,
-                ),
-              ],
-            ),
-
-            // the first row for greetings
-            Expanded(
-              flex: 5,
-              child: Container(
-                color: const Color(0xFFdcdcdc),
-                width: double.infinity,
-                padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Hai, Faisal Setiadi",
-                      style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      // "Terdaftar sebagai Third-Party Administration (TPA)",
-                      "Terdaftar di Perusahaan ABCXYZ",
-                      style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+            SizedBox(
+              child: ImageSlideshow(
+                indicatorColor: Colors.blue,
+                onPageChanged: (value) {
+                  debugPrint('Page changed: $value');
+                },
+                autoPlayInterval: 3000,
+                isLoop: true,
+                children: [
+                  Image.asset(
+                    'asset/whatsapp-logo.png',
+                    fit: BoxFit.cover,
+                  ),
+                  Image.asset(
+                    'asset/apple-logo.png',
+                    fit: BoxFit.cover,
+                  ),
+                  Image.asset(
+                    'asset/google-logo.png',
+                    fit: BoxFit.cover,
+                  ),
+                ],
               ),
             ),
 
-            Expanded(
-              flex: 5,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Nearby ...",
-                      style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
+            // the first row for greetings
+            Container(
+              height: 60,
+              color: const Color(0xFFdcdcdc),
+              width: double.infinity,
+              padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Hai, Faisal Setiadi",
+                    style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    // "Terdaftar sebagai Third-Party Administration (TPA)",
+                    "Terdaftar di Perusahaan ABCXYZ",
+                    style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
 
-                    Text(
-                      "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
-                      style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+            Container(
+              height: 50,
+              width: double.infinity,
+              padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Nearby ...",
+                    style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+
+                  Text(
+                    "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
+                    style: GoogleFonts.raleway(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
 
