@@ -45,17 +45,38 @@ class _ProfilePageState extends State<ProfilePage> {
             Expanded(
               child: ListView(
                 children: [
-                  const ListTile(
-                    leading: Icon(Icons.perm_identity_outlined),
-                    title: Text('My Account'),
+                  ListTile(
+                    // leading: Icon(Icons.perm_identity_outlined),
+                    title: const Text('My Account'),
+                    leading: Image.asset(
+                        "asset/employee.png",
+                      height: 24,
+                      width: 24,
+                    ),
                   ),
-                  const ListTile(
-                    leading: Icon(Icons.badge_outlined),
-                    title: Text('My e-Card'),
+                  ListTile(
+                    leading: Image.asset(
+                      "asset/id-card.png",
+                      height: 24,
+                      width: 24,
+                    ),
+                    title: const Text('My e-Card'),
                   ),
-                  const ListTile(
-                    leading: Icon(Icons.menu_book_sharp),
-                    title: Text('Manual Guide'),
+                  ListTile(
+                    leading: Image.asset(
+                      "asset/open-book.png",
+                      height: 24,
+                      width: 24,
+                    ),
+                    title: const Text('Manual Guide'),
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      "asset/info.png",
+                      height: 24,
+                      width: 24,
+                    ),
+                    title: Text('About Smilynks'),
                   ),
                   ListTile(
                     leading: const Icon(Icons.fingerprint_rounded),
@@ -101,9 +122,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       }
                     },
                   ),
-
-
-
                   // ... Add more ListTiles as needed
                   ListTile(
                     leading: const Icon(Icons.exit_to_app),

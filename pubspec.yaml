@@ -36,6 +36,8 @@ dependencies:
   qr_flutter: ^4.1.0
   qr_code_scanner: ^1.0.1
   permission_handler: ^11.1.0
+  flutter_image_slideshow: ^0.1.6
+  page_transition: ^2.1.0
 #  camera: ^0.8.0
 
 dev_dependencies:
@@ -64,9 +66,17 @@ flutter:
     - asset/whatsapp-logo.png
     - asset/contact-form.png
     - asset/open-book.png
-    - asset/247_services.png
+    - asset/info.png
+    - asset/id-card.png
+    - asset/247-services.png
     - asset/benefits.png
     - asset/hospital-building.png
+    - asset/insurance-policy.png
+    - asset/hospital.png
+    - asset/employee.png
+    - asset/identification.png
+    - asset/health-insurance.png
+    - asset/healthcare.png
 
   # fonts:
   #   - family: Schyler
