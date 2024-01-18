@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 const kPureWhite = Color(0x00ffffff);
 
+const c10 = SizedBox(height: 10,);
+
 class SizeConfig {
   late MediaQueryData _mediaQueryData;
   late double screenWidth;

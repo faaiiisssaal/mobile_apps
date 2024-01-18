@@ -2,7 +2,12 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/user/peserta/profile/account.dart';
+import 'package:helathcareapp/user/peserta/profile/ecard.dart';
+import 'package:helathcareapp/user/peserta/profile/guide.dart';
 import 'package:package_info/package_info.dart';
+import 'package:page_transition/page_transition.dart';
+import 'about.dart';
 import 'biometrics.dart'; // Import the biometric_utils.dart file
 
 class ProfilePage extends StatefulWidget {
@@ -32,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Placeholder(
       child: Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,40 +50,47 @@ class _ProfilePageState extends State<ProfilePage> {
               child: ListView(
                 children: [
                   ListTile(
-                    // leading: Icon(Icons.perm_identity_outlined),
+                    leading: const Icon(Icons.perm_identity_outlined),
                     title: const Text('My Account'),
-                    leading: Image.asset(
-                      "asset/employee.png",
-                      height: 24,
-                      width: 24,
-                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AccountPage()),
+                      );
+                    },
                   ),
                   ListTile(
-                    leading: Image.asset(
-                      "asset/id-card.png",
-                      height: 24,
-                      width: 24,
-                    ),
+                    leading: const Icon(Icons.badge_outlined),
                     title: const Text('My e-Card'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ECardPage()),
+                      );
+                    },
                   ),
                   ListTile(
-                    leading: Image.asset(
-                      "asset/open-book.png",
-                      height: 24,
-                      width: 24,
-                    ),
+                    leading: const Icon(Icons.file_open),
                     title: const Text('Manual Guide'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const GuidePage()),
+                      );
+                    },
                   ),
                   ListTile(
-                    leading: Image.asset(
-                      "asset/info.png",
-                      height: 24,
-                      width: 24,
-                    ),
+                    leading: const Icon(Icons.info_outline),
                     title: const Text('About Smilynks'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AboutPage()),
+                      );
+                    },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.fingerprint_rounded),
+                    leading: const Icon(Icons.fingerprint_outlined),
                     title: const Text('Quick Login'),
                     trailing: Switch(
                       value: isQuickLoginActivated,
@@ -171,13 +183,6 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Text(
-              //   "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
-              //   maxLines: 1,
-              //   softWrap: true,
-              //   textAlign: TextAlign.center,
-              // ),
-              // const SizedBox(height: 4.0),
               Text(
                 'App Version: $_appVersion',
                 style: const TextStyle(fontSize: 12.5, color: Colors.black),

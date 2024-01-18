@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
             // 2nd row for username
             Container(
               height: 50,
-              color: const Color(0xFFdcdcdc),
+              // color: const Color(0xFFdcdcdc),
               width: double.infinity,
               margin: const EdgeInsets.only(left: 10, right: 10),
               child: Column(
@@ -251,35 +251,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-
-            // 5th row for our location
-            Container(
-              height: 140,
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.35,
-                    child: Image.asset(
-                      "asset/247-services.png",
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Expanded(
-                      child: Text(
-                    "About Us\nSmilynlks\nJl. Pluit Kencana Raya No. 85A\nJakarta Utara, 14450, Indonesia\nTelp : +62 21 6624399\nFax : +62 21 6624299\nEmail : alarmcenter.1@smilynks.co.id",
-                    style: TextStyle(fontSize: 13),
-                    textAlign: TextAlign.justify,
-                  )),
                 ],
               ),
             ),
