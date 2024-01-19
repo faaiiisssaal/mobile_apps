@@ -38,6 +38,9 @@ dependencies:
   permission_handler: ^11.1.0
   flutter_image_slideshow: ^0.1.6
   page_transition: ^2.1.0
+  json_serializable: ^6.7.1
+  bloc: ^8.1.2
+  url_launcher: ^6.2.3
 #  camera: ^0.8.0
 
 dev_dependencies:

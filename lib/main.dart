@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/user/sign_in.dart';
-
-import 'onboarding/appwrapper.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/onboarding/appwrapper.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/onboarding/sign_in.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
