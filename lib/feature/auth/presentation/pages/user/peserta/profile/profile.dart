@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/profile/ecard.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/profile/guide.dart';
 import 'package:helathcareapp/feature/common/constant.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'about.dart';
 import '../../../../widgets/biometrics.dart'; // Import the biometric_utils.dart file
 
@@ -354,7 +354,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   // ... Add more ListTiles as needed
                   ListTile(
                     leading: const Icon(Icons.exit_to_app),
-                    title: const Text('Exit App'),
+                    title: const Text('Exit'),
                     onTap: () {
                       // Show a confirmation dialog
                       showDialog(

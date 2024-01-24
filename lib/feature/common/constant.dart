@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 // Color code
 
@@ -112,7 +111,6 @@ double mediaheight(double height, BuildContext context) {
 double mediawidth(double width, BuildContext context) {
   return MediaQuery.of(context).size.height * width;
 }
-
 
 // Radius
 const BorderRadius r15 = BorderRadius.all(Radius.circular(15.0));

@@ -2,8 +2,8 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
-import 'biometrics.dart'; // Import the biometric_utils.dart file
+import 'package:helathcareapp/feature/auth/presentation/widgets/biometrics.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class EnterpriseProfilePage extends StatefulWidget {
   const EnterpriseProfilePage({super.key});
@@ -105,7 +105,7 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
                   // ... Add more ListTiles as needed
                   ListTile(
                     leading: const Icon(Icons.exit_to_app),
-                    title: const Text('Exit App'),
+                    title: const Text('Exit'),
                     onTap: () {
                       // Show a confirmation dialog
                       showDialog(
@@ -147,13 +147,6 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Text(
-              //   "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
-              //   maxLines: 1,
-              //   softWrap: true,
-              //   textAlign: TextAlign.center,
-              // ),
-              // const SizedBox(height: 4.0),
               Text(
                 'App Version: $_appVersion',
                 style: const TextStyle(fontSize: 12.5, color: Colors.black),

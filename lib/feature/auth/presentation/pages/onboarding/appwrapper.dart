@@ -1,10 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/onboarding/screen.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/onboarding/structure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'sign_in.dart';
+import '../gatepass/sign_in.dart';
 class AppWrapper extends StatefulWidget {
   const AppWrapper({super.key});
 
@@ -42,7 +42,7 @@ class _AppWrapperState extends State<AppWrapper> {
   @override
   Widget build(BuildContext context) {
     if (_showOnboarding) {
-      return OnboardingScreen(
+      return Structure(
         onDone: completeOnboarding,
       );
     } else {

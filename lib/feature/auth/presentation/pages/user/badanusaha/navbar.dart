@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/content/member.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/profile/profile.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/data/data.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/home/home.dart';
@@ -17,6 +19,7 @@ class _EnterpriseNavBarState extends State<EnterpriseNavBar> {
   final List<Widget> _pages = [
     const EnterpriseHomePage(),
     const EnterpriseDataPage(),
+    const EnterprisePolicyPage(),
     const EnterpriseProfilePage(),
   ];
 
@@ -63,12 +66,18 @@ class _EnterpriseNavBarState extends State<EnterpriseNavBar> {
                     Icons.home,
                   ),
                   label: 'Home',
-                  backgroundColor: Colors.red),
+              ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.qr_code_2_outlined,
+                  Icons.policy_outlined,
                 ),
-                label: 'QR Code',
+                label: 'Policy',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.people_outlined,
+                ),
+                label: 'Member',
               ),
               BottomNavigationBarItem(
                 icon: Icon(

@@ -8,6 +8,8 @@ class InsuranceProfilePage extends StatefulWidget {
 }
 
 class _InsuranceProfilePageState extends State<InsuranceProfilePage> {
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

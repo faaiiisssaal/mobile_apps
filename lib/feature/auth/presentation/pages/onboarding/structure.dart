@@ -1,18 +1,18 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/onboarding/page.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/onboarding/data.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class Structure extends StatefulWidget {
   final VoidCallback onDone;
 
-  const OnboardingScreen({super.key, required this.onDone});
+  const Structure({super.key, required this.onDone});
 
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  _StructureState createState() => _StructureState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _StructureState extends State<Structure> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 

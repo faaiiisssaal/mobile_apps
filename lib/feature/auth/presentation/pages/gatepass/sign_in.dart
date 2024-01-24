@@ -1,16 +1,18 @@
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, unused_element
 
 import 'package:flutter/foundation.dart';
-import 'package:package_info/package_info.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/gatepass/forgotinsurance.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/gatepass/forgotmember.dart';
+import 'package:helathcareapp/feature/auth/presentation/widgets/biometrics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import '../../../data/data_sources/userdata.dart';
-import '../user/asuransi/navbar.dart';
-import '../user/badanusaha/navbar.dart';
-import '../user/badanusaha/profile/biometrics.dart';
-import '../user/badanusaha/profile/profile.dart';
-import '../user/peserta/navbar.dart';
+import 'package:helathcareapp/feature/auth/data/data_sources/userdata.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/navbar.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/navbar.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/profile/profile.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/navbar.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -25,11 +27,11 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _insurancePassController = TextEditingController();
   final TextEditingController _companyEmailController = TextEditingController();
   final TextEditingController _companyPassController = TextEditingController();
-  final TextEditingController _clientmemberController = TextEditingController();
-  final TextEditingController _clientdateController = TextEditingController();
+  final TextEditingController _membermemberController = TextEditingController();
+  final TextEditingController _memberdateController = TextEditingController();
   bool _useCompany = true;
   bool _useInsurance = true;
-  bool _useClient = true;
+  bool _useMember = true;
 
   UserData userData = UserData(
     companyEmail: '',
@@ -50,17 +52,17 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (selectedDate != null) {
       setState(() {
-        _clientdateController.text = DateFormat('yyyy-M-dd').format(selectedDate);
+        _memberdateController.text = DateFormat('yyyy-M-dd').format(selectedDate);
       });
     }
   }
 
   void switchInputType() {
     setState(() {
-      if (_useClient) {
-        // Reset data based on the current input type (Client)
-        _clientmemberController.clear();
-        _clientdateController.clear();
+      if (_useMember) {
+        // Reset data based on the current input type (Member)
+        _membermemberController.clear();
+        _memberdateController.clear();
         userData.memberId = '';
         userData.dateOfBirth = DateTime.now();
       } else if (_useInsurance) {
@@ -78,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
       }
 
       // Switch input type
-      _useClient = !_useClient;
+      _useMember = !_useMember;
       _useCompany = false;
       _useInsurance = false;
     });
@@ -106,9 +108,9 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
-  void switchToClient() {
+  void switchToMember() {
     setState(() {
-      _useClient = true;
+      _useMember = true;
       _useCompany = false;
       _useInsurance = false;
     });
@@ -125,19 +127,19 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void signIn() {
-    final String enteredMemberId = _clientmemberController.text.trim();
-    final String enteredDoB = _clientdateController.text.trim();
+    final String enteredMemberId = _membermemberController.text.trim();
+    final String enteredDoB = _memberdateController.text.trim();
 
     // Verify against fake data
     if (enteredMemberId == "610026424-2" && enteredDoB == "2023-9-30") {
       // Successful login
       if (kDebugMode) {
-        print("Client Login Successful");
+        print("Member Login Successful");
       }
 
       // Clear form data
-      _clientmemberController.clear();
-      _clientdateController.clear();
+      _membermemberController.clear();
+      _memberdateController.clear();
 
       // Show circular progress while transitioning
       showDialog(
@@ -161,7 +163,7 @@ class _SignInScreenState extends State<SignInScreen> {
     } else {
       // Display an error message
       if (kDebugMode) {
-        print("Client Login Error: Invalid Member ID or Date of Birth");
+        print("Member Login Error: Invalid Member ID or Date of Birth");
       }
 
       // Show a floating Snackbar for login error
@@ -190,11 +192,66 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void signInInsurance() {
-    // Navigate to the next screen and pass userData
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const InsuranceNavBar(),
+    final String enteredInsuranceID = _insuranceEmailController.text;
+    final String enteredInsurancePass = _insurancePassController.text;
+
+    // Verify against fake data
+    if (enteredInsuranceID == "0987654321" && enteredInsurancePass == "1234567890") {
+      // Successful login
+      if (kDebugMode) {
+        print("Insurance Login Successful");
+      }
+
+      // Clear form data
+      _insuranceEmailController.clear();
+      _insurancePassController.clear();
+
+      // Show circular progress while transitioning
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
+
+      // Simulate some async operation before navigating (replace with your actual logic)
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.of(context).pop(); // Close the loading dialog
+        // Navigate to the home screen
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const InsuranceNavBar()),
+        );
+      });
+    } else {
+      // Display an error message
+      if (kDebugMode) {
+        print("Insurance Login Error: Invalid Member ID or Date of Birth");
+      }
+
+      // Show a floating Snackbar for login error
+      _showFloatingSnackbarInsurance('Invalid ID or Password. Please try again.');
+    }
+  }
+
+  void _showFloatingSnackbarInsurance(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+        ),
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.red,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        margin: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        behavior: SnackBarBehavior.floating,
+        elevation: 8.0,
       ),
     );
   }
@@ -224,7 +281,7 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
-  final GlobalKey<ScaffoldMessengerState> _clientScaffoldMessengerKey =
+  final GlobalKey<ScaffoldMessengerState> _memberScaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
   final GlobalKey<ScaffoldMessengerState> _companyScaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
@@ -269,14 +326,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
 
                     // 2nd Row - 3 Different Form with Switchable in Single Row
-                    if (_useClient) ...[
-                      buildClientSection(),
+                    if (_useMember) ...[
+                      buildMemberSection(),
                     ],
-                    if (!_useClient) ...[
+                    if (!_useMember) ...[
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          if (!_useClient && !_useCompany) ...[
+                          if (!_useMember && !_useCompany) ...[
                             buildInsuranceSection(),
                           ],
                           if (_useCompany) ...[
@@ -320,15 +377,15 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget buildClientSection() {
+  Widget buildMemberSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Client ID
+        // Member ID
         TextFormField(
-          controller: _clientmemberController,
+          controller: _membermemberController,
           decoration: const InputDecoration(
-            hintText: 'Member No.',
+            hintText: 'Member ID',
             prefixIcon: Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -343,7 +400,7 @@ class _SignInScreenState extends State<SignInScreen> {
           keyboardType: TextInputType.number,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
-            _MemberIdInputFormatter(),
+            MemberIDInputFormatter(),
           ],
           onChanged: (value) {
             setState(() {
@@ -352,14 +409,14 @@ class _SignInScreenState extends State<SignInScreen> {
           },
         ),
         const SizedBox(height: 10.0),
-        // Client DoB
+        // Member DoB
         GestureDetector(
           onTap: () async {
             _showCalendar(context);
           },
           child: AbsorbPointer(
             child: TextFormField(
-              controller: _clientdateController,
+              controller: _memberdateController,
               decoration: const InputDecoration(
                 hintText: 'Date of Birth',
                 prefixIcon: Icon(Icons.date_range_outlined),
@@ -376,12 +433,29 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 30.0),
-
+        const SizedBox(height: 10.0),
+        Align(
+          alignment: Alignment.topRight,
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ForgotMemberSection(),
+                ),
+              );
+            },
+            child: const Text(
+              "Forgot Member ID?",
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20.0),
         // Sign In Button
         ElevatedButton(
           onPressed: () {
-            // if (_clientmemberController.text.isEmpty || _clientdateController.text.isEmpty) {
+            // if (_membermemberController.text.isEmpty || _memberdateController.text.isEmpty) {
             //   // Show a Snackbar for missing fields
             //   _showFloatingSnackbar('Please fill in the form');
             // } else {
@@ -391,7 +465,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
-          child: const Text('Sign In as Participants'),
+          child: const Text('Sign In as Member'),
         ),
         const SizedBox(height: 10.0),
 
@@ -436,7 +510,7 @@ class _SignInScreenState extends State<SignInScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
-              _useClient ? 'Switch to Insurance' : 'Switch to Client',
+              _useMember ? 'Switch to Insurance' : 'Switch to Member',
               style: const TextStyle(
                 color: Colors.blue,
               ),
@@ -455,7 +529,7 @@ class _SignInScreenState extends State<SignInScreen> {
         TextFormField(
           controller: _companyEmailController,
           decoration: const InputDecoration(
-            hintText: 'ID',
+            hintText: 'Enterprise ID',
             prefixIcon: Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -478,7 +552,7 @@ class _SignInScreenState extends State<SignInScreen> {
           controller: _companyPassController,
           obscureText: !_showPassword,
           decoration: InputDecoration(
-            hintText: 'Password',
+            hintText: 'Enterprise Password',
             prefixIcon: const Icon(Icons.lock_outline_rounded),
             suffixIcon: InkWell(
               onTap: () {
@@ -537,19 +611,19 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
 
         const SizedBox(height: 10.0),
-        // Back to Client button
+        // Back to member button
         ElevatedButton(
           onPressed: () {
-            switchToClient();
+            switchToMember();
             if (kDebugMode) {
-              print("Switch to Client");
+              print("Switch to Member");
             }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
           ),
-          child: const Text('Back to Client'),
+          child: const Text('Back to Member'),
         ),
       ],
     );
@@ -562,7 +636,7 @@ class _SignInScreenState extends State<SignInScreen> {
         TextFormField(
           controller: _companyEmailController,
           decoration: const InputDecoration(
-            hintText: 'ID',
+            hintText: 'Insurance ID',
             prefixIcon: Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -585,7 +659,7 @@ class _SignInScreenState extends State<SignInScreen> {
           controller: _insurancePassController,
           obscureText: !_showPassword,
           decoration: InputDecoration(
-            hintText: 'Password',
+            hintText: 'Insurance Password',
             prefixIcon: const Icon(Icons.lock_outline_rounded),
             suffixIcon: InkWell(
               onTap: () {
@@ -612,6 +686,24 @@ class _SignInScreenState extends State<SignInScreen> {
               userData.insurancePass = value;
             });
           },
+        ),
+        const SizedBox(height: 10.0),
+        Align(
+          alignment: Alignment.topRight,
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const InsuranceForgotSection(),
+                ),
+              );
+            },
+            child: const Text(
+              "Forgot your account?",
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
         ),
         const SizedBox(height: 30.0),
         ElevatedButton(
@@ -646,23 +738,23 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(height: 10.0),
         ElevatedButton(
           onPressed: () {
-            switchToClient();
+            switchToMember();
             if (kDebugMode) {
-              print("Switch to Client");
+              print("Switch to Member");
             }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
           ),
-          child: const Text('Back to Client'),
+          child: const Text('Back to Member'),
         ),
       ],
     );
   }
 }
 
-class _MemberIdInputFormatter extends TextInputFormatter {
+class MemberIDInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
