@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/member/member.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/policy/policy.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/profile/profile.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/data/data.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/home/home.dart';
 
 class EnterpriseNavBar extends StatefulWidget {
@@ -18,8 +18,8 @@ class _EnterpriseNavBarState extends State<EnterpriseNavBar> {
 
   final List<Widget> _pages = [
     const EnterpriseHomePage(),
-    const EnterpriseDataPage(),
     const EnterprisePolicyPage(),
+    const EnterpriseMemberPage(),
     const EnterpriseProfilePage(),
   ];
 

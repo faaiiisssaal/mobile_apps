@@ -550,7 +550,7 @@ class _SignInScreenState extends State<SignInScreen> {
         TextFormField(
           controller: _companyEmailController,
           decoration: const InputDecoration(
-            hintText: 'Enterprise ID',
+            hintText: 'Company ID',
             prefixIcon: Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -573,7 +573,7 @@ class _SignInScreenState extends State<SignInScreen> {
           controller: _companyPassController,
           obscureText: !_showPassword,
           decoration: InputDecoration(
-            hintText: 'Enterprise Password',
+            hintText: 'Company Password',
             prefixIcon: const Icon(Icons.lock_outline_rounded),
             suffixIcon: InkWell(
               onTap: () {
@@ -601,6 +601,24 @@ class _SignInScreenState extends State<SignInScreen> {
             });
           },
         ),
+        const SizedBox(height: 10.0),
+        Align(
+          alignment: Alignment.topRight,
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const InsuranceForgotSection(),
+                ),
+              );
+            },
+            child: const Text(
+              "Forgot your account?",
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+        ),
         const SizedBox(height: 30.0),
         ElevatedButton(
           onPressed: () {
@@ -608,7 +626,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
-          child: const Text('Sign In as Enterprises'),
+          child: const Text('Sign In as Company'),
         ),
         const SizedBox(height: 10.0),
 
@@ -623,7 +641,7 @@ class _SignInScreenState extends State<SignInScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
-              _useCompany ? 'Switch to Insurance' : 'Switch to Enterprises',
+              _useCompany ? 'Switch to Insurance' : 'Switch to Company',
               style: const TextStyle(
                 color: Colors.blue,
               ),
@@ -751,7 +769,7 @@ class _SignInScreenState extends State<SignInScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
-              _useCompany ? 'Switch to Insurance' : 'Switch to Enterprise',
+              _useCompany ? 'Switch to Insurance' : 'Switch to Company',
               style: const TextStyle(
                 color: Colors.blue,
               ),

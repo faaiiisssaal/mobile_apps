@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:helathcareapp/feature/common/constant.dart';
-import 'package:intl/intl.dart';
 
 class InsuranceForgotSection extends StatefulWidget {
   const InsuranceForgotSection({super.key});
@@ -13,21 +12,6 @@ class InsuranceForgotSection extends StatefulWidget {
 class _InsuranceForgotSectionState extends State<InsuranceForgotSection> {
 
   final TextEditingController _insuranceforgotController = TextEditingController();
-
-  void _showCalendar(BuildContext context) async {
-    DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900, 1, 1),
-      lastDate: DateTime.now(),
-    );
-
-    if (selectedDate != null) {
-      setState(() {
-        _insuranceforgotController.text = DateFormat('yyyy-M-dd').format(selectedDate);
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,29 +35,23 @@ class _InsuranceForgotSectionState extends State<InsuranceForgotSection> {
                   c10,
                   SizedBox(
                       height: mediaheight(0.05, context),
-                      child: const Text("Enter your DoB for verifying your account")),
-                  GestureDetector(
-                    onTap: () async {
-                      _showCalendar(context);
-                    },
-                    child: AbsorbPointer(
-                      child: TextFormField(
-                        controller: _insuranceforgotController,
-                        decoration: const InputDecoration(
-                          hintText: 'Date of Birth',
-                          prefixIcon: Icon(Icons.date_range_outlined),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                        ),
+                      child: const Text("Enter your ID for verifying your account")),
+                  TextFormField(
+                    controller: _insuranceforgotController,
+                    decoration: const InputDecoration(
+                      hintText: 'Your ID',
+                      prefixIcon: Icon(Icons.person_outline_rounded),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
+                    keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: 10.0),
                   c10,

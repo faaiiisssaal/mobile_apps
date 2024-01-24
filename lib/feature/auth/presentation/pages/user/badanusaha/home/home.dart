@@ -188,7 +188,7 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                               .leftToRight, // Set the transition type left-to-right
                           duration: const Duration(milliseconds: 300),
                           reverseDuration: const Duration(milliseconds: 300),
-                          child: const PolicyPage(),
+                          child: const EnterprisePolicyPage(),
                         ),
                       );
                     },
