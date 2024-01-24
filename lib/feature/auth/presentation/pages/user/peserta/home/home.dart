@@ -4,11 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:helathcareapp/feature/common/constant.dart';
 import 'package:page_transition/page_transition.dart';
 
-import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/content/benefits.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/content/claim.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/content/hotline.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/content/policy.dart';
-
+import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/home/benefits.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/home/hotline.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -133,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                               .leftToRight, // Set the transition type left-to-right
                           duration: const Duration(milliseconds: 300),
                           reverseDuration: const Duration(milliseconds: 300),
-                          child: const BenefitsPage(),
+                          child: const BenefitPage(),
                         ),
                       );
                     },
@@ -149,68 +146,6 @@ class _HomePageState extends State<HomePage> {
                         )),
                         const Text(
                           "Benefits",
-                          style: TextStyle(),
-                        )
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType
-                              .rightToLeft, // Set the transition type right-to-left
-                          duration: const Duration(milliseconds: 300),
-                          reverseDuration: const Duration(milliseconds: 300),
-                          child: const ClaimPage(),
-                        ),
-                      );
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            "asset/claim.png",
-                            color: Colors.red,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        const Text(
-                          "Claim",
-                          style: TextStyle(),
-                        )
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType
-                              .leftToRight, // Set the transition type left-to-right
-                          duration: const Duration(milliseconds: 300),
-                          reverseDuration: const Duration(milliseconds: 300),
-                          child: const PolicyPage(),
-                        ),
-                      );
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            "asset/insurance-policy.png",
-                            color: Colors.red,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        const Text(
-                          "Policy",
                           style: TextStyle(),
                         )
                       ],

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/content/benefits.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/content/claim.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/content/hotline.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/content/policy.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/home/benefits.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/home/hotline.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/policy/policy.dart';
 import 'package:page_transition/page_transition.dart';
 
 class EnterpriseHomePage extends StatefulWidget {
@@ -67,7 +66,7 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                   ),
                   Text(
                     // "Terdaftar sebagai Third-Party Administration (TPA)",
-                    "Terdaftar di Asueransi Arta Graha General Insurance",
+                    "Terdaftar di Asuransi Arta Graha General Insurance",
                     style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -161,16 +160,6 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType
-                              .rightToLeft, // Set the transition type right-to-left
-                          duration: const Duration(milliseconds: 300),
-                          reverseDuration: const Duration(milliseconds: 300),
-                          child: const ClaimPage(),
-                        ),
-                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

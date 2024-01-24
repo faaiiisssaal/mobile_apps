@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/content/member.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/member/member.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/profile/profile.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/data/data.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/home/home.dart';

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+class QuickLoginStatus {
+  static bool quickLoginActivated = false;
+}
+
 // Color code
 
 const kPureWhite = Color(0xFFffffff);

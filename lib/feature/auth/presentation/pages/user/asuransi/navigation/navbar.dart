@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/data/data.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/company/company.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/member/member.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/home/home.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/profile/profile.dart';
 
@@ -16,7 +17,8 @@ class _InsuranceNavBarState extends State<InsuranceNavBar> {
 
   final List<Widget> _pages = [
     const InsuranceHomePage(),
-    const InsuranceDataPage(),
+    const InsuranceCompanyPage(),
+    const InsuranceMemberPage(),
     const InsuranceProfilePage(),
   ];
 
@@ -59,16 +61,22 @@ class _InsuranceNavBarState extends State<InsuranceNavBar> {
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                label: 'Home',
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: 'Home',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.qr_code_2_outlined,
+                  Icons.policy_outlined,
                 ),
-                label: 'Data',
+                label: 'Company',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.people_outlined,
+                ),
+                label: 'Member',
               ),
               BottomNavigationBarItem(
                 icon: Icon(

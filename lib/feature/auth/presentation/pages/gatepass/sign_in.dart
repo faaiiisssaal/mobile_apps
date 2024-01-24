@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:helathcareapp/feature/auth/data/data_sources/userdata.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/navbar.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/navbar.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/navigation/navbar.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/navigation/navbar.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/profile/profile.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/navbar.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/navigation/navbar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -116,7 +116,7 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
-  void signInTemp() {
+  void signInMemTemp() {
     // Navigate to the next screen and pass userData
     Navigator.push(
       context,
@@ -125,6 +125,27 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
+
+  void signInInsuTemp() {
+    // Navigate to the next screen and pass userData
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const InsuranceNavBar(),
+      ),
+    );
+  }
+
+  void signInCompTemp() {
+    // Navigate to the next screen and pass userData
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const EnterpriseNavBar(),
+      ),
+    );
+  }
+
 
   void signIn() {
     final String enteredMemberId = _membermemberController.text.trim();
@@ -441,12 +462,12 @@ class _SignInScreenState extends State<SignInScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ForgotMemberSection(),
+                  builder: (context) => const ForgotMemberSection(),
                 ),
               );
             },
             child: const Text(
-              "Forgot Member ID?",
+              "Forgot your account?",
               style: TextStyle(fontSize: 12),
             ),
           ),
@@ -461,7 +482,7 @@ class _SignInScreenState extends State<SignInScreen> {
             // } else {
             //   signIn();
             // }
-            signInTemp();
+            signInMemTemp();
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
@@ -708,7 +729,9 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(height: 30.0),
         ElevatedButton(
           onPressed: () {
-            signInInsurance();
+            // signInInsurance();
+
+            signInInsuTemp();
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.lightBlue,

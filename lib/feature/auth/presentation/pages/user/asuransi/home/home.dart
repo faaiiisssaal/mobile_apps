@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/company/company.dart';
 import 'package:page_transition/page_transition.dart';
-
-import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/content/benefits.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/content/claim.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/content/hotline.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/content/policy.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/home/hotline.dart';
 class InsuranceHomePage extends StatefulWidget {
   const InsuranceHomePage({super.key});
 
@@ -137,68 +134,7 @@ class _InsuranceHomePageState extends State<InsuranceHomePage> {
                               .leftToRight, // Set the transition type left-to-right
                           duration: const Duration(milliseconds: 300),
                           reverseDuration: const Duration(milliseconds: 300),
-                          child: const BenefitsPage(),
-                        ),
-                      );
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                            child: Image.asset(
-                          "asset/health-insurance.png",
-                          color: Colors.red,
-                          fit: BoxFit.fill,
-                        )),
-                        const Text(
-                          "Benefits",
-                          style: TextStyle(),
-                        )
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType
-                              .rightToLeft, // Set the transition type right-to-left
-                          duration: const Duration(milliseconds: 300),
-                          reverseDuration: const Duration(milliseconds: 300),
-                          child: const ClaimPage(),
-                        ),
-                      );
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            "asset/claim.png",
-                            color: Colors.red,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        const Text(
-                          "Claim",
-                          style: TextStyle(),
-                        )
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType
-                              .leftToRight, // Set the transition type left-to-right
-                          duration: const Duration(milliseconds: 300),
-                          reverseDuration: const Duration(milliseconds: 300),
-                          child: const PolicyPage(),
+                          child: const InsuranceCompanyPage(),
                         ),
                       );
                     },

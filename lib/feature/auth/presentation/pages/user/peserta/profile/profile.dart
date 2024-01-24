@@ -412,7 +412,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-class QuickLoginStatus {
-  static bool quickLoginActivated = false;
-}
