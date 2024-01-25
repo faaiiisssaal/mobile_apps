@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/home/home.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/profile/ecard.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/profile/guide.dart';
 import 'package:helathcareapp/feature/common/constant.dart';
@@ -316,7 +317,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           isQuickLoginActivated = value;
                         });
 
-                        QuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
+                        MemberQuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
 
                         if (isBiometricAvailable) {
                           // Prompt for biometric authentication
@@ -326,7 +327,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             // Biometric authentication successful
                             // Additional logic if needed
                             if (kDebugMode) {
-                              print("Biometric authentication successful.");
+                              print("Member Biometric authentication successful.");
                             }
                           } else {
                             // Biometric authentication failed or canceled
@@ -372,7 +373,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Navigator.of(context).pushReplacementNamed('/login');
                                   if (kDebugMode) {
                                     print(
-                                        "QuickLoginStatus.quickLoginActivated: ${QuickLoginStatus.quickLoginActivated}");
+                                        "MemberQuickLoginStatus.quickLoginActivated: ${MemberQuickLoginStatus.quickLoginActivated}");
                                   }
                                 },
                                 child: const Text('Yes'),

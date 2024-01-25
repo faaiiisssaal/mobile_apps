@@ -86,7 +86,7 @@ class _InsuranceCompanyPageState extends State<InsuranceCompanyPage> {
                   ),
                 ),
               ),
-              c10, // constant value from constant.dart
+              hp10, // constant value from constant.dart
               Expanded(
                 child: Container(
                   height: double.infinity,

@@ -86,7 +86,7 @@ class _EnterprisePolicyPageState extends State<EnterprisePolicyPage> {
                   ),
                 ),
               ),
-              c10, // constant value from constant.dart
+              hp10, // constant value from constant.dart
               Expanded(
                 child: Container(
                   height: double.infinity,

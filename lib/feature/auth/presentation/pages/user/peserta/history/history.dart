@@ -69,8 +69,8 @@ class _HistoryPageState extends State<HistoryPage> {
                                     child: Text("LILI"),
                                   ),
                                   DropdownMenuItem(
-                                    value: "LULU",
-                                    child: Text("LULU"),
+                                    value: "Ni Made Raysita Iswari Nuramanda Pande",
+                                    child: Text("Ni Made Raysita Iswari Nuramanda Pande"),
                                   ),
                                   DropdownMenuItem(
                                     value: "LELE",
@@ -120,7 +120,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           )
                         ],
                       ),
-                      c10,
+                      hp10,
                       Row(
                         children: [
                           const SizedBox(
@@ -143,7 +143,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   ),
                 ),
               ),
-              c10, // constant value from constant.dart
+              hp10, // constant value from constant.dart
               Expanded(
                 child: Container(
                   height: double.infinity,

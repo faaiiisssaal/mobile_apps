@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/home/home.dart';
 import 'package:helathcareapp/feature/auth/presentation/widgets/biometrics.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -66,7 +67,7 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
                           isQuickLoginActivated = value;
                         });
 
-                        QuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
+                        EnterpriseQuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
 
                         if (isBiometricAvailable) {
                           // Prompt for biometric authentication
@@ -121,6 +122,10 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).popUntil((route) => route.isFirst);
                                   Navigator.of(context).pushReplacementNamed('/login');
+                                  if (kDebugMode) {
+                                    print(
+                                        "EnterpriseQuickLoginStatus.quickLoginActivated: ${EnterpriseQuickLoginStatus.quickLoginActivated}");
+                                  }
                                 },
                                 child: const Text('Yes'),
                               ),
@@ -158,8 +163,4 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
       ),
     );
   }
-}
-
-class QuickLoginStatus {
-  static bool quickLoginActivated = false;
 }

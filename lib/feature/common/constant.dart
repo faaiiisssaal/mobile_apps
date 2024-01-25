@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-class QuickLoginStatus {
-  static bool quickLoginActivated = false;
-}
-
 // Color code
 
 const kPureWhite = Color(0xFFffffff);
@@ -18,6 +14,8 @@ const kLightBlack = Color(0xFF454545);
 const kDarkBlue = Color(0xFF00008b);
 const kSeaBlue = Color(0xFF006994);
 const kSkyBlue = Color(0xFF87CEEB);
+const kLightBlue = Color(0xFFADD8E6);
+
 const kLightRed = Color(0xFFFF7F7F);
 const kDarkRed = Color(0xFF8B0000);
 const kLightGrey = Color(0xFFD3D3D3);
@@ -25,9 +23,13 @@ const kDarkGrey = Color(0xFFA9a9a9);
 
 // Divider
 
-const c10 = SizedBox(
+const hp10 = SizedBox(
   height: 10,
 );
+const wp10 = SizedBox(
+  width: 10,
+);
+
 const spc = Spacer();
 
 // Padding and Margin
@@ -49,6 +51,10 @@ EdgeInsets vertical(double symmetrics) {
 
 EdgeInsets horizontal(double symmetrics) {
   return EdgeInsets.symmetric(horizontal: symmetrics);
+}
+
+EdgeInsets horiverti(double sym1, double sym2) {
+  return EdgeInsets.symmetric(horizontal: sym1, vertical: sym2);
 }
 // Symmetrics
 

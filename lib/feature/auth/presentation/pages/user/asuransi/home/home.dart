@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/company/company.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/home/hotline.dart';
+import 'package:helathcareapp/feature/auth/presentation/widgets/hotline.dart';
+import 'package:helathcareapp/feature/common/constant.dart';
 class InsuranceHomePage extends StatefulWidget {
   const InsuranceHomePage({super.key});
 
@@ -12,14 +11,19 @@ class InsuranceHomePage extends StatefulWidget {
 }
 
 class _InsuranceHomePageState extends State<InsuranceHomePage> {
+  String dropDownValue1 = "LALA";
+  String dropDownValue2 = "2352352366261116";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
+        padding: paddingall(10),
         child: Column(
           children: [
             // 1st row for Information
-            SizedBox(
+            Container(
+              margin: onlytop(25),
               child: ImageSlideshow(
                 indicatorColor: Colors.blue,
                 onPageChanged: (value) {
@@ -30,76 +34,79 @@ class _InsuranceHomePageState extends State<InsuranceHomePage> {
                 children: [
                   Image.asset(
                     'asset/whatsapp-logo.png',
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitHeight,
                   ),
                   Image.asset(
                     'asset/apple-logo.png',
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitHeight,
                   ),
                   Image.asset(
                     'asset/google-logo.png',
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitHeight,
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            hp10,
 
             // 2nd row for username
             Container(
-              height: 50,
-              color: const Color(0xFFdcdcdc),
               width: double.infinity,
-              margin: const EdgeInsets.only(left: 10, right: 10),
+              padding: paddingall(10),
+              decoration: BoxDecoration(
+                color: kPureWhite, // Moved the color property to BoxDecoration
+                borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+                // You can also add border, shadow etc. here
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hai, Arta Graha General Insurance",
-                    style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
+                    "Hai, Melinda",
+                    style: GoogleFonts.lato(fontSize: mediawidth(0.025, context)+2.5, fontWeight: FontWeight.bold),
                   ),
+                  hp10,
                   Text(
                     // "Terdaftar sebagai Third-Party Administration (TPA)",
-                    "",
-                    style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
+                    "sebagai ArtaGraha General Insurance",
+                    style: GoogleFonts.lato(fontSize: mediawidth(0.0125, context)+2.5, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            hp10,
 
             // 3rd row for nearby
             Container(
-              height: 50,
               width: double.infinity,
-              padding: const EdgeInsets.only(bottom: 5, left: 0, right: 10),
+              padding: paddingall(10),
+              decoration: BoxDecoration(
+                color: kPureWhite, // Moved the color property to BoxDecoration
+                borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+                // You can also add border, shadow etc. here
+              ),
               child: Row(
                 children: [
                   SizedBox(
-                    width: 50,
                     child: Image.asset(
                       "asset/placeholder.png",
-                      height: 50,
-                      width: 50,
+                      height: mediawidth(0.05, context),
+                      width: mediawidth(0.05, context),
                     ),
                   ),
-                  Expanded(
+                  SizedBox(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "Nearby ...",
-                          style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.lato(fontSize: mediawidth(0.025, context)+2.5, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
-                          style: GoogleFonts.lato(fontSize: 14, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.lato(fontSize: mediawidth(0.0125, context)+2.5, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -107,115 +114,254 @@ class _InsuranceHomePageState extends State<InsuranceHomePage> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-
-            // 4th row for our product
+            hp10,
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: GridView(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.5,
-                  crossAxisSpacing: 0,
-                  mainAxisSpacing: 20,
+                height: mediaheight(0.36, context),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: kPureWhite, // Moved the color property to BoxDecoration
+                  borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+                  // You can also add border, shadow etc. here
                 ),
-                clipBehavior: Clip.hardEdge,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType
-                              .leftToRight, // Set the transition type left-to-right
-                          duration: const Duration(milliseconds: 300),
-                          reverseDuration: const Duration(milliseconds: 300),
-                          child: const InsuranceCompanyPage(),
-                        ),
-                      );
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            "asset/insurance-policy.png",
-                            color: Colors.red,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        const Text(
-                          "Policy",
-                          style: TextStyle(),
-                        )
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType
-                              .rightToLeft, // Set the transition type right-to-left
-                          duration: const Duration(milliseconds: 300),
-                          reverseDuration: const Duration(milliseconds: 300),
-                          child: const HotlinePage(),
-                        ),
-                      );
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            "asset/247-services.png",
-                            color: Colors.red,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        const Text(
-                          "Hotline 24/7",
-                          style: TextStyle(),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+                child: Column(
+                  children: [
 
-            // 5th row for our location
+                    // 1st choice member name
+                    Container(
+                      padding: horiverti(10, 5),
+                      decoration: const BoxDecoration(
+                        color: kSkyBlue,
+                        borderRadius: r15,
+                      ),
+                      margin: topleftright(10, 10, 10),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 90,
+                                  child: Text(
+                                    "Member Name",
+                                    style: TextStyle(
+                                      fontSize: mediawidth(0.0125, context)+2,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: onlyleft(5),
+                                  width: 5,
+                                  child: const Text(":"),
+                                ),
+                                Expanded(
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton<String>(
+                                        padding: paddingall(0),
+                                        isExpanded: true,
+                                        value: dropDownValue1,
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            dropDownValue1 = newValue!;
+                                          });
+                                        },
+                                        items: const [
+                                          DropdownMenuItem<String>(
+                                            value: "LALA",
+                                            child: Text(
+                                              "LALA",
+                                            ),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: "LILI",
+                                            child: Text("LILI"),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: "LULU",
+                                            child: Text("LULU"),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: "LELE",
+                                            child: Text("LELE"),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    hp10,
+
+
+                    Container(
+                      padding: paddingall(10),
+                      child: ButtonTheme(
+                        buttonColor: kSeaBlue,
+                        textTheme: ButtonTextTheme.primary,
+                        alignedDropdown: true,
+                        child: DropdownButton<String>(
+                          padding: paddingall(0),
+                          isExpanded: true,
+                          value: dropDownValue1,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropDownValue1 = newValue!;
+                            });
+                          },
+                          items: const [
+                            DropdownMenuItem<String>(
+                              value: "LALA",
+                              child: Text(
+                                "LALA",
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: "LILI",
+                              child: Text("LILI"),
+                            ),
+                            DropdownMenuItem(
+                              value: "LULU",
+                              child: Text("LULU"),
+                            ),
+                            DropdownMenuItem(
+                              value: "LELE",
+                              child: Text("LELE"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    // constant value from constant.dart
+                    Expanded(
+                      child: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                          color: Colors.lightGreenAccent,
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                        ),
+                        margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                        child: const Center(
+                          child: Text("No Data"),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+            ),
+            hp10,
             Container(
-              height: 140,
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
+              width: double.infinity,
+              padding: paddingall(10),
+              decoration: BoxDecoration(
+                color: kPureWhite, // Moved the color property to BoxDecoration
+                borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+                // You can also add border, shadow etc. here
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.35,
-                    child: Image.asset(
-                      "asset/247-services.png",
-                      fit: BoxFit.contain,
+                  const Text(
+                    "Hotline 24/7",
+                    style: TextStyle(
+                        fontSize: 24
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Expanded(
-                      child: Text(
-                    "About Us\nSmilynlks\nJl. Pluit Kencana Raya No. 85A\nJakarta Utara, 14450, Indonesia\nTelp : +62 21 6624399\nFax : +62 21 6624299\nEmail : alarmcenter.1@smilynks.co.id",
-                    style: TextStyle(fontSize: 13),
-                    textAlign: TextAlign.justify,
-                  )),
+                  hp10,
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: mediawidth(0.1, context),
+                                child: const Text("Peserta"),
+                              ),
+                              const Text(": "),
+                              const Text("+62 857 1188 0237"),],
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              launchPhoneDialer("+6285711880237");
+                            },
+                            child: const Icon(Icons.call),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              whatsapp("+6285711880237");
+                            },
+                            child: Image.asset(
+                              "asset/whatsapp-logo.png",
+                              scale:22.5,
+                            ),
+                          )
+                        ],
+                      ),
+                      hp10,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: mediawidth(0.1, context),
+                                child: const Text("Rumah Sakit"),
+                              ),
+                              const Text(": "),
+                              const Text("+62 851 0289 8692"),
+                            ],
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              launchPhoneDialer("+6285102898692");
+                            },
+                            child: const Icon(Icons.call),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              whatsapp("+6285102898692");
+                            },
+                            child: Image.asset(
+                              "asset/whatsapp-logo.png",
+                              scale: 22.5,
+                            ),
+                          )
+                        ],
+                      ),
+                      hp10,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: mediawidth(0.1, context),
+                                child: const Text("Bebas Pulsa"),
+                              ),
+                              const Text(": "),
+                              const Text("+62 21 662 4399 ( ext 22/33 )"),],
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              launchPhoneDialer("+62216624399");
+                            },
+                            child: const Icon(Icons.call),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
@@ -224,4 +370,8 @@ class _InsuranceHomePageState extends State<InsuranceHomePage> {
       ),
     );
   }
+}
+
+class InsuranceQuickLoginStatus {
+  static bool quickLoginActivated = false;
 }

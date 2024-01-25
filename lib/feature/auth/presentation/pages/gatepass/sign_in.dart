@@ -1,16 +1,19 @@
 // ignore_for_file: unused_field, unused_element
 
 import 'package:flutter/foundation.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/gatepass/forgotinsurance.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/gatepass/forgotmember.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/gatepass/forgot_insurance.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/gatepass/forgot _member.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/home/home.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/home/home.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/home/home.dart';
 import 'package:helathcareapp/feature/auth/presentation/widgets/biometrics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:helathcareapp/feature/common/constant.dart';
 import 'package:intl/intl.dart';
 import 'package:helathcareapp/feature/auth/data/data_sources/userdata.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/navigation/navbar.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/navigation/navbar.dart';
-import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/profile/profile.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/navigation/navbar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -22,6 +25,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
   bool _showPassword = false;
   final TextEditingController _insuranceEmailController = TextEditingController();
   final TextEditingController _insurancePassController = TextEditingController();
@@ -29,9 +33,39 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _companyPassController = TextEditingController();
   final TextEditingController _membermemberController = TextEditingController();
   final TextEditingController _memberdateController = TextEditingController();
-  bool _useCompany = true;
-  bool _useInsurance = true;
-  bool _useMember = true;
+
+
+  // bool _useCompany = true;
+  // bool _useInsurance = true;
+  // bool _useMember = true;
+
+  bool _useMember =
+  MemberQuickLoginStatus.quickLoginActivated == false
+      && EnterpriseQuickLoginStatus.quickLoginActivated == false
+      && InsuranceQuickLoginStatus.quickLoginActivated == false
+      ? true // 1st conditional
+      : MemberQuickLoginStatus.quickLoginActivated == true
+      ? true // 2nd conditonal
+      : false;
+
+  bool _useCompany =
+  MemberQuickLoginStatus.quickLoginActivated == false
+      && EnterpriseQuickLoginStatus.quickLoginActivated == false
+      && InsuranceQuickLoginStatus.quickLoginActivated == false
+      ? true // 1st conditional
+      : MemberQuickLoginStatus.quickLoginActivated == true
+      ? true // 2nd conditonal
+      : false;
+
+  bool _useInsurance =
+  MemberQuickLoginStatus.quickLoginActivated == false
+      && EnterpriseQuickLoginStatus.quickLoginActivated == false
+      && InsuranceQuickLoginStatus.quickLoginActivated == false
+      ? true // 1st conditional
+      : MemberQuickLoginStatus.quickLoginActivated == true
+      ? true // 2nd conditonal
+      : false;
+
 
   UserData userData = UserData(
     companyEmail: '',
@@ -146,7 +180,6 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-
   void signIn() {
     final String enteredMemberId = _membermemberController.text.trim();
     final String enteredDoB = _memberdateController.text.trim();
@@ -249,7 +282,7 @@ class _SignInScreenState extends State<SignInScreen> {
     } else {
       // Display an error message
       if (kDebugMode) {
-        print("Insurance Login Error: Invalid Member ID or Date of Birth");
+        print("Insurance Login Error: Invalid ID or Password");
       }
 
       // Show a floating Snackbar for login error
@@ -289,12 +322,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   String _appVersion = "Unknown"; // Default value
 
-  @override
-  void initState() {
-    super.initState();
-    _getAppVersion(); // Call this method to get the app version during initialization
-  }
-
   Future<void> _getAppVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     setState(() {
@@ -310,11 +337,18 @@ class _SignInScreenState extends State<SignInScreen> {
       GlobalKey<ScaffoldMessengerState>();
 
   @override
+  void initState() {
+    super.initState();
+    _getAppVersion(); // Call this method to get the app version during initialization
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: kPureWhite,
         resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -346,7 +380,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       height: screenHeight * 0.1,
                     ),
 
-                    // 2nd Row - 3 Different Form with Switchable in Single Row
+
                     if (_useMember) ...[
                       buildMemberSection(),
                     ],
@@ -354,7 +388,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          if (!_useMember && !_useCompany) ...[
+                          if (!_useCompany) ...[
                             buildInsuranceSection(),
                           ],
                           if (_useCompany) ...[
@@ -490,7 +524,8 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         const SizedBox(height: 10.0),
 
-        QuickLoginStatus.quickLoginActivated
+        // Biometrics
+        MemberQuickLoginStatus.quickLoginActivated
             ? ElevatedButton(
                 onPressed: () async {
                   // Trigger biometric authentication logic
@@ -630,6 +665,36 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         const SizedBox(height: 10.0),
 
+        // Biometrics
+        EnterpriseQuickLoginStatus.quickLoginActivated
+            ? ElevatedButton(
+                onPressed: () async {
+                  // Trigger biometric authentication logic
+                  bool authenticated = await showBiometricAuthenticationDialog(context);
+
+                  if (authenticated) {
+                    // Biometric authentication successful
+                    if (context.mounted) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NavBar()),
+                      );
+                    }
+                  } else {
+                    // Biometric authentication failed or canceled
+                    if (kDebugMode) {
+                      print("Biometric authentication failed or canceled.");
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Biometrics Login'),
+              )
+            : Container(),
+
         GestureDetector(
           onTap: () {
             switchCompanyInputType();
@@ -758,6 +823,40 @@ class _SignInScreenState extends State<SignInScreen> {
           child: const Text('Sign In as Insurance'),
         ),
         const SizedBox(height: 10.0),
+
+        // Biometrics
+        InsuranceQuickLoginStatus.quickLoginActivated
+            ? ElevatedButton(
+                onPressed: () async {
+                  // Trigger biometric authentication logic
+                  bool authenticated = await showBiometricAuthenticationDialog(context);
+
+                  if (authenticated) {
+                    // Biometric authentication successful
+                    if (context.mounted) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NavBar()),
+                      );
+                    }
+                  } else {
+                    // Biometric authentication failed or canceled
+                    if (kDebugMode) {
+                      print("Biometric authentication failed or canceled.");
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Biometrics Login'),
+              )
+            : Container(),
+
+        // Switch
+        InsuranceQuickLoginStatus.quickLoginActivated ?
+        Container() :
         GestureDetector(
           onTap: () {
             switchCompanyInputType();
@@ -777,6 +876,9 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
         const SizedBox(height: 10.0),
+
+        InsuranceQuickLoginStatus.quickLoginActivated ?
+        Container() :
         ElevatedButton(
           onPressed: () {
             switchToMember();

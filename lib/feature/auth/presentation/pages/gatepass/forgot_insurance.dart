@@ -32,7 +32,7 @@ class _InsuranceForgotSectionState extends State<InsuranceForgotSection> {
                         "Recovery\nAccount",
                         style: TextStyle(fontSize: 36),
                       )),
-                  c10,
+                  hp10,
                   SizedBox(
                       height: mediaheight(0.05, context),
                       child: const Text("Enter your ID for verifying your account")),
@@ -54,7 +54,7 @@ class _InsuranceForgotSectionState extends State<InsuranceForgotSection> {
                     keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: 10.0),
-                  c10,
+                  hp10,
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(

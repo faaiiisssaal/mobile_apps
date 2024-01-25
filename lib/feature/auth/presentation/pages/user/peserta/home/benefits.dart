@@ -38,7 +38,7 @@ class _BenefitPageState extends State<BenefitPage> {
                         children: [
                           const SizedBox(
                             width: 110,
-                            child: Text("Company Name"),
+                            child: Text("Member Name"),
                           ),
                           Container(
                             padding: onlyleft(5),
@@ -86,7 +86,7 @@ class _BenefitPageState extends State<BenefitPage> {
                   ),
                 ),
               ),
-              c10,
+              hp10,
               Container(
                 padding: paddingall(10),
                 child: ButtonTheme(

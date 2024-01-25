@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/home/home.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/profile/about.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/profile/guide.dart';
 import 'package:helathcareapp/feature/common/constant.dart';
@@ -305,7 +306,7 @@ class _InsuranceProfilePageState extends State<InsuranceProfilePage> {
                           isQuickLoginActivated = value;
                         });
 
-                        QuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
+                        InsuranceQuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
 
                         if (isBiometricAvailable) {
                           // Prompt for biometric authentication
@@ -361,7 +362,7 @@ class _InsuranceProfilePageState extends State<InsuranceProfilePage> {
                                   Navigator.of(context).pushReplacementNamed('/login');
                                   if (kDebugMode) {
                                     print(
-                                        "QuickLoginStatus.quickLoginActivated: ${QuickLoginStatus.quickLoginActivated}");
+                                        "InsuranceQuickLoginStatus.quickLoginActivated: ${InsuranceQuickLoginStatus.quickLoginActivated}");
                                   }
                                 },
                                 child: const Text('Yes'),

@@ -45,7 +45,7 @@ class _ForgotMemberSectionState extends State<ForgotMemberSection> {
                   "Recovery\nAccount",
                   style: TextStyle(fontSize: 36),
                 )),
-                c10,
+                hp10,
                 SizedBox(
                     height: mediaheight(0.05, context),
                     child: const Text("Enter your DoB for verifying your account")),
@@ -73,7 +73,7 @@ class _ForgotMemberSectionState extends State<ForgotMemberSection> {
                   ),
                 ),
                 const SizedBox(height: 10.0),
-                c10,
+                hp10,
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(

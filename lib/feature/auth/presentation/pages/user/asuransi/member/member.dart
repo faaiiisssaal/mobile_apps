@@ -121,7 +121,7 @@ class _InsuranceMemberPageState extends State<InsuranceMemberPage> {
                           )
                         ],
                       ),
-                      c10,
+                      hp10,
                       Row(
                         children: [
                           const SizedBox(
@@ -161,7 +161,7 @@ class _InsuranceMemberPageState extends State<InsuranceMemberPage> {
                   ),
                 ),
               ),
-              c10, // constant value from constant.dart
+              hp10, // constant value from constant.dart
               Expanded(
                 child: Container(
                   height: double.infinity,
