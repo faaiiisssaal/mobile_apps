@@ -50,10 +50,6 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
                     title: Text('My Account'),
                   ),
                   const ListTile(
-                    leading: Icon(Icons.badge_outlined),
-                    title: Text('My e-Card'),
-                  ),
-                  const ListTile(
                     leading: Icon(Icons.menu_book_sharp),
                     title: Text('Manual Guide'),
                   ),
@@ -114,7 +110,7 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('Confirm Exit'),
-                            content: const Text('Are you sure you want to exit the app?'),
+                            content: const Text('Are you sure you want to exit?'),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
