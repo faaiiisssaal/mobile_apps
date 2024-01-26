@@ -378,3 +378,7 @@ class _HomePageState extends State<HomePage> {
 class MemberQuickLoginStatus {
   static bool quickLoginActivated = false;
 }
+
+class MemberSession {
+  bool session = false;
+}

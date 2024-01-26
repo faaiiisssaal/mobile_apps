@@ -284,69 +284,6 @@ class _InsuranceHomePageState extends State<InsuranceHomePage> {
                             children: [
                               SizedBox(
                                 width: mediawidth(0.1, context),
-                                child: const Text("Peserta"),
-                              ),
-                              const Text(": "),
-                              const Text("+62 857 1188 0237"),],
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              launchPhoneDialer("+6285711880237");
-                            },
-                            child: const Icon(Icons.call),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              whatsapp("+6285711880237");
-                            },
-                            child: Image.asset(
-                              "asset/whatsapp-logo.png",
-                              scale:22.5,
-                            ),
-                          )
-                        ],
-                      ),
-                      hp10,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: mediawidth(0.1, context),
-                                child: const Text("Rumah Sakit"),
-                              ),
-                              const Text(": "),
-                              const Text("+62 851 0289 8692"),
-                            ],
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              launchPhoneDialer("+6285102898692");
-                            },
-                            child: const Icon(Icons.call),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              whatsapp("+6285102898692");
-                            },
-                            child: Image.asset(
-                              "asset/whatsapp-logo.png",
-                              scale: 22.5,
-                            ),
-                          )
-                        ],
-                      ),
-                      hp10,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: mediawidth(0.1, context),
                                 child: const Text("Bebas Pulsa"),
                               ),
                               const Text(": "),
@@ -375,3 +312,8 @@ class _InsuranceHomePageState extends State<InsuranceHomePage> {
 class InsuranceQuickLoginStatus {
   static bool quickLoginActivated = false;
 }
+
+class InsuranceSession {
+  bool session = false;
+}
+

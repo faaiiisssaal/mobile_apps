@@ -122,9 +122,17 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).popUntil((route) => route.isFirst);
                                   Navigator.of(context).pushReplacementNamed('/login');
+
+                                  EnterpriseSession enterpriseSession = EnterpriseSession();
+
+                                  // Change the value of session to true
+                                  enterpriseSession.session = true;
+
                                   if (kDebugMode) {
-                                    print(
-                                        "EnterpriseQuickLoginStatus.quickLoginActivated: ${EnterpriseQuickLoginStatus.quickLoginActivated}");
+                                    print("EnterpriseQuickLoginStatus.quickLoginActivated: "
+                                        "${EnterpriseQuickLoginStatus.quickLoginActivated}");
+                                    print("EnterpriseSession.session: "
+                                        "${enterpriseSession.session}");
                                   }
                                 },
                                 child: const Text('Yes'),

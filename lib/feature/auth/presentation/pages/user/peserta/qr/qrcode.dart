@@ -41,7 +41,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   if (result != null)
-                    Text('Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+                    Text('Barcode Type: ${(result!.format)}   Data: ${result!.code}')
                   else
                     const Text('Scan a code'),
                   Row(
@@ -73,7 +73,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                               future: controller?.getCameraInfo(),
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
-                                  return Text('Camera facing ${describeEnum(snapshot.data!)}');
+                                  return Text('Camera facing ${(snapshot.data!)}');
                                 } else {
                                   return const Text('loading');
                                 }

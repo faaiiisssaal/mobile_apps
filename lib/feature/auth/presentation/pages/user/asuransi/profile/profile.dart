@@ -352,7 +352,7 @@ class _InsuranceProfilePageState extends State<InsuranceProfilePage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('Confirm Exit'),
-                            content: const Text('Are you sure you want to exit the app?'),
+                            content: const Text('Are you sure you want to exit?'),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
@@ -360,9 +360,15 @@ class _InsuranceProfilePageState extends State<InsuranceProfilePage> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).popUntil((route) => route.isFirst);
                                   Navigator.of(context).pushReplacementNamed('/login');
+                                  InsuranceSession insuranceSession = InsuranceSession();
+
+                                  // Change the value of session to true
+                                  insuranceSession.session = true;
                                   if (kDebugMode) {
                                     print(
                                         "InsuranceQuickLoginStatus.quickLoginActivated: ${InsuranceQuickLoginStatus.quickLoginActivated}");
+                                    print("InsuranceSession.session: "
+                                        "${insuranceSession.session}");
                                   }
                                 },
                                 child: const Text('Yes'),

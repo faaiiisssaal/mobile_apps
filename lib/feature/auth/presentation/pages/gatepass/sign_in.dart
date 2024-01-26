@@ -16,6 +16,7 @@ import 'package:helathcareapp/feature/auth/presentation/pages/user/asuransi/navi
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/navigation/navbar.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/peserta/navigation/navbar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -35,36 +36,62 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _memberdateController = TextEditingController();
 
 
-  // bool _useCompany = true;
-  // bool _useInsurance = true;
-  // bool _useMember = true;
+  bool _useCompany = true;
+  bool _useInsurance = true;
+  bool _useMember = false;
 
-  bool _useMember =
-  MemberQuickLoginStatus.quickLoginActivated == false
-      && EnterpriseQuickLoginStatus.quickLoginActivated == false
-      && InsuranceQuickLoginStatus.quickLoginActivated == false
-      ? true // 1st conditional
-      : MemberQuickLoginStatus.quickLoginActivated == true
-      ? true // 2nd conditonal
-      : false;
+  // bool _useMember =
+  // MemberQuickLoginStatus.quickLoginActivated == false
+  //     && EnterpriseQuickLoginStatus.quickLoginActivated == false
+  //     && InsuranceQuickLoginStatus.quickLoginActivated == false
+  //     ? false // 1st conditional
+  //     : MemberQuickLoginStatus.quickLoginActivated == true
+  //     ? true // 2nd conditonal
+  //     : false;
+  //
+  // bool _useCompany =
+  // MemberQuickLoginStatus.quickLoginActivated == false
+  //     && EnterpriseQuickLoginStatus.quickLoginActivated == false
+  //     && InsuranceQuickLoginStatus.quickLoginActivated == false
+  //     ? true // 1st conditional
+  //     : EnterpriseQuickLoginStatus.quickLoginActivated == true
+  //     ? true // 2nd conditonal
+  //     : false;
+  //
+  // bool _useInsurance =
+  // MemberQuickLoginStatus.quickLoginActivated == false
+  //     && EnterpriseQuickLoginStatus.quickLoginActivated == false
+  //     && InsuranceQuickLoginStatus.quickLoginActivated == false
+  //     ? true // 1st conditional
+  //     : InsuranceQuickLoginStatus.quickLoginActivated == true
+  //     ? true // 2nd conditonal
+  //     : false;
 
-  bool _useCompany =
-  MemberQuickLoginStatus.quickLoginActivated == false
-      && EnterpriseQuickLoginStatus.quickLoginActivated == false
-      && InsuranceQuickLoginStatus.quickLoginActivated == false
-      ? true // 1st conditional
-      : MemberQuickLoginStatus.quickLoginActivated == true
-      ? true // 2nd conditonal
-      : false;
+  // bool _useMember = MemberSession().session;
+  // bool _useCompany = EnterpriseSession().session;
+  // bool _useInsurance = InsuranceSession().session;
 
-  bool _useInsurance =
-  MemberQuickLoginStatus.quickLoginActivated == false
-      && EnterpriseQuickLoginStatus.quickLoginActivated == false
-      && InsuranceQuickLoginStatus.quickLoginActivated == false
-      ? true // 1st conditional
-      : MemberQuickLoginStatus.quickLoginActivated == true
-      ? true // 2nd conditonal
-      : false;
+  // bool _useMember =
+  // MemberSession().session == false && EnterpriseSession().session == false && InsuranceSession().session == false
+  // ? true
+  // : MemberSession().session == true
+  // ? true
+  // : false;
+  //
+  // bool _useCompany =
+  // MemberSession().session == false && EnterpriseSession().session == false && InsuranceSession().session == false
+  //     ? true
+  //     : EnterpriseSession().session == true
+  //     ? true
+  //     : false;
+  //
+  // bool _useInsurance =
+  // MemberSession().session == false && EnterpriseSession().session == false && InsuranceSession().session == false
+  //     ? true
+  //     : InsuranceSession().session == true
+  //     ? true
+  //     : false;
+
 
 
   UserData userData = UserData(
@@ -149,6 +176,52 @@ class _SignInScreenState extends State<SignInScreen> {
       _useInsurance = false;
     });
   }
+
+  void switchToCompany() {
+    setState(() {
+      _useMember = false;
+      _useCompany = true;
+      _useInsurance = false;
+    });
+  }
+
+  void switchToInsurance() {
+    setState(() {
+      _useMember = false;
+      _useCompany = false;
+      _useInsurance = true;
+    });
+  }
+
+  void saveUser(String user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("user", user);
+  }
+
+  void loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? result = prefs.getString("user");
+    if (kDebugMode) {
+      print(result);
+    }
+
+
+    setState(() {
+      if (result == "member") {
+        switchToMember();
+      } else if (result == "company") {
+        switchToCompany();
+      } else if (result == "insurance"){
+        switchToInsurance();
+      } else {
+        switchToMember();
+      }
+    });
+
+
+
+  }
+
 
   void signInMemTemp() {
     // Navigate to the next screen and pass userData
@@ -339,6 +412,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
+    loadUser();
     _getAppVersion(); // Call this method to get the app version during initialization
   }
 
@@ -419,6 +493,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 softWrap: true,
                 textAlign: TextAlign.center,
               ),
+              Text("${MemberSession().session}"),
+              Text("${EnterpriseSession().session}"),
+              Text("${InsuranceSession().session}"),
+
+              Text("$_useMember"),
+              Text("$_useCompany"),
+              Text("$_useInsurance")
+
               // const SizedBox(height: 4.0),
               // Text(
               //   'App Version: $_appVersion',
@@ -517,6 +599,7 @@ class _SignInScreenState extends State<SignInScreen> {
             //   signIn();
             // }
             signInMemTemp();
+            saveUser("member");
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
@@ -554,6 +637,7 @@ class _SignInScreenState extends State<SignInScreen> {
               )
             : Container(),
 
+        switchToMember.toString() == "member" ? Container() :
         // Switch
         GestureDetector(
           onTap: () {
@@ -658,6 +742,10 @@ class _SignInScreenState extends State<SignInScreen> {
         ElevatedButton(
           onPressed: () {
             signInCompany();
+            saveUser("company");
+            if (kDebugMode) {
+              print(saveUser.toString());
+            }
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
@@ -695,6 +783,8 @@ class _SignInScreenState extends State<SignInScreen> {
               )
             : Container(),
 
+        switchToCompany.toString() == "company"
+            ? Container() :
         GestureDetector(
           onTap: () {
             switchCompanyInputType();
@@ -715,6 +805,9 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
 
         const SizedBox(height: 10.0),
+
+        switchToCompany.toString() == "company"
+            ? Container() :
         // Back to member button
         ElevatedButton(
           onPressed: () {
@@ -815,6 +908,10 @@ class _SignInScreenState extends State<SignInScreen> {
             // signInInsurance();
 
             signInInsuTemp();
+            saveUser("insurance");
+            if (kDebugMode) {
+              print(saveUser.toString());
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.lightBlue,
@@ -855,8 +952,7 @@ class _SignInScreenState extends State<SignInScreen> {
             : Container(),
 
         // Switch
-        InsuranceQuickLoginStatus.quickLoginActivated ?
-        Container() :
+        switchToInsurance.toString() == "insurance" ? Container() :
         GestureDetector(
           onTap: () {
             switchCompanyInputType();
@@ -877,8 +973,7 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         const SizedBox(height: 10.0),
 
-        InsuranceQuickLoginStatus.quickLoginActivated ?
-        Container() :
+        switchToInsurance.toString() == "insurance" ? Container() :
         ElevatedButton(
           onPressed: () {
             switchToMember();

@@ -371,9 +371,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).popUntil((route) => route.isFirst);
                                   Navigator.of(context).pushReplacementNamed('/login');
+                                  MemberSession membersession = MemberSession();
+
+                                  // Change the value of session to true
+                                  membersession.session = true;
                                   if (kDebugMode) {
                                     print(
                                         "MemberQuickLoginStatus.quickLoginActivated: ${MemberQuickLoginStatus.quickLoginActivated}");
+                                    print("MemberSession.session: "
+                                        "${membersession.session}");
                                   }
                                 },
                                 child: const Text('Yes'),
