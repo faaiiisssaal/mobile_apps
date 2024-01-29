@@ -14,7 +14,5 @@ void main() {
 
     // resets the screen to its original size after the test end
     addTearDown(tester.view.resetPhysicalSize);
-
-    // TODO: do something
   });
 }
