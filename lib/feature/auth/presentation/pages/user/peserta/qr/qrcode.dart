@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/feature/common/constant.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRViewExample extends StatefulWidget {
@@ -49,7 +50,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        margin: const EdgeInsets.all(8),
+                        margin: paddingall(8),
                         child: ElevatedButton(
                             onPressed: () async {
                               await controller?.toggleFlash();
@@ -63,7 +64,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                             )),
                       ),
                       Container(
-                        margin: const EdgeInsets.all(8),
+                        margin: paddingall(8),
                         child: ElevatedButton(
                             onPressed: () async {
                               await controller?.flipCamera();
@@ -87,7 +88,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        margin: const EdgeInsets.all(8),
+                        margin: paddingall(8),
                         child: ElevatedButton(
                           onPressed: () async {
                             await controller?.pauseCamera();
@@ -96,7 +97,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.all(8),
+                        margin: paddingall(8),
                         child: ElevatedButton(
                           onPressed: () async {
                             await controller?.resumeCamera();

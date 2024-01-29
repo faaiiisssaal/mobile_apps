@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/feature/common/constant.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -17,7 +18,7 @@ class _FormPageState extends State<FormPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 30),
+              margin: topleftright(30, 30, 30),
               height: 50,
               child: const Text(
                   "FORM",
@@ -29,7 +30,7 @@ class _FormPageState extends State<FormPage> {
             ),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: paddingall(10),
                 children: [
                   const ListTile(
                     leading: Icon(Icons.stairs_outlined),

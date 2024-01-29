@@ -10,7 +10,6 @@ class EnterpriseMemberPage extends StatefulWidget {
 
 class _EnterpriseMemberPageState extends State<EnterpriseMemberPage> {
 
-  String dropDownValue1 = "PT ABAJA";
   String dropDownValue2 = "2352352366261116";
   String dropDownValue3 = "LALA";
 
@@ -24,7 +23,6 @@ class _EnterpriseMemberPageState extends State<EnterpriseMemberPage> {
             children: [
               Container(
                 padding: paddingall(10),
-                height: 200,
                 decoration: const BoxDecoration(
                   color: kSkyBlue,
                   borderRadius: r15,
@@ -35,54 +33,6 @@ class _EnterpriseMemberPageState extends State<EnterpriseMemberPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 110,
-                            child: Text("Company Name"),
-                          ),
-                          Container(
-                            padding: onlyleft(5),
-                            width: 5,
-                            child: const Text(":"),
-                          ),
-                          Expanded(
-                              child: ButtonTheme(
-                                alignedDropdown: true,
-                                child: DropdownButton<String>(
-                                  padding: paddingall(0),
-                                  isExpanded: true,
-                                  value: dropDownValue1,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropDownValue1 = newValue!;
-                                    });
-                                  },
-                                  items: const [
-                                    DropdownMenuItem<String>(
-                                      value: "PT ABAJA",
-                                      child: Text(
-                                        "PT ABAJA",
-                                      ),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "PT HBJ",
-                                      child: Text("PT HBJ"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "PT PPJ",
-                                      child: Text("PT PPJ"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "PT NUSAPALA",
-                                      child: Text("PT NUSAPALA"),
-                                    ),
-                                  ],
-                                ),
-                              )
-                          )
-                        ],
-                      ),
                       Row(
                         children: [
                           const SizedBox(
@@ -170,7 +120,7 @@ class _EnterpriseMemberPageState extends State<EnterpriseMemberPage> {
                     color: Colors.lightGreenAccent,
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
-                  margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                  margin: bottomleftright(10, 10, 10),
                   child: const Center(
                     child: Text("No Data"),
                   ),

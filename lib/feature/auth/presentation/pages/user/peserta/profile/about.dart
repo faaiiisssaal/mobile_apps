@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/feature/common/constant.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({super.key});
@@ -16,11 +17,11 @@ class _AboutPageState extends State<AboutPage> {
             backgroundColor: Colors.white,
             resizeToAvoidBottomInset: false,
             body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              padding: horiverti(10, 20),
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: horizontal(10),
                     child: const Text(
                       "Sejarah PT. Abadi SmiLynks"
                           "\n\n"
@@ -38,7 +39,7 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                   const SizedBox(height: 10,),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: horizontal(10),
                     child: const Text(
                       "Visi"
                           "\n\n"
@@ -51,7 +52,7 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                   const SizedBox(height: 10,),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: horizontal(10),
                     child: const Text(
                       "Misi"
                           "\n\n"
@@ -65,7 +66,7 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                   const SizedBox(height: 10,),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: horizontal(10),
                     child: Row(
                       children: [
                         Placeholder(

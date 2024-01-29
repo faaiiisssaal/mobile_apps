@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/onboarding/data.dart';
+import 'package:helathcareapp/feature/common/constant.dart';
 
 class Structure extends StatefulWidget {
   final VoidCallback onDone;
@@ -62,7 +63,7 @@ class _StructureState extends State<Structure> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: paddingall(20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

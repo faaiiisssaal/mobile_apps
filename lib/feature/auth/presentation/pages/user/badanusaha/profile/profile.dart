@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:helathcareapp/feature/auth/presentation/pages/user/badanusaha/home/home.dart';
 import 'package:helathcareapp/feature/auth/presentation/widgets/biometrics.dart';
+import 'package:helathcareapp/feature/common/constant.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class EnterpriseProfilePage extends StatefulWidget {
@@ -152,7 +153,7 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
           ],
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
+          padding: horiverti(2.5, 5),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

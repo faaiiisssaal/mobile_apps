@@ -9,9 +9,28 @@ class EnterprisePolicyPage extends StatefulWidget {
 }
 
 class _EnterprisePolicyPageState extends State<EnterprisePolicyPage> {
-
   String dropDownValue1 = "LALA";
   String dropDownValue2 = "2352352366261116";
+  String selectedOption = "46546545"; // Default selected option
+
+  final Map<String, Map<String, String>> optionsData = {
+    "46546545": {
+      "Policy Name": "ArtaGraha General Insurance",
+      "Effective Policy": "...",
+      "Active Member": "500",
+      "Plan": "II",
+      "TC": "...",
+      "Fee Policy": "Rp. 20.000.000,00",
+    },
+    "46546000": {
+      "Policy Name": "Allianz Insurance",
+      "Effective Policy": "Value for B - Option 1",
+      "Active Member": "500",
+      "Plan": "I",
+      "TC": "...",
+      "Fee Policy": "Rp. 50.000.000,00",
+    },
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -19,89 +38,108 @@ class _EnterprisePolicyPageState extends State<EnterprisePolicyPage> {
       child: Placeholder(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: Column(
-            children: [
-              Container(
-                padding: paddingall(10),
-                height: 75,
-                decoration: const BoxDecoration(
-                  color: kSkyBlue,
-                  borderRadius: r15,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: paddingall(10),
+                  height: 75,
+                  decoration: const BoxDecoration(
+                    color: kPureWhite,
+                    borderRadius: r15,
+                  ),
+                  margin: topleftright(10, 10, 10),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 110,
+                              child: Text("Policy No"),
+                            ),
+                            Container(
+                              padding: onlyleft(5),
+                              width: 5,
+                              child: const Text(":"),
+                            ),
+                            Expanded(
+                                child: ButtonTheme(
+                                  alignedDropdown: true,
+                                  child: DropdownButton<String>(
+                                    padding: paddingall(0),
+                                    isExpanded: true,
+                                    value: selectedOption,
+                                    items: optionsData.keys.map((String option) {
+                                      return DropdownMenuItem<String>(
+                                        value: option,
+                                        child: Text(option),
+                                      );
+                                    }).toList(),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedOption = newValue!;
+                                      });
+                                    },
+                                  ),
+                                )
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                margin: topleftright(10, 10, 10),
-                child: SingleChildScrollView(
+                hp10,
+                Container(
+                  margin: horizontal(10),
+                  decoration: const BoxDecoration(
+                    color: kPureWhite,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 110,
-                            child: Text("Company Name"),
-                          ),
-                          Container(
-                            padding: onlyleft(5),
-                            width: 5,
-                            child: const Text(":"),
-                          ),
-                          Expanded(
-                              child: ButtonTheme(
-                                alignedDropdown: true,
-                                child: DropdownButton<String>(
-                                  padding: paddingall(0),
-                                  isExpanded: true,
-                                  value: dropDownValue1,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropDownValue1 = newValue!;
-                                    });
-                                  },
-                                  items: const [
-                                    DropdownMenuItem<String>(
-                                      value: "LALA",
+                      Container(
+                        margin: paddingall(10),
+                        decoration: const BoxDecoration(
+                          color: kLightGrey,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: optionsData[selectedOption]!.entries.map((entry) {
+                            return ListTile(
+                              title: Row(
+                                children: [
+                                  SizedBox(
+                                      width: 90,
                                       child: Text(
-                                        "LALA",
-                                      ),
+                                        entry.key,
+                                        softWrap: true,
+                                        maxLines: 2,
+                                      )
+                                  ),
+                                  const Text(": "),
+                                  Expanded(
+                                    child: Text(
+                                      entry.value,
+                                      softWrap: true,
+                                      maxLines: 2,
                                     ),
-                                    DropdownMenuItem(
-                                      value: "LILI",
-                                      child: Text("LILI"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "LULU",
-                                      child: Text("LULU"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "LELE",
-                                      child: Text("LELE"),
-                                    ),
-                                  ],
-                                ),
-                              )
-                          )
-                        ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),),
                       ),
                     ],
                   ),
-                ),
-              ),
-              hp10, // constant value from constant.dart
-              Expanded(
-                child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Colors.lightGreenAccent,
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                  ),
-                  margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
-                  child: const Center(
-                    child: Text("No Data"),
-                  ),
-                ),
-              ),
-            ],
+                ),// constant value from constant.dart
+
+              ],
+            ),
           ),
         ),
       ),

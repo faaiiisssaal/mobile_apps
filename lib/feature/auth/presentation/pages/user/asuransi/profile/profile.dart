@@ -392,7 +392,7 @@ class _InsuranceProfilePageState extends State<InsuranceProfilePage> {
           ],
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 5),
+          padding: horiverti(2.5, 5),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

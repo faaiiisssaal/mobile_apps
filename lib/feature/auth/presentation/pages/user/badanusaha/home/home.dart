@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:helathcareapp/feature/auth/presentation/widgets/hotline.dart';
+import 'package:helathcareapp/feature/auth/presentation/widgets/information.dart';
 import 'package:helathcareapp/feature/common/constant.dart';
 
 class EnterpriseHomePage extends StatefulWidget {
@@ -13,9 +12,9 @@ class EnterpriseHomePage extends StatefulWidget {
 
 class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
 
-
   String dropDownValue1 = "LALA";
   String dropDownValue2 = "2352352366261116";
+  String dropDownValue3 = "Rawat Jalan";
 
   @override
   Widget build(BuildContext context) {
@@ -27,28 +26,7 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
             // 1st row for Information
             Container(
               margin: onlytop(25),
-              child: ImageSlideshow(
-                indicatorColor: Colors.blue,
-                onPageChanged: (value) {
-                  debugPrint('Page changed: $value');
-                },
-                autoPlayInterval: 3000,
-                isLoop: true,
-                children: [
-                  Image.asset(
-                    'asset/whatsapp-logo.png',
-                    fit: BoxFit.fitHeight,
-                  ),
-                  Image.asset(
-                    'asset/apple-logo.png',
-                    fit: BoxFit.fitHeight,
-                  ),
-                  Image.asset(
-                    'asset/google-logo.png',
-                    fit: BoxFit.fitHeight,
-                  ),
-                ],
-              ),
+              child: ImageSlideShow().build(context),
             ),
             hp10,
 
@@ -66,14 +44,14 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hai, Linda",
-                    style: TextStyle(fontSize: mediawidth(0.025, context)+2.5, fontWeight: FontWeight.bold),
+                    "Hai, PT Pacific Place Jakarta",
+                    style: TextStyle(fontSize: mediawidth(0.045, context) + 2.5, fontWeight: FontWeight.bold),
                   ),
                   hp10,
                   Text(
                     // "Terdaftar sebagai Administration Service Only (ASO)",
-                    "sebagai PT Pacific Place Jakarta",
-                    style: TextStyle(fontSize: mediawidth(0.0125, context)+2.5, fontWeight: FontWeight.bold),
+                    "terdaftar di ArtaGraha General Insurance",
+                    style: TextStyle(fontSize: mediawidth(0.025, context) + 2.5, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -82,7 +60,7 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
 
             // 3rd row for nearby
             Container(
-              width: double.infinity,
+              width: mediawidth(1, context),
               padding: paddingall(10),
               decoration: BoxDecoration(
                 color: kPureWhite, // Moved the color property to BoxDecoration
@@ -91,25 +69,26 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
               ),
               child: Row(
                 children: [
-                  SizedBox(
-                    child: Image.asset(
-                      "asset/placeholder.png",
-                      height: mediawidth(0.05, context),
-                      width: mediawidth(0.05, context),
-                    ),
+                  Image.asset(
+                    "asset/placeholder.png",
+                    height: mediawidth(0.085, context),
+                    width: mediawidth(0.085, context),
                   ),
-                  SizedBox(
+                  Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "Nearby ...",
-                          style: GoogleFonts.lato(fontSize: mediawidth(0.025, context)+2.5, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: mediawidth(0.05, context) + 2.5, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
-                          style: GoogleFonts.lato(fontSize: mediawidth(0.0125, context)+2.5, fontWeight: FontWeight.bold),
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(fontSize: mediawidth(0.025, context) + 2.5, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -128,7 +107,6 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                 ),
                 child: Column(
                   children: [
-
                     // 1st choice member name
                     Container(
                       padding: horiverti(10, 5),
@@ -149,7 +127,7 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                                   child: Text(
                                     "Member Name",
                                     style: TextStyle(
-                                      fontSize: mediawidth(0.0125, context)+2,
+                                      fontSize: mediawidth(0.025, context) + 2.5,
                                     ),
                                   ),
                                 ),
@@ -170,29 +148,47 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                                             dropDownValue1 = newValue!;
                                           });
                                         },
-                                        items: const [
+                                        items: [
                                           DropdownMenuItem<String>(
                                             value: "LALA",
                                             child: Text(
                                               "LALA",
+                                              style: TextStyle(
+                                                fontSize: mediawidth(0.025, context) + 2.5,
+                                              ),
                                             ),
                                           ),
                                           DropdownMenuItem(
                                             value: "LILI",
-                                            child: Text("LILI"),
+                                            child: Text(
+                                              "LILI",
+                                              style: TextStyle(
+                                                fontSize: mediawidth(0.025, context) + 2.5,
+                                              ),
+                                            ),
                                           ),
                                           DropdownMenuItem(
                                             value: "LULU",
-                                            child: Text("LULU"),
+                                            child: Text(
+                                              "LULU",
+                                              style: TextStyle(
+                                                fontSize: mediawidth(0.025, context) + 2.5,
+                                              ),
+                                            ),
                                           ),
                                           DropdownMenuItem(
                                             value: "LELE",
-                                            child: Text("LELE"),
+                                            child: Text(
+                                              "LELE",
+                                              style: TextStyle(
+                                                fontSize: mediawidth(0.025, context) + 2.5,
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
                                     )
-                                )
+                                ),
                               ],
                             ),
                           ],
@@ -200,7 +196,6 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                       ),
                     ),
                     hp10,
-
 
                     Container(
                       padding: paddingall(10),
@@ -211,30 +206,30 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                         child: DropdownButton<String>(
                           padding: paddingall(0),
                           isExpanded: true,
-                          value: dropDownValue1,
+                          value: dropDownValue3,
                           onChanged: (String? newValue) {
                             setState(() {
-                              dropDownValue1 = newValue!;
+                              dropDownValue3 = newValue!;
                             });
                           },
-                          items: const [
+                          items: [
                             DropdownMenuItem<String>(
-                              value: "LALA",
+                              value: "Rawat Jalan",
                               child: Text(
-                                "LALA",
+                                "Rawat Jalan",
+                                style: TextStyle(
+                                  fontSize: mediawidth(0.025, context) + 2.5,
+                                ),
                               ),
                             ),
                             DropdownMenuItem(
-                              value: "LILI",
-                              child: Text("LILI"),
-                            ),
-                            DropdownMenuItem(
-                              value: "LULU",
-                              child: Text("LULU"),
-                            ),
-                            DropdownMenuItem(
-                              value: "LELE",
-                              child: Text("LELE"),
+                              value: "Rawat Inap",
+                              child: Text(
+                                "Rawat Inap",
+                                style: TextStyle(
+                                  fontSize: mediawidth(0.025, context) + 2.5,
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -249,15 +244,14 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
                           color: Colors.lightGreenAccent,
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
-                        margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                        margin: bottomleftright(10, 10, 10),
                         child: const Center(
                           child: Text("No Data"),
                         ),
                       ),
                     ),
                   ],
-                )
-            ),
+                )),
             hp10,
             Container(
               width: double.infinity,
@@ -270,38 +264,14 @@ class _EnterpriseHomePageState extends State<EnterpriseHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Hotline 24/7",
                     style: TextStyle(
-                        fontSize: 24
+                      fontSize: mediawidth(0.085, context),
                     ),
                   ),
                   hp10,
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: mediawidth(0.1, context),
-                                child: const Text("Bebas Pulsa"),
-                              ),
-                              const Text(": "),
-                              const Text("+62 21 662 4399 ( ext 22/33 )"),],
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              launchPhoneDialer("+62216624399");
-                            },
-                            child: const Icon(Icons.call),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
+                  const HotlineWidget(),
                 ],
               ),
             ),

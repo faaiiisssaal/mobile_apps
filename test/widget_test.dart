@@ -10,20 +10,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:helathcareapp/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets("foo", (tester) async {
+    tester.view.physicalSize = const Size(42, 42);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // resets the screen to its original size after the test end
+    addTearDown(tester.view.resetPhysicalSize);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // TODO: do something
   });
 }

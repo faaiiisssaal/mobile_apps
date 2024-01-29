@@ -170,7 +170,7 @@ class _InsuranceMemberPageState extends State<InsuranceMemberPage> {
                     color: Colors.lightGreenAccent,
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
-                  margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                  margin: bottomleftright(10, 10, 10),
                   child: const Center(
                     child: Text("No Data"),
                   ),

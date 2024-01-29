@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:helathcareapp/feature/common/constant.dart';
 
 class OnboardingPage extends StatelessWidget {
   final String title;
@@ -19,13 +20,13 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: paddingall(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            padding: const EdgeInsets.all(50),
+            padding: paddingall(50),
             alignment: Alignment.center,
             child: image,
           ),

@@ -35,79 +35,79 @@ const spc = Spacer();
 // Padding and Margin
 
 // All
-EdgeInsets? paddingall(double all) {
+EdgeInsetsGeometry paddingall(double all) {
   return EdgeInsets.all(all);
 }
 
-EdgeInsets marginall(double all) {
+EdgeInsetsGeometry marginall(double all) {
   return EdgeInsets.all(all);
 }
 // All
 
 // Symmetrics
-EdgeInsets vertical(double symmetrics) {
+EdgeInsetsGeometry vertical(double symmetrics) {
   return EdgeInsets.symmetric(vertical: symmetrics);
 }
 
-EdgeInsets horizontal(double symmetrics) {
+EdgeInsetsGeometry horizontal(double symmetrics) {
   return EdgeInsets.symmetric(horizontal: symmetrics);
 }
 
-EdgeInsets horiverti(double sym1, double sym2) {
+EdgeInsetsGeometry horiverti(double sym1, double sym2) {
   return EdgeInsets.symmetric(horizontal: sym1, vertical: sym2);
 }
 // Symmetrics
 
 // One padding/margin
-EdgeInsets onlyleft(double left) {
+EdgeInsetsGeometry onlyleft(double left) {
   return EdgeInsets.only(left: left);
 }
 
-EdgeInsets onlyright(double right) {
+EdgeInsetsGeometry onlyright(double right) {
   return EdgeInsets.only(right: right);
 }
 
-EdgeInsets onlytop(double top) {
+EdgeInsetsGeometry onlytop(double top) {
   return EdgeInsets.only(top: top);
 }
 
-EdgeInsets onlybottom(double bottom) {
+EdgeInsetsGeometry onlybottom(double bottom) {
   return EdgeInsets.only(bottom: bottom);
 }
 // One padding/margin
 
 // 2 padding/margin
-EdgeInsets leftbottom(double left, double bottom) {
+EdgeInsetsGeometry leftbottom(double left, double bottom) {
   return EdgeInsets.only(left: left, bottom: bottom);
 }
 
-EdgeInsets rightbottom(double right, double bottom) {
+EdgeInsetsGeometry rightbottom(double right, double bottom) {
   return EdgeInsets.only(right: right, bottom: bottom);
 }
 
-EdgeInsets lefttop(double left, double top) {
+EdgeInsetsGeometry lefttop(double left, double top) {
   return EdgeInsets.only(left: left, top: top);
 }
 
-EdgeInsets righttop(double right, double top) {
+EdgeInsetsGeometry righttop(double right, double top) {
   return EdgeInsets.only(right: right, top: top);
 }
 // 2 padding/margin
 
 // 3 margin/padding
-EdgeInsets topleftright(double top, double left, double right) {
+EdgeInsetsGeometry topleftright(double top, double left, double right) {
   return EdgeInsets.only(top: top, left: left, right: right);
 }
 
-EdgeInsets bottomleftright(double bottom, double left, double right) {
+EdgeInsetsGeometry bottomleftright(double bottom, double left, double right) {
   return EdgeInsets.only(bottom: bottom, left: left, right: right);
 }
 
-EdgeInsets topbottomleft(double top, double bottom, double left) {
+EdgeInsetsGeometry topbottomleft(double top, double bottom, double left) {
   return EdgeInsets.only(top: top, bottom: bottom, right: left);
 }
 
-EdgeInsets topbottomright(double top, double bottom, double right) {
+EdgeInsetsGeometry topbottomright(double top, double bottom, double right) {
   return EdgeInsets.only(top: top, bottom: bottom, left: right);
 }
 // 3 margin/padding
@@ -119,7 +119,7 @@ double mediaheight(double height, BuildContext context) {
 }
 
 double mediawidth(double width, BuildContext context) {
-  return MediaQuery.of(context).size.height * width;
+  return MediaQuery.of(context).size.width * width;
 }
 
 // Radius

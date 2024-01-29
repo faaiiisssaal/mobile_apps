@@ -39,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   bool _useCompany = true;
   bool _useInsurance = true;
-  bool _useMember = false;
+  bool _useMember = true;
 
   UserData userData = UserData(
     companyEmail: '',
@@ -266,8 +266,8 @@ class _SignInScreenState extends State<SignInScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        margin: const EdgeInsets.all(10.0),
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        margin: paddingall(10),
+        padding: horiverti(24, 12),
         behavior: SnackBarBehavior.floating,
         elevation: 8.0,
       ),
@@ -331,8 +331,8 @@ class _SignInScreenState extends State<SignInScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        margin: const EdgeInsets.all(10.0),
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        margin: paddingall(10),
+        padding: horiverti(24, 12),
         behavior: SnackBarBehavior.floating,
         elevation: 8.0,
       ),
@@ -368,7 +368,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
-    loadUser();
+    // loadUser();
     _getAppVersion(); // Call this method to get the app version during initialization
   }
 
@@ -380,13 +380,13 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Scaffold(
         backgroundColor: kPureWhite,
         resizeToAvoidBottomInset: false,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(20.0),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                padding: paddingall(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -405,12 +405,10 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ],
                         )),
-
+          
                     SizedBox(
                       height: screenHeight * 0.1,
                     ),
-
-
                     if (_useMember) ...[
                       buildMemberSection(),
                     ],
@@ -427,27 +425,25 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
                     ],
-
-                    SizedBox(
-                      height: screenHeight * 0.02,
-                    ),
-                    // 2% of screen height
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.5),
+          padding: horizontal(2.5),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
-                maxLines: 1,
-                softWrap: true,
-                textAlign: TextAlign.center,
+              Container(
+                color: kPureWhite,
+                child: Text(
+                  "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
+                  maxLines: 1,
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                ),
               ),
               // Text("${MemberSession().session}"),
               // Text("${EnterpriseSession().session}"),
@@ -604,7 +600,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           child: Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            padding: vertical(10.0),
             child: Text(
               _useMember ? 'Switch to Insurance' : 'Switch to Member',
               style: const TextStyle(
@@ -750,7 +746,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           child: Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            padding: vertical(10),
             child: Text(
               _useCompany ? 'Switch to Insurance' : 'Switch to Company',
               style: const TextStyle(
@@ -918,7 +914,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           child: Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            padding: vertical(10),
             child: Text(
               _useCompany ? 'Switch to Insurance' : 'Switch to Company',
               style: const TextStyle(
