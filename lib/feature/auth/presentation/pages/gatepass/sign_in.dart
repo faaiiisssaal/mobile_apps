@@ -540,7 +540,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 20.0),
+        const SizedBox(height: 10.0),
         // Sign In Button
         ElevatedButton(
           onPressed: () {
@@ -690,7 +690,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 30.0),
+        const SizedBox(height: 10.0),
         ElevatedButton(
           onPressed: () {
             signInCompany();
@@ -854,7 +854,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 30.0),
+        const SizedBox(height: 10.0),
         ElevatedButton(
           onPressed: () {
             // signInInsurance();
