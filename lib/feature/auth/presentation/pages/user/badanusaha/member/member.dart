@@ -111,18 +111,441 @@ class _EnterpriseMemberPageState extends State<EnterpriseMemberPage> {
                   ),
                 ),
               ),
-              hp10, // constant value from constant.dart
+              hp10,
+              // constant value from constant.dart
+
+              // Expanded, Container, SingleChildScrollView, Column, Container, Column, Row
               Expanded(
                 child: Container(
                   height: double.infinity,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     color: Colors.lightGreenAccent,
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   margin: bottomleftright(10, 10, 10),
-                  child: const Center(
-                    child: Text("No Data"),
+                  padding: paddingall(10),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                    
+                          decoration: const BoxDecoration(
+                            color: kPureWhite,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          padding: paddingall(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 25,
+                                    alignment: Alignment.topLeft,
+                                    child: const Text("1"),
+                                  ),
+                                  const Expanded(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("MARUGAME UDON"),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                                child: Text("Member No. "),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("21214415465"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Age"),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("99"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Effective Date"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Expanded(child: Text("01 January 2024 to 31 December 2024")),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Plan"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("II"),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        hp10,
+                        Container(
+                    
+                          decoration: const BoxDecoration(
+                            color: kPureWhite,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          padding: paddingall(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 25,
+                                    alignment: Alignment.topLeft,
+                                    child: const Text("1"),
+                                  ),
+                                  const Expanded(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("MARUGAME UDON"),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Member No. "),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("21214415465"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Age"),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("99"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Effective Date"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Expanded(child: Text("01 January 2024 to 31 December 2024")),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Plan"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("II"),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        hp10,
+                        Container(
+                    
+                          decoration: const BoxDecoration(
+                            color: kPureWhite,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          padding: paddingall(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 25,
+                                    alignment: Alignment.topLeft,
+                                    child: const Text("1"),
+                                  ),
+                                  const Expanded(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("MARUGAME UDON"),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Member No. "),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("21214415465"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Age"),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("99"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Effective Date"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Expanded(child: Text("01 January 2024 to 31 December 2024")),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Plan"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("II"),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        hp10,
+                        Container(
+                    
+                          decoration: const BoxDecoration(
+                            color: kPureWhite,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          padding: paddingall(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 25,
+                                    alignment: Alignment.topLeft,
+                                    child: const Text("1"),
+                                  ),
+                                  const Expanded(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("MARUGAME UDON"),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Member No. "),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("21214415465"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Age"),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("99"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Effective Date"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Expanded(child: Text("01 January 2024 to 31 December 2024")),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Plan"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("II"),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        hp10,
+                        Container(
+                    
+                          decoration: const BoxDecoration(
+                            color: kPureWhite,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          padding: paddingall(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 25,
+                                    alignment: Alignment.topLeft,
+                                    child: const Text("1"),
+                                  ),
+                                  const Expanded(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("MARUGAME UDON"),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Member No. "),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("21214415465"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              child: Text("Age"),
+                                              width: 100,
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("99"),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Effective Date"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Expanded(child: Text("01 January 2024 to 31 December 2024")),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text("Plan"),
+                                            ),
+                                            wp10,
+                                            Text(":"),
+                                            wp10,
+                                            Text("II"),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

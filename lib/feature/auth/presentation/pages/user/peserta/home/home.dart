@@ -45,7 +45,6 @@ class _HomePageState extends State<HomePage> {
           children: [
             // 1st row for Information
             Container(
-              margin: onlytop(25),
               child: ImageSlideShow().build(context),
             ),
             hp10,
@@ -65,13 +64,13 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text(
                     "Hai, Linda",
-                    style: TextStyle(fontSize: mediawidth(0.045, context) + 2.5, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: mediawidth(0.045, context), fontWeight: FontWeight.bold),
                   ),
                   hp10,
                   Text(
                     // "Terdaftar sebagai Administration Service Only (ASO)",
                     "terdaftar di karyawan PT Pacific Place Jakarta",
-                    style: TextStyle(fontSize: mediawidth(0.025, context) + 2.5, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: mediawidth(0.025, context), fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -101,14 +100,14 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           "Nearby ...",
-                          style: TextStyle(fontSize: mediawidth(0.05, context) + 2.5, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: mediawidth(0.05, context), fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
                           maxLines: 2,
                           softWrap: true,
                           overflow: TextOverflow.clip,
-                          style: TextStyle(fontSize: mediawidth(0.025, context) + 2.5, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: mediawidth(0.025, context), fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -147,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Text(
                                     "Member Name",
                                     style: TextStyle(
-                                      fontSize: mediawidth(0.025, context) + 2.5,
+                                      fontSize: mediawidth(0.025, context),
                                     ),
                                   ),
                                 ),
@@ -174,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                                             child: Text(
                                               "LALA",
                                               style: TextStyle(
-                                                fontSize: mediawidth(0.025, context) + 2.5,
+                                                fontSize: mediawidth(0.025, context),
                                               ),
                                             ),
                                           ),
@@ -183,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                                             child: Text(
                                               "LILI",
                                               style: TextStyle(
-                                                fontSize: mediawidth(0.025, context) + 2.5,
+                                                fontSize: mediawidth(0.025, context),
                                               ),
                                             ),
                                           ),
@@ -192,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                                             child: Text(
                                               "LULU",
                                               style: TextStyle(
-                                                fontSize: mediawidth(0.025, context) + 2.5,
+                                                fontSize: mediawidth(0.025, context),
                                               ),
                                             ),
                                           ),
@@ -201,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                                             child: Text(
                                               "LELE",
                                               style: TextStyle(
-                                                fontSize: mediawidth(0.025, context) + 2.5,
+                                                fontSize: mediawidth(0.025, context),
                                               ),
                                             ),
                                           ),
@@ -238,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 "Rawat Jalan",
                                 style: TextStyle(
-                                  fontSize: mediawidth(0.025, context) + 2.5,
+                                  fontSize: mediawidth(0.025, context),
                                 ),
                               ),
                             ),
@@ -247,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 "Rawat Inap",
                                 style: TextStyle(
-                                  fontSize: mediawidth(0.025, context) + 2.5,
+                                  fontSize: mediawidth(0.025, context),
                                 ),
                               ),
                             ),

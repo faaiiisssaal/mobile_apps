@@ -6,11 +6,17 @@ import 'package:helathcareapp/feature/auth/presentation/pages/gatepass/sign_in.d
 import 'package:helathcareapp/feature/common/constant.dart';
 
 Future<void> main() async {
-  runApp(const MyApp());
+  runApp(const MyApp(jsonData: {},));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.jsonData});
+
+  final Map<String, dynamic> jsonData;
+
+  factory MyApp.fromJsonData(Map<String, dynamic> jsonData) {
+    return MyApp(jsonData: jsonData);
+  }
 
   // This widget is the root of your application.
   @override
