@@ -40,6 +40,7 @@ dependencies:
   json_serializable: ^6.7.1
   bloc: ^8.1.2
   url_launcher: ^6.2.3
+  flutter_animate: ^4.5.0
 #  camera: ^0.8.0
 
 dev_dependencies:

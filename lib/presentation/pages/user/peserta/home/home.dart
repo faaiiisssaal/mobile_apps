@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     var now = DateTime.now();
     var hour = now.hour;
 
-    if (hour > 6 && hour < 11) {
+    if (hour == 12 && hour < 14) {
       return 'Selamat Pagi';
     } else if (hour < 15) {
       return 'Selamat Siang';
@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    getGreeting();
     timer = Timer.periodic(const Duration(milliseconds: 500), ((timer) {
       getGreeting();
     }));
@@ -130,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                     hp10,
                     Text(
                       // "Terdaftar sebagai Administration Service Only (ASO)",
-                      "terdaftar di karyawan PT Pacific Place Jakarta gwehiwehioerhylguiergyerugyueiy",
+                      "terdaftar di karyawan PT Pacific Place Jakarta",
                       style: TextStyle(fontSize: mediawidth(0.035, context), fontWeight: FontWeight.bold),
                     ),
                   ],
