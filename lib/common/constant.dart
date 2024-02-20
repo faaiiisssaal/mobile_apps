@@ -2,24 +2,27 @@ import 'package:flutter/material.dart';
 
 // Color code
 
-const kPureWhite = Color(0xFFffffff);
-const kPureBlack = Color(0xFF000000);
-const kPureRed = Color(0xFFFF0000);
-const kPureGreen = Color(0xFF00FF00);
-const kPureBlue = Color(0xFF0000FF);
+const kPureWhite      = Color(0xFFffffff);
+const kPureBlack      = Color(0xFF000000);
+const kPureRed        = Color(0xFFFF0000);
+const kPureGreen      = Color(0xFF00FF00);
+const kPureBlue       = Color(0xFF0000FF);
 
-const kDarkWhite = Color(0xFFE1D9D1);
-const kLightBlack = Color(0xFF454545);
+const kDarkWhite      = Color(0xFFE1D9D1);
+const kLightBlack     = Color(0xFF454545);
 
-const kDarkBlue = Color(0xFF00008b);
-const kSeaBlue = Color(0xFF006994);
-const kSkyBlue = Color(0xFF87CEEB);
-const kLightBlue = Color(0xFFADD8E6);
+const kDarkBlue       = Color(0xFF00008b);
+const kSeaBlue        = Color(0xFF006994);
+const kSkyBlue        = Color(0xFF87CEEB);
+const kLightBlue      = Color(0xFFADD8E6);
+const kSapphireBlue   = Color(0XFF0F52BA);
+const kBabyBlue       = Color(0XFF89CFF0);
 
-const kLightRed = Color(0xFFFF7F7F);
-const kDarkRed = Color(0xFF8B0000);
-const kLightGrey = Color(0xFFD3D3D3);
-const kDarkGrey = Color(0xFFA9a9a9);
+const kLightRed       = Color(0xFFFF7F7F);
+const kDarkRed        = Color(0xFF8B0000);
+
+const kLightGrey      = Color(0xFFD3D3D3);
+const kDarkGrey       = Color(0xFFA9a9a9);
 
 // Divider
 

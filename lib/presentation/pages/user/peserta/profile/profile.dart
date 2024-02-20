@@ -7,7 +7,6 @@ import 'package:helathcareapp/presentation/pages/user/peserta/home/home.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/profile/ecard.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/profile/guide.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'about.dart';
 import '../../../../widgets/biometrics.dart'; // Import the biometric_utils.dart file
 
@@ -314,41 +313,62 @@ class _ProfilePageState extends State<ProfilePage> {
                     trailing: Switch(
                       value: isQuickLoginActivated,
                       onChanged: (value) async {
-                        setState(() {
-                          isQuickLoginActivated = value;
-                        });
+                        // Don't change switch state if verification is in progress
+                        if (isVerificationInProgress) {
+                          return;
+                        }
 
-                        MemberQuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
+                        // If user is turning on the switch
+                        if (value) {
+                          bool authenticated = false;
+                          if (isBiometricAvailable) {
+                            // Prompt for biometric authentication
+                            setState(() {
+                              isVerificationInProgress = true; // Set flag "switch" to true
+                            });
 
-                        if (isBiometricAvailable) {
-                          // Prompt for biometric authentication
-                          bool authenticated = await showBiometricAuthenticationDialog(context);
+                            authenticated = await showBiometricAuthenticationDialog(context);
+
+                            setState(() {
+                              isVerificationInProgress = false; // Reset flag "switch"
+                            });
+                          }
 
                           if (authenticated) {
-                            // Biometric authentication successful
-                            // Additional logic if needed
-                            if (kDebugMode) {
-                              print("Member Biometric authentication successful.");
-                            }
+                            // If biometric verification is successful, switch to ON position
+                            setState(() {
+                              isQuickLoginActivated = true;
+                            });
                           } else {
-                            // Biometric authentication failed or canceled
+                            // If biometric verification failed or was canceled, keep the switch off
+                            setState(() {
+                              isQuickLoginActivated = false;
+                            });
+
                             // Handle accordingly (e.g., show a message)
                             if (kDebugMode) {
-                              print("Biometric authentication failed or canceled.");
+                              print("Biometric verification failed or was canceled. Switch remains off.");
                             }
                           }
+                        } else {
+                          // If user is turning off the switch
+                          setState(() {
+                            isQuickLoginActivated = value;
+                          });
                         }
+
+                        MemberQuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
                       },
                     ),
                     onTap: () {
-                      if (isBiometricAvailable && isQuickLoginActivated) {
+                      if (isBiometricAvailable && isQuickLoginActivated && !isVerificationInProgress) {
                         // Show biometric authentication dialog
                         showBiometricAuthenticationDialog(context);
                       } else {
                         // Handle accordingly (e.g., show a message)
                         if (kDebugMode) {
                           print(
-                              "Biometric authentication is not available or Quick Login is deactivated.");
+                              "Biometric authentication is not available, Quick Login is deactivated, or verification is in progress.");
                         }
                       }
                     },
@@ -372,8 +392,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Navigator.of(context).pop();
                                   Navigator.of(context).popUntil((route) => route.isFirst);
                                   Navigator.of(context).pushReplacementNamed('/login');
-                                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                                  prefs.remove("user");
+                                  // SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  // prefs.remove("user");
                                   if (kDebugMode) {
                                     print(
                                         "MemberQuickLoginStatus.quickLoginActivated: ${MemberQuickLoginStatus.quickLoginActivated}");

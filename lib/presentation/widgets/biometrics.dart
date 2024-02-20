@@ -7,6 +7,7 @@ import 'package:local_auth/local_auth.dart';
 
 bool isBiometricAvailable = false;
 bool isQuickLoginActivated = false;
+bool isVerificationInProgress = false; // Flag to track biometric verification status
 
 Future<void> checkBiometricAvailability() async {
   final LocalAuthentication localAuthentication = LocalAuthentication();

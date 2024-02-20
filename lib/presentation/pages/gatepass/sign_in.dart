@@ -1,7 +1,6 @@
 // ignore_for_file: unused_field, unused_element
 
 import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/data/data_sources/userdata.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,8 @@ import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../data/models/userdata.dart';
+
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
@@ -27,7 +28,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-
   bool _showPassword = false;
   final TextEditingController _insuranceEmailController = TextEditingController();
   final TextEditingController _insurancePassController = TextEditingController();
@@ -35,7 +35,6 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _companyPassController = TextEditingController();
   final TextEditingController _membermemberController = TextEditingController();
   final TextEditingController _memberdateController = TextEditingController();
-
 
   bool _useCompany = true;
   bool _useInsurance = true;
@@ -158,7 +157,6 @@ class _SignInScreenState extends State<SignInScreen> {
       print(areResult);
     }
 
-
     setState(() {
       if (result == "member") {
         switchToMember();
@@ -166,18 +164,14 @@ class _SignInScreenState extends State<SignInScreen> {
       } else if (result == "company") {
         switchToCompany();
         compResult = "company";
-      } else if (result == "insurance"){
+      } else if (result == "insurance") {
         switchToInsurance();
         insurResult = "insurance";
       } else {
         switchToMember();
       }
     });
-
-
-
   }
-
 
   void signInMemTemp() {
     // Navigate to the next screen and pass userData
@@ -358,12 +352,9 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
-  final GlobalKey<ScaffoldMessengerState> _memberScaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
-  final GlobalKey<ScaffoldMessengerState> _companyScaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
-  final GlobalKey<ScaffoldMessengerState> _insuranceScaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _memberScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _companyScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _insuranceScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   void initState() {
@@ -405,7 +396,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ],
                         )),
-          
+
                     SizedBox(
                       height: screenHeight * 0.1,
                     ),
@@ -553,12 +544,40 @@ class _SignInScreenState extends State<SignInScreen> {
             signInMemTemp();
             saveUser("member");
           },
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
           child: const Text('Sign In as Member'),
         ),
         const SizedBox(height: 10.0),
-
+        MemberQuickLoginStatus.quickLoginActivated == true
+            ? const Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: kDarkRed,
+                          height: 7.5,
+                          thickness: 3,
+                          indent: 0,
+                          endIndent: 5,
+                        ),
+                      ),
+                      Text("OR"),
+                      Expanded(
+                        child: Divider(
+                          color: kPureBlue,
+                          height: 7.5,
+                          thickness: 3,
+                          indent: 5,
+                          endIndent: 0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10.0),
+                ],
+              )
+            : Container(),
         // Biometrics
         MemberQuickLoginStatus.quickLoginActivated == true
             ? ElevatedButton(
@@ -589,26 +608,28 @@ class _SignInScreenState extends State<SignInScreen> {
               )
             : Container(),
 
-        memberResult == "member" ? Container() :
-        // Switch
-        GestureDetector(
-          onTap: () {
-            switchInputType();
-            if (kDebugMode) {
-              print("Switch to Insurance");
-            }
-          },
-          child: Container(
-            alignment: Alignment.center,
-            padding: vertical(10.0),
-            child: Text(
-              _useMember ? 'Switch to Insurance' : 'Switch to Member',
-              style: const TextStyle(
-                color: Colors.blue,
+        memberResult == "member"
+            ? Container()
+            :
+            // Switch
+            GestureDetector(
+                onTap: () {
+                  switchInputType();
+                  if (kDebugMode) {
+                    print("Switch to Insurance");
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: vertical(10.0),
+                  child: Text(
+                    _useMember ? 'Switch to Insurance' : 'Switch to Member',
+                    style: const TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
       ],
     );
   }
@@ -699,12 +720,40 @@ class _SignInScreenState extends State<SignInScreen> {
               print(saveUser.toString());
             }
           },
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
           child: const Text('Sign In as Company'),
         ),
         const SizedBox(height: 10.0),
-
+        EnterpriseQuickLoginStatus.quickLoginActivated == true
+            ? const Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: kDarkRed,
+                          height: 7.5,
+                          thickness: 3,
+                          indent: 0,
+                          endIndent: 5,
+                        ),
+                      ),
+                      Text("OR"),
+                      Expanded(
+                        child: Divider(
+                          color: kPureBlue,
+                          height: 7.5,
+                          thickness: 3,
+                          indent: 5,
+                          endIndent: 0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10.0),
+                ],
+              )
+            : Container(),
         // Biometrics
         EnterpriseQuickLoginStatus.quickLoginActivated == true
             ? ElevatedButton(
@@ -736,44 +785,45 @@ class _SignInScreenState extends State<SignInScreen> {
             : Container(),
 
         compResult == "company"
-            ? Container() :
-        GestureDetector(
-          onTap: () {
-            switchCompanyInputType();
-            if (kDebugMode) {
-              print("Switch to Insurance");
-            }
-          },
-          child: Container(
-            alignment: Alignment.center,
-            padding: vertical(10),
-            child: Text(
-              _useCompany ? 'Switch to Insurance' : 'Switch to Company',
-              style: const TextStyle(
-                color: Colors.blue,
+            ? Container()
+            : GestureDetector(
+                onTap: () {
+                  switchCompanyInputType();
+                  if (kDebugMode) {
+                    print("Switch to Insurance");
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: vertical(10),
+                  child: Text(
+                    _useCompany ? 'Switch to Insurance' : 'Switch to Company',
+                    style: const TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
 
         const SizedBox(height: 10.0),
 
         compResult == "company"
-            ? Container() :
-        // Back to member button
-        ElevatedButton(
-          onPressed: () {
-            switchToMember();
-            if (kDebugMode) {
-              print("Switch to Member");
-            }
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            foregroundColor: Colors.white,
-          ),
-          child: const Text('Back to Member'),
-        ),
+            ? Container()
+            :
+            // Back to member button
+            ElevatedButton(
+                onPressed: () {
+                  switchToMember();
+                  if (kDebugMode) {
+                    print("Switch to Member");
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Back to Member'),
+              ),
       ],
     );
   }
@@ -872,6 +922,36 @@ class _SignInScreenState extends State<SignInScreen> {
           child: const Text('Sign In as Insurance'),
         ),
         const SizedBox(height: 10.0),
+        InsuranceQuickLoginStatus.quickLoginActivated == true
+            ? const Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    color: kDarkRed,
+                    height: 7.5,
+                    thickness: 3,
+                    indent: 0,
+                    endIndent: 5,
+                  ),
+                ),
+                Text("OR"),
+                Expanded(
+                  child: Divider(
+                    color: kPureBlue,
+                    height: 7.5,
+                    thickness: 3,
+                    indent: 5,
+                    endIndent: 0,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10.0),
+          ],
+        )
+            : Container(),
 
         // Biometrics
         InsuranceQuickLoginStatus.quickLoginActivated == true
@@ -904,41 +984,43 @@ class _SignInScreenState extends State<SignInScreen> {
             : Container(),
 
         // Switch
-        insurResult == "insurance" ? Container() :
-        GestureDetector(
-          onTap: () {
-            switchCompanyInputType();
-            if (kDebugMode) {
-              print("Switch to Company");
-            }
-          },
-          child: Container(
-            alignment: Alignment.center,
-            padding: vertical(10),
-            child: Text(
-              _useCompany ? 'Switch to Insurance' : 'Switch to Company',
-              style: const TextStyle(
-                color: Colors.blue,
+        insurResult == "insurance"
+            ? Container()
+            : GestureDetector(
+                onTap: () {
+                  switchCompanyInputType();
+                  if (kDebugMode) {
+                    print("Switch to Company");
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: vertical(10),
+                  child: Text(
+                    _useCompany ? 'Switch to Insurance' : 'Switch to Company',
+                    style: const TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
         const SizedBox(height: 10.0),
 
-        insurResult == "insurance" ? Container() :
-        ElevatedButton(
-          onPressed: () {
-            switchToMember();
-            if (kDebugMode) {
-              print("Switch to Member");
-            }
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            foregroundColor: Colors.white,
-          ),
-          child: const Text('Back to Member'),
-        ),
+        insurResult == "insurance"
+            ? Container()
+            : ElevatedButton(
+                onPressed: () {
+                  switchToMember();
+                  if (kDebugMode) {
+                    print("Switch to Member");
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Back to Member'),
+              ),
       ],
     );
   }
@@ -961,8 +1043,7 @@ class MemberIDInputFormatter extends TextInputFormatter {
 
     // Add hyphen automatically after 9 digits
     if (formattedValue.length > 9) {
-      formattedValue =
-          '${formattedValue.substring(0, 9)}-${formattedValue.substring(9, formattedValue.length)}';
+      formattedValue = '${formattedValue.substring(0, 9)}-${formattedValue.substring(9, formattedValue.length)}';
     }
 
     // Ensure max length is 11

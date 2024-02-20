@@ -56,51 +56,71 @@ class _EnterpriseProfilePageState extends State<EnterpriseProfilePage> {
                     title: Text('Manual Guide'),
                   ),
                   ListTile(
-                    leading: const Icon(Icons.fingerprint_rounded),
+                    leading: const Icon(Icons.fingerprint_outlined),
                     title: const Text('Quick Login'),
                     trailing: Switch(
                       value: isQuickLoginActivated,
                       onChanged: (value) async {
-                        setState(() {
-                          isQuickLoginActivated = value;
-                        });
+                        // Don't change switch state if verification is in progress
+                        if (isVerificationInProgress) {
+                          return;
+                        }
 
-                        EnterpriseQuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
+                        // If user is turning on the switch
+                        if (value) {
+                          bool authenticated = false;
+                          if (isBiometricAvailable) {
+                            // Prompt for biometric authentication
+                            setState(() {
+                              isVerificationInProgress = true; // Set flag "switch" to true
+                            });
 
-                        if (isBiometricAvailable) {
-                          // Prompt for biometric authentication
-                          bool authenticated = await showBiometricAuthenticationDialog(context);
+                            authenticated = await showBiometricAuthenticationDialog(context);
+
+                            setState(() {
+                              isVerificationInProgress = false; // Reset flag "switch"
+                            });
+                          }
 
                           if (authenticated) {
-                            // Biometric authentication successful
-                            // Additional logic if needed
-                            if (kDebugMode) {
-                              print("Biometric authentication successful.");
-                            }
+                            // If biometric verification is successful, switch to ON position
+                            setState(() {
+                              isQuickLoginActivated = true;
+                            });
                           } else {
-                            // Biometric authentication failed or canceled
+                            // If biometric verification failed or was canceled, keep the switch off
+                            setState(() {
+                              isQuickLoginActivated = false;
+                            });
+
                             // Handle accordingly (e.g., show a message)
                             if (kDebugMode) {
-                              print("Biometric authentication failed or canceled.");
+                              print("Biometric verification failed or was canceled. Switch remains off.");
                             }
                           }
+                        } else {
+                          // If user is turning off the switch
+                          setState(() {
+                            isQuickLoginActivated = value;
+                          });
                         }
+
+                        EnterpriseQuickLoginStatus.quickLoginActivated = isQuickLoginActivated;
                       },
                     ),
                     onTap: () {
-                      if (isBiometricAvailable && isQuickLoginActivated) {
+                      if (isBiometricAvailable && isQuickLoginActivated && !isVerificationInProgress) {
                         // Show biometric authentication dialog
                         showBiometricAuthenticationDialog(context);
                       } else {
                         // Handle accordingly (e.g., show a message)
                         if (kDebugMode) {
                           print(
-                              "Biometric authentication is not available or Quick Login is deactivated.");
+                              "Biometric authentication is not available, Quick Login is deactivated, or verification is in progress.");
                         }
                       }
                     },
                   ),
-
                   // ... Add more ListTiles as needed
                   ListTile(
                     leading: const Icon(Icons.exit_to_app),

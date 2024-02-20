@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     var now = DateTime.now();
     var hour = now.hour;
 
-    if (hour == 12 && hour < 14) {
+    if (hour < 12) {
       return 'Selamat Pagi';
     } else if (hour < 15) {
       return 'Selamat Siang';
@@ -95,22 +95,15 @@ class _HomePageState extends State<HomePage> {
     return PopScope(
       canPop: false, //When false, blocks the current route from being popped.
       onPopInvoked: (didPop) async {
-
         showExitPopup(context);
-
       },
       child: SafeArea(
         child: SingleChildScrollView(
           padding: paddingall(10),
           child: Column(
             children: [
-              // 1st row for Information
-              Container(
-                child: ImageSlideShow().build(context),
-              ),
-              hp10,
-      
-              // 2nd row for username
+
+              // 1st row for username
               Container(
                 width: double.infinity,
                 padding: paddingall(10),
@@ -124,10 +117,9 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${getGreeting()}, Linda",
+                      "${getGreeting()}\nLinda",
                       style: TextStyle(fontSize: mediawidth(0.045, context), fontWeight: FontWeight.bold),
                     ),
-                    Text(getGreeting()),
                     hp10,
                     Text(
                       // "Terdaftar sebagai Administration Service Only (ASO)",
@@ -138,7 +130,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               hp10,
-      
+
+              // 2nd row for Information
+              Container(
+                child: ImageSlideShow().build(context),
+              ),
+              hp10,
+
               // 3rd row for nearby
               Container(
                 width: mediawidth(1, context),

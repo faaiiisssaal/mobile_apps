@@ -51,7 +51,6 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         '/login': (context) => const SignInScreen(),
-        // Add more routes as needed
       },
     );
   }
