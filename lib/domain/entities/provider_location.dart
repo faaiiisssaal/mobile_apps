@@ -13,6 +13,5 @@ class ProviderLocation extends Equatable {
   // TODO: implement props
   List<Object?> get props => [
     area,
-    description,
   ];
 }

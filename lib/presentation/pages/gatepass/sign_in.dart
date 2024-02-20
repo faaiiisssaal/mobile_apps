@@ -21,6 +21,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/models/userdata.dart';
 
 class SignInScreen extends StatefulWidget {
+  static const routeName = '/sign_in';
+
   const SignInScreen({super.key});
 
   @override

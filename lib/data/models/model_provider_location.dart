@@ -2,7 +2,7 @@
 
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/login_user.dart';
+import 'package:helathcareapp/domain/entities/provider_location.dart';
 
 class ProviderLocationModel extends Equatable {
   const ProviderLocationModel(
@@ -34,6 +34,5 @@ class ProviderLocationModel extends Equatable {
   @override
   List<Object?> get props => [
     area,
-    description,
   ];
 }

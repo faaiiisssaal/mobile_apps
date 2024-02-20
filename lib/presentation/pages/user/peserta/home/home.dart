@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:helathcareapp/common/constant.dart';
+import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
 import 'package:helathcareapp/presentation/widgets/hotline.dart';
 import 'package:helathcareapp/presentation/widgets/information.dart';
 
@@ -138,41 +139,47 @@ class _HomePageState extends State<HomePage> {
               hp10,
 
               // 3rd row for nearby
-              Container(
-                width: mediawidth(1, context),
-                padding: paddingall(10),
-                decoration: const BoxDecoration(
-                  color: kPureWhite, // Moved the color property to BoxDecoration
-                  borderRadius: r20, // Adjust the radius as needed
-                  // You can also add border, shadow etc. here
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      "asset/placeholder.png",
-                      height: mediawidth(0.085, context),
-                      width: mediawidth(0.085, context),
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Nearby ...",
-                            style: TextStyle(fontSize: mediawidth(0.05, context), fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
-                            maxLines: 2,
-                            softWrap: true,
-                            overflow: TextOverflow.clip,
-                            style: TextStyle(fontSize: mediawidth(0.025, context), fontWeight: FontWeight.bold),
-                          ),
-                        ],
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                      context, MapsPage.routeName);
+                },
+                child: Container(
+                  width: mediawidth(1, context),
+                  padding: paddingall(10),
+                  decoration: const BoxDecoration(
+                    color: kPureWhite, // Moved the color property to BoxDecoration
+                    borderRadius: r20, // Adjust the radius as needed
+                    // You can also add border, shadow etc. here
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        "asset/placeholder.png",
+                        height: mediawidth(0.085, context),
+                        width: mediawidth(0.085, context),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Nearby ...",
+                              style: TextStyle(fontSize: mediawidth(0.05, context), fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
+                              maxLines: 2,
+                              softWrap: true,
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(fontSize: mediawidth(0.025, context), fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               hp10,
