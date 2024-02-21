@@ -8,39 +8,29 @@ import 'package:helathcareapp/common/exception.dart';
 import 'package:helathcareapp/data/models/response/response_provider_location.dart';
 
 abstract class RemoteDataSource {
-  Future<List<ProviderLocationModel>>           getProviderLocation();
+  Future<List<ProviderLocationModel>> getProviderLocation();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
+  static const BASE_URL = 'http://192.168.60.10:1433/src/model';
+
   final http.Client client;
+
   RemoteDataSourceImpl({required this.client});
-  static const baseURL = 'http://192.168.60.10:1433/src/model';
 
   @override
   Future<List<ProviderLocationModel>> getProviderLocation() async {
-    final response = await client.get(Uri.parse('$baseURL/provider'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    );
-
-    if (kDebugMode) {
-      print('response');
-    }
+    final response = await client.get(Uri.parse('$BASE_URL/provider'));
 
     if (response.statusCode == 200) {
       if (kDebugMode) {
-        print(json.decode(response.body).toString());
+        print("Response Body: ${json.decode(response.body)}");
       }
-
-      final providerLocationResponse =
-      ProviderLocationResponse.fromJson(json.decode(response.body));
-
-      return providerLocationResponse.ProviderLocation;
+      return ProviderLocationResponse.fromJson(json.decode(response.body)).ProviderLocation;
     } else {
       if (kDebugMode) {
-        print(response.statusCode);
+        print('Response status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
       }
       throw ServerException();
     }

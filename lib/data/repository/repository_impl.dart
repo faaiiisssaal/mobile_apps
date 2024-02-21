@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:helathcareapp/domain/entities/provider_location.dart';
 import 'package:helathcareapp/domain/repository/repository.dart';
@@ -17,27 +16,13 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<ProviderLocation>>> getProviderLocation() async {
     try {
       final result = await remoteDataSource.getProviderLocation();
-      if (kDebugMode) {
-        print('Received data from remote data source: $result');
-      }
-
-      final entityList = result.map((model) => model.toEntity()).toList();
-      return Right(entityList);
-    } on ServerException catch (e) {
-      if (kDebugMode) {
-        print('ServerException: $e');
-      }
-      return const Left(ServerFailure('Failed to get data from the server.'));
-    } on SocketException catch (e) {
-      if (kDebugMode) {
-        print('SocketException: $e');
-      }
-      return const Left(ConnectionFailure('Failed to connect to the network.'));
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Unable to establish a connection to the network.'));
     } catch (e) {
-      if (kDebugMode) {
-        print('Unexpected error: $e');
-      }
-      return Left(CommonFailure('Unexpected error: $e'));
+      return Left(CommonFailure(e.toString()));
     }
   }
 }

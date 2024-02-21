@@ -2,13 +2,14 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:helathcareapp/common/constant.dart';
+import 'package:helathcareapp/presentation/pages/user/peserta/profile/about.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/home/home.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/profile/ecard.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/profile/guide.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'about.dart';
-import '../../../../widgets/biometrics.dart'; // Import the biometric_utils.dart file
+
+import 'package:helathcareapp/presentation/widgets/biometrics.dart'; // Import the biometric_utils.dart file
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
