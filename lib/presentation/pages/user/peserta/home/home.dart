@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helathcareapp/common/constant.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
 import 'package:helathcareapp/presentation/widgets/hotline.dart';
-import 'package:helathcareapp/presentation/widgets/information.dart';
+
+import '../../../../widgets/information.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -14,7 +16,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   String dropDownValue1 = "LALA";
   String dropDownValue2 = "2352352366261116";
@@ -43,9 +45,10 @@ class _HomePageState extends State<HomePage> {
     var now = DateTime.now();
     var hour = now.hour;
 
+
     if (hour < 12) {
       return 'Selamat Pagi';
-    } else if (hour < 15) {
+    } else if (hour < 16) {
       return 'Selamat Siang';
     } else if (hour < 18) {
       return 'Selamat Sore';
@@ -55,62 +58,92 @@ class _HomePageState extends State<HomePage> {
   }
 
   Timer? timer;
+  DateTime? _currentTime;
+  late AnimationController _controller;
+  String _timeOfDay = '';
 
-  int tapCount = 0;
-
-  Future<void> showExitPopup(BuildContext context) async {
-    await showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("Tekan sekali lagi untuk keluar"),
-            ],
-          ),
-        );
-      },
-    );
+  void _updateTimeOfDay() {
+    int? currentHour = _currentTime?.hour;
+    int? currentMin  = _currentTime?.minute;
+    if (currentHour! >= 6 && currentHour < 12) {
+      _timeOfDay = 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 15) {
+      _timeOfDay = 'Good Afternoon';
+    } else if (currentHour >= 15 || currentHour < 16 && currentMin! <= 29) {
+      _timeOfDay = 'Good Evening';
+    } else if (currentHour >= 18 && currentHour < 24 && currentMin! >= 25) {
+      _timeOfDay = 'Good Night';
+    } else {
+      _timeOfDay = 'Late Night';
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    getGreeting();
-    timer = Timer.periodic(const Duration(milliseconds: 500), ((timer) {
-      getGreeting();
-    }));
+
+    // Initialize the animation controller
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    _controller.addListener(() {
+      if (mounted) { // Check if the widget is mounted
+        setState(() {
+          _currentTime = DateTime.now();
+          _updateTimeOfDay();
+        });
+      }
+    });
+
+    // Set up the initial time
+    _currentTime = DateTime.now();
+    // Set up a timer to update the current time every minute
+    timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+      setState(() {
+        _currentTime = DateTime.now();
+        _updateTimeOfDay();
+      });
+    });
+    // Start the animation
+    _controller.repeat();
   }
 
   @override
   void dispose() {
-    timer!.cancel();
+    // Dispose of the timer
+    timer?.cancel();
+    // Dispose of the animation controller
+    _controller.dispose();
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
-
-    return PopScope(
-      canPop: false, //When false, blocks the current route from being popped.
-      onPopInvoked: (didPop) async {
-        showExitPopup(context);
-      },
-      child: SafeArea(
-        child: SingleChildScrollView(
-          padding: paddingall(10),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          primary: false,
+          scrolledUnderElevation: 0.0,
+          automaticallyImplyLeading: false,
+          leading: Image.asset(
+              "asset/smilynks.png",
+            fit: BoxFit.cover,
+          ),
+          leadingWidth: 120,
+        ),
+        body: SingleChildScrollView(
+          padding: paddingall(20),
           child: Column(
             children: [
-
               // 1st row for username
               Container(
                 width: double.infinity,
                 padding: paddingall(10),
                 decoration: const BoxDecoration(
-                  color: kPureWhite, // Moved the color property to BoxDecoration
-                  borderRadius: r20, // Adjust the radius as needed
+                  color: kSkyBlue, // Moved the color property to BoxDecoration
+                  borderRadius: r10, // Adjust the radius as needed
                   // You can also add border, shadow etc. here
                 ),
                 child: Column(
@@ -118,233 +151,177 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${getGreeting()}\nLinda",
-                      style: TextStyle(fontSize: mediawidth(0.045, context), fontWeight: FontWeight.bold),
+                      "$_timeOfDay,\nLinda",
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
-                    hp10,
-                    Text(
-                      // "Terdaftar sebagai Administration Service Only (ASO)",
-                      "terdaftar di karyawan PT Pacific Place Jakarta",
-                      style: TextStyle(fontSize: mediawidth(0.035, context), fontWeight: FontWeight.bold),
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${_currentTime?.hour.toString().padLeft(2, '0')}:${_currentTime?.minute.toString().padLeft(2, '0')}:${_currentTime?.second.toString().padLeft(2, '0')}",
+                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                        const Text(
+                          // "Terdaftar sebagai Administration Service Only (ASO)",
+                          "registered di karyawan PT Pacific Place Jakarta",
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
-              hp10,
-
-              // 2nd row for Information
-              Container(
-                child: ImageSlideShow().build(context),
-              ),
-              hp10,
-
-              // 3rd row for nearby
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(
-                      context, MapsPage.routeName);
-                },
-                child: Container(
-                  width: mediawidth(1, context),
-                  padding: paddingall(10),
-                  decoration: const BoxDecoration(
-                    color: kPureWhite, // Moved the color property to BoxDecoration
-                    borderRadius: r20, // Adjust the radius as needed
-                    // You can also add border, shadow etc. here
-                  ),
-                  child: Row(
+              hp20,
+              // 2nd row for nearby
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset(
-                        "asset/placeholder.png",
-                        height: mediawidth(0.085, context),
-                        width: mediawidth(0.085, context),
+                      const Text(
+                        "Nearby",
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                       ),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Nearby ...",
-                              style: TextStyle(fontSize: mediawidth(0.05, context), fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
-                              maxLines: 2,
-                              softWrap: true,
-                              overflow: TextOverflow.clip,
-                              style: TextStyle(fontSize: mediawidth(0.025, context), fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, MapsPage.routeName);
+                        },
+                        child: const Text(
+                          "See All",
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
-              hp10,
-              Container(
-                  height: mediaheight(0.36, context),
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: kPureWhite, // Moved the color property to BoxDecoration
-                    borderRadius: r20, // Adjust the radius as needed
-                    // You can also add border, shadow etc. here
-                  ),
-                  child: Column(
-                    children: [
-                      // 1st choice member name
-                      Container(
-                        padding: horiverti(10, 5),
-                        decoration: const BoxDecoration(
-                          color: kSkyBlue,
-                          borderRadius: r15,
+                  hp10,
+                  Container(
+                    width: mediawidth(1, context),
+                    padding: paddingall(10),
+                    decoration: const BoxDecoration(
+                      color: kSkyBlue,// Moved the color property to BoxDecoration
+                      borderRadius: r10, // Adjust the radius as needed
+                      // You can also add border, shadow etc. here
+                    ),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "asset/placeholder.png",
+                          height: mediawidth(0.085, context),
+                          width: mediawidth(0.085, context),
                         ),
-                        margin: topleftright(10, 10, 10),
-                        child: SingleChildScrollView(
+                        wp10,
+                        const Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 90,
-                                    child: Text(
-                                      "Member Name",
-                                      style: TextStyle(
-                                        fontSize: mediawidth(0.025, context),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: onlyleft(5),
-                                    width: 5,
-                                    child: const Text(":"),
-                                  ),
-                                  Expanded(
-                                      child: ButtonTheme(
-                                        alignedDropdown: true,
-                                        child: DropdownButton<String>(
-                                          padding: paddingall(0),
-                                          isExpanded: true,
-                                          value: dropDownValue1,
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              dropDownValue1 = newValue!;
-                                            });
-                                          },
-                                          items: [
-                                            DropdownMenuItem<String>(
-                                              value: "LALA",
-                                              child: Text(
-                                                "LALA",
-                                                style: TextStyle(
-                                                  fontSize: mediawidth(0.025, context),
-                                                ),
-                                              ),
-                                            ),
-                                            DropdownMenuItem(
-                                              value: "LILI",
-                                              child: Text(
-                                                "LILI",
-                                                style: TextStyle(
-                                                  fontSize: mediawidth(0.025, context),
-                                                ),
-                                              ),
-                                            ),
-                                            DropdownMenuItem(
-                                              value: "LULU",
-                                              child: Text(
-                                                "LULU",
-                                                style: TextStyle(
-                                                  fontSize: mediawidth(0.025, context),
-                                                ),
-                                              ),
-                                            ),
-                                            DropdownMenuItem(
-                                              value: "LELE",
-                                              child: Text(
-                                                "LELE",
-                                                style: TextStyle(
-                                                  fontSize: mediawidth(0.025, context),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                  ),
-                                ],
+                              Text(
+                                "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
+                                maxLines: 2,
+                                softWrap: true,
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Text(
+                                "Salemba, Jakarta Selatan",
+                                maxLines: 2,
+                                softWrap: true,
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              hp20,
+              // 3rd row for Information
+              Column(
+                children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Information",
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                       ),
-                      hp10,
-      
-                      Container(
-                        padding: paddingall(10),
-                        child: ButtonTheme(
-                          buttonColor: kSeaBlue,
-                          textTheme: ButtonTextTheme.primary,
-                          alignedDropdown: true,
-                          child: DropdownButton<String>(
-                            padding: paddingall(0),
-                            isExpanded: true,
-                            value: dropDownValue3,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropDownValue3 = newValue!;
-                              });
-                            },
-                            items: [
-                              DropdownMenuItem<String>(
-                                value: "Rawat Jalan",
-                                child: Text(
-                                  "Rawat Jalan",
-                                  style: TextStyle(
-                                    fontSize: mediawidth(0.025, context),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "Rawat Inap",
-                                child: Text(
-                                  "Rawat Inap",
-                                  style: TextStyle(
-                                    fontSize: mediawidth(0.025, context),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // constant value from constant.dart
-                      Expanded(
-                        child: Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Colors.lightGreenAccent,
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          margin: bottomleftright(10, 10, 10),
-                          child: const Center(
-                            child: Text("No Data"),
-                          ),
-                        ),
+                      Text(
+                        "See All",
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                     ],
-                  )),
-              hp10,
+                  ),
+                  hp10,
+                  Container(
+                    padding: paddingall(10),
+                    decoration: const BoxDecoration(
+                      color: kSkyBlue,// Moved the color property to BoxDecoration
+                      borderRadius: r10, // Adjust the radius as needed
+                      // You can also add border, shadow etc. here
+                    ),
+                    child: ImageSlideShow().build(context),
+                  ),
+                ],
+              ),
+              hp20,
+              // 4th for product
+              Column(
+                children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Feature",
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "See All",
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  hp10,
+                  Container(
+                    width: double.infinity,
+                    padding: paddingall(10),
+                    decoration: const BoxDecoration(
+                      color: kSkyBlue,// Moved the color property to BoxDecoration
+                      borderRadius: r10, // Adjust the radius as needed
+                      // You can also add border, shadow etc. here
+                    ),
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Hotline 24/7",
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                        hp10,
+                        HotlineWidget(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              hp20,
+              // 5th for hotline
               Container(
                 width: double.infinity,
                 padding: paddingall(10),
                 decoration: const BoxDecoration(
-                  color: kPureWhite, // Moved the color property to BoxDecoration
-                  borderRadius: r20, // Adjust the radius as needed
+                  color: kSkyBlue,// Moved the color property to BoxDecoration
+                  borderRadius: r10, // Adjust the radius as needed
                   // You can also add border, shadow etc. here
                 ),
                 child: Column(
@@ -353,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "Hotline 24/7",
                       style: TextStyle(
-                        fontSize: mediawidth(0.085, context),
+                        fontSize: mediawidth(0.075, context),
                       ),
                     ),
                     hp10,

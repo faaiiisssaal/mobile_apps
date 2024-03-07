@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:helathcareapp/domain/entities/provider_location.dart';
-import 'package:helathcareapp/domain/usecase/get_provider_loc.dart';
+import 'package:helathcareapp/domain/usecase/get/get_provider_loc.dart';
 
 part 'provider_location_state.dart';
 

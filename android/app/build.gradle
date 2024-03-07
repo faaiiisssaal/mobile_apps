@@ -26,6 +26,15 @@ android {
     namespace "com.aggi.smilynks.helathcareapp"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def builtType = variant.buildType.name
+            def versionName = variant.versionName
+            def versionCode = variant.versionCode
+            def flavor = variant.flavorName
+            outputFileName = "app-${flavor}-${builtType}-${versionName}-${versionCode}.apk"
+        }
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

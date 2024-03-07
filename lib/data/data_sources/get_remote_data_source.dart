@@ -12,7 +12,7 @@ abstract class RemoteDataSource {
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  static const BASE_URL = 'http://192.168.60.10:1433/src/model';
+  static const baseURL = 'http://192.168.60.10:1433/src/model';
 
   final http.Client client;
 
@@ -20,7 +20,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<ProviderLocationModel>> getProviderLocation() async {
-    final response = await client.get(Uri.parse('$BASE_URL/provider'));
+    final response = await client.get(Uri.parse('$baseURL/provider'));
 
     if (response.statusCode == 200) {
       if (kDebugMode) {

@@ -20,10 +20,17 @@ class HotlineWidget extends StatelessWidget {
             children: [
               SizedBox(
                 width: mediawidth(0.25, context),
-                child: const Text("Bebas Pulsa"),
+                child: const Text(
+                  "Bebas Pulsa",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
               ),
               const Text(": "),
-              const Expanded(child: Text("+62 21 662 4399 ( ext 22/33 )")),
+              const Expanded(
+                  child: Text(
+                "+62 21 662 4399 ( ext 22/33 )",
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              )),
             ],
           ),
         ),

@@ -32,9 +32,27 @@ class _FormPageState extends State<FormPage> {
               child: ListView(
                 padding: paddingall(10),
                 children: [
-                  const ListTile(
-                    leading: Icon(Icons.stairs_outlined),
-                    title: Text('Procedure Claim'),
+                  ListTile(
+                    leading: Image.asset(
+                        'asset/contact-form.png',
+                        width: 24.0,
+                        height: 24.0,
+                        color: Theme.of(context).brightness == Brightness.light ? kPureBlack : kPureWhite
+                    ),
+                    title: Text('Procedure Claim',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                        'asset/contact-form.png',
+                        width: 24.0,
+                        height: 24.0,
+                        color: Theme.of(context).brightness == Brightness.light ? kPureBlack : kPureWhite
+                    ),
+                    title: Text('Outpatient Claim Form',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   ),
                   ListTile(
                     leading: Image.asset(
@@ -42,15 +60,9 @@ class _FormPageState extends State<FormPage> {
                       width: 24.0,
                       height: 24.0,
                     ),
-                    title: const Text('Outpatient Claim Form'),
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      'asset/contact-form.png',
-                      width: 24.0,
-                      height: 24.0,
+                    title: Text('Inpatient Claim Form',
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    title: const Text('Inpatient Claim Form'),
                   ),
                 ],
               ),

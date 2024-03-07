@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:helathcareapp/domain/entities/provider_location.dart';
 import 'package:helathcareapp/domain/repository/repository.dart';
-import 'package:helathcareapp/data/data_sources/remote_data_source.dart';
+import 'package:helathcareapp/data/data_sources/get_remote_data_source.dart';
 import 'package:helathcareapp/common/failure.dart';
 import 'package:helathcareapp/common/exception.dart';
 

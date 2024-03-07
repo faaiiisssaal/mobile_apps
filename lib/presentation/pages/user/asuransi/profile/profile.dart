@@ -381,7 +381,7 @@ class _InsuranceProfilePageState extends State<InsuranceProfilePage> {
                                   // Dismiss the dialog and navigate to the login page
                                   Navigator.of(context).pop();
                                   Navigator.of(context).popUntil((route) => route.isFirst);
-                                  Navigator.of(context).pushReplacementNamed('/login');
+                                  Navigator.of(context).pushReplacementNamed('/sign_in');
                                   SharedPreferences prefs = await SharedPreferences.getInstance();
                                   prefs.remove("user");
                                   if (kDebugMode) {

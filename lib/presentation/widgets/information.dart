@@ -6,7 +6,7 @@ import 'package:helathcareapp/common/constant.dart';
 class ImageSlideShow {
   Widget build(BuildContext context) {
     return ImageSlideshow(
-      height: MediaQuery.sizeOf(context).height * 0.25,
+      height: 200,
       indicatorColor: kSeaBlue,
       onPageChanged: (value) {
         debugPrint('Page changed: $value');

@@ -16,7 +16,7 @@ class MapsPage extends StatefulWidget {
 
 class _MapsPageState extends State<MapsPage> {
 
-  final ScrollController _firstController = ScrollController();
+  final ScrollController trackController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -29,24 +29,26 @@ class _MapsPageState extends State<MapsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: 100,
-              width: double.infinity,
-              color: kDarkRed,
-              child: const Center(child: Text("provider", style: TextStyle(color: kPureWhite),)),
-            ),
-            Expanded(child: buildBlocBuilder(),),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 100,
+                width: double.infinity,
+                color: kDarkRed,
+                child: const Center(child: Text("provider", style: TextStyle(color: kPureWhite),)),
+              ),
+              Expanded(child: buildDataProvider(),),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  BlocBuilder<ProviderLocationCubit, ProviderLocationState> buildBlocBuilder() {
+  BlocBuilder<ProviderLocationCubit, ProviderLocationState> buildDataProvider() {
     return BlocBuilder<ProviderLocationCubit, ProviderLocationState>(
           builder: (context, state) {
             if (state is ProviderLocationLoadingState) {
@@ -60,13 +62,13 @@ class _MapsPageState extends State<MapsPage> {
               }
               return Scrollbar(
                 interactive: true,
-                controller: _firstController,
+                controller: trackController,
                 thumbVisibility: true,
                 trackVisibility: true,
-                thickness: 10,
+                thickness: 5,
                 radius: const Radius.circular(10),
                 child: ListView.separated(
-                  controller: _firstController,
+                  controller: trackController,
                   padding: paddingall(10),
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {

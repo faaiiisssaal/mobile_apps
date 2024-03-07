@@ -8,6 +8,8 @@ const kPureRed        = Color(0xFFFF0000);
 const kPureGreen      = Color(0xFF00FF00);
 const kPureBlue       = Color(0xFF0000FF);
 
+const kBlack        = Color(0XFF1e1e1e);
+
 const kDarkWhite      = Color(0xFFE1D9D1);
 const kLightBlack     = Color(0xFF454545);
 
@@ -31,6 +33,13 @@ const hp10 = SizedBox(
 );
 const wp10 = SizedBox(
   width: 10,
+);
+
+const hp20 = SizedBox(
+  height: 20,
+);
+const wp20 = SizedBox(
+  width: 20,
 );
 
 const spc = Spacer();

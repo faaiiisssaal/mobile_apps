@@ -12,8 +12,6 @@ class _HistoryPageState extends State<HistoryPage> {
 
   String dropDownValue1 = "LALA";
   String dropDownValue2 = "2352352366261116";
-  
-  
 
   @override
   Widget build(BuildContext context) {
@@ -28,132 +26,120 @@ class _HistoryPageState extends State<HistoryPage> {
                 height: 200,
                 decoration: const BoxDecoration(
                   color: kSkyBlue,
-                  borderRadius: r15,
+                  borderRadius: r10,
                 ),
                 margin: topleftright(10, 10, 10),
-                child: ClipRRect(
-                  borderRadius: r10,
-                  child: Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    padding: paddingall(10),
-                    decoration: const BoxDecoration(
-                      color: kPureWhite,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text("Name"),
-                              ),
-                              Container(
-                                padding: onlyleft(5),
-                                width: 5,
-                                child: const Text(":"),
-                              ),
-                              Expanded(
-                                child: ButtonTheme(
-                                  alignedDropdown: true,
-                                  child: DropdownButton<String>(
-                                    padding: paddingall(0),
-                                    isExpanded: true,
-                                    value: dropDownValue1,
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        dropDownValue1 = newValue!;
-                                      });
-                                    },
-                                    items: const [
-                                      DropdownMenuItem<String>(
-                                        value: "LALA",
-                                        child: Text(
-                                            "LALA",
-                                        ),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "LILI",
-                                        child: Text("LILI"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "Ni Made Raysita Iswari Nuramanda Pande",
-                                        child: Text("Ni Made Raysita Iswari Nuramanda Pande"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "LELE",
-                                        child: Text("LELE"),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              )
-                            ],
+                          const SizedBox(
+                            width: 100,
+                            child: Text("Name"),
                           ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text("Policy No"),
-                              ),
-                              Container(
-                                padding: onlyleft(5),
-                                width: 5,
-                                child: const Text(":"),
-                              ),
-                              Expanded(
-                                  child: ButtonTheme(
-                                    alignedDropdown: true,
-                                    child: DropdownButton<String>(
-                                      padding: paddingall(0),
-                                      isExpanded: true,
-                                      value: dropDownValue2,
-                                      onChanged: (String? newValue2) {
-                                        setState(() {
-                                          dropDownValue2 = newValue2!;
-                                        });
-                                      },
-                                      items: const [
-                                        DropdownMenuItem<String>(
-                                          value: "2352352366261116",
-                                          child: Text("2352352366261116"),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: "2352352366260000",
-                                          child: Text("2352352366260000"),
-                                        ),
-                                      ],
+                          Container(
+                            padding: onlyleft(5),
+                            width: 5,
+                            child: const Text(":"),
+                          ),
+                          Expanded(
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButton<String>(
+                                padding: paddingall(0),
+                                isExpanded: true,
+                                value: dropDownValue1,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropDownValue1 = newValue!;
+                                  });
+                                },
+                                items: const [
+                                  DropdownMenuItem<String>(
+                                    value: "LALA",
+                                    child: Text(
+                                        "LALA",
                                     ),
-                                  )
-                              )
-                            ],
-                          ),
-                          hp10,
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text("Effective Policy"),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: "LILI",
+                                    child: Text("LILI"),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: "Ni Made Raysita Iswari Nuramanda Pande",
+                                    child: Text("Ni Made Raysita Iswari Nuramanda Pande"),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: "LELE",
+                                    child: Text("LELE"),
+                                  ),
+                                ],
                               ),
-                              Container(
-                                padding: onlyleft(5),
-                                width: 5,
-                                child: const Text(":"),
-                              ),
-                              Expanded(
-                                  child: Container(
-                                    padding: onlyleft(15),
-                                      child: const Text("Jan 01 2024 to Dec 01 2024"))
-                              )
-                            ],
+                            )
                           )
                         ],
                       ),
-                    ),
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 100,
+                            child: Text("Policy No"),
+                          ),
+                          Container(
+                            padding: onlyleft(5),
+                            width: 5,
+                            child: const Text(":"),
+                          ),
+                          Expanded(
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: DropdownButton<String>(
+                                  padding: paddingall(0),
+                                  isExpanded: true,
+                                  value: dropDownValue2,
+                                  onChanged: (String? newValue2) {
+                                    setState(() {
+                                      dropDownValue2 = newValue2!;
+                                    });
+                                  },
+                                  items: const [
+                                    DropdownMenuItem<String>(
+                                      value: "2352352366261116",
+                                      child: Text("2352352366261116"),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: "2352352366260000",
+                                      child: Text("2352352366260000"),
+                                    ),
+                                  ],
+                                ),
+                              )
+                          )
+                        ],
+                      ),
+                      hp10,
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 100,
+                            child: Text("Effective Policy"),
+                          ),
+                          Container(
+                            padding: onlyleft(5),
+                            width: 5,
+                            child: const Text(":"),
+                          ),
+                          Expanded(
+                              child: Container(
+                                padding: onlyleft(15),
+                                  child: const Text("Jan 01 2024 to Dec 01 2024"))
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ),

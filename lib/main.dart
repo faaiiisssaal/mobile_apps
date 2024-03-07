@@ -30,18 +30,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = MediaQuery.platformBrightnessOf(context) == Brightness.dark;
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-
+      SystemUiOverlayStyle(
         // NavigationBar
         systemNavigationBarContrastEnforced: true,
-        systemNavigationBarColor: kLightBlue,
-        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: isDarkMode ? kBlack : kPureWhite,
+        systemNavigationBarIconBrightness: Brightness.light,
 
         // StatuBar
         systemStatusBarContrastEnforced: true,
-        statusBarColor: kLightBlue,
-        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: isDarkMode ? kBlack : kPureWhite,
+        statusBarIconBrightness: Brightness.light,
       ),
     );
     return MultiProvider(
@@ -51,11 +51,28 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        // builder: (context, child) {
+        //   return MediaQuery(
+        //     data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+        //     child: child!,
+        //   );
+        // },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: kPureWhite,
           textTheme: GoogleFonts.latoTextTheme(
             Theme.of(context).textTheme,
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            type: BottomNavigationBarType.fixed,
+          ),
+        ),
+        darkTheme: ThemeData(
+          scaffoldBackgroundColor: kBlack,
+          textTheme: GoogleFonts.latoTextTheme(
+            Theme.of(context).textTheme.apply(
+                  bodyColor: kPureWhite, // Set text color to white
+                ),
           ),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             type: BottomNavigationBarType.fixed,
@@ -67,9 +84,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/':
-              return MaterialPageRoute(
-                  builder: (_) => const AppWrapper()
-              );
+              return MaterialPageRoute(builder: (_) => const AppWrapper());
             case SignInScreen.routeName:
               return MaterialPageRoute(
                 builder: (_) => const SignInScreen(),
@@ -81,8 +96,7 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
 
-
-          // divider detail over widget
+            // divider detail over widget
 
             // case ListdetailOffers_Page.ROUTE_NAME:
             //   final allOffers = settings.arguments as AllOffers;
