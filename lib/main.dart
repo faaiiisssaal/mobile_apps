@@ -35,13 +35,13 @@ class MyApp extends StatelessWidget {
       SystemUiOverlayStyle(
         // NavigationBar
         systemNavigationBarContrastEnforced: true,
-        systemNavigationBarColor: isDarkMode ? kBlack : kPureWhite,
-        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: isDarkMode ? kPureWhite : kBlack,
+        systemNavigationBarIconBrightness: isDarkMode ? Brightness.dark : Brightness.light,
 
         // StatuBar
         systemStatusBarContrastEnforced: true,
-        statusBarColor: isDarkMode ? kBlack : kPureWhite,
-        statusBarIconBrightness: Brightness.light,
+        statusBarColor: isDarkMode ? kPureWhite : kBlack,
+        statusBarIconBrightness: isDarkMode ? Brightness.dark : Brightness.light,
       ),
     );
     return MultiProvider(
@@ -58,26 +58,29 @@ class MyApp extends StatelessWidget {
         //   );
         // },
         debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.system,
         theme: ThemeData(
           scaffoldBackgroundColor: kPureWhite,
           textTheme: GoogleFonts.latoTextTheme(
-            Theme.of(context).textTheme,
-          ),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            type: BottomNavigationBarType.fixed,
-          ),
-        ),
-        darkTheme: ThemeData(
-          scaffoldBackgroundColor: kBlack,
-          textTheme: GoogleFonts.latoTextTheme(
             Theme.of(context).textTheme.apply(
-                  bodyColor: kPureWhite, // Set text color to white
-                ),
+              bodyColor: kBlack, // Set text color to black
+            ),
           ),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             type: BottomNavigationBarType.fixed,
           ),
         ),
+        // darkTheme: ThemeData(
+        //   scaffoldBackgroundColor: kBlack,
+        //   textTheme: GoogleFonts.latoTextTheme(
+        //     Theme.of(context).textTheme.apply(
+        //           bodyColor: kPureWhite, // Set text color to white
+        //         ),
+        //   ),
+        //   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        //     type: BottomNavigationBarType.fixed,
+        //   ),
+        // ),
         title: 'Smilynks',
         home: const AppWrapper(),
         navigatorObservers: [routeObserver],

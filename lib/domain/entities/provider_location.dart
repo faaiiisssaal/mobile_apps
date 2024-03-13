@@ -2,20 +2,26 @@ import 'package:equatable/equatable.dart';
 
 class ProviderLocation extends Equatable {
   const ProviderLocation({
-    required this.area,
     required this.description,
+    required this.id,
+    required this.producttype,
     required this.name,
+    required this.address,
   });
 
-  final String? area;
   final String? description;
+  final String? id;
+  final String? producttype;
   final String? name;
+  final String? address;
 
   @override
   // TODO: implement props
   List<Object?> get props => [
-    area,
     description,
-    name
+    id,
+    producttype,
+    name,
+    address
   ];
 }

@@ -36,9 +36,13 @@ class _HistoryPageState extends State<HistoryPage> {
                     children: [
                       Row(
                         children: [
-                          const SizedBox(
+                          SizedBox(
                             width: 100,
-                            child: Text("Name"),
+                            child: Text("Name",
+                              style: TextStyle(
+                                color: Theme.of(context).textTheme.bodyLarge?.color, // Use current text color
+                              ),
+                            ),
                           ),
                           Container(
                             padding: onlyleft(5),
@@ -142,17 +146,11 @@ class _HistoryPageState extends State<HistoryPage> {
                     ],
                   ),
                 ),
-              ),
-              hp10, // constant value from constant.dart
+              ),// constant value from constant.dart
               Expanded(
                 child: Container(
                   height: double.infinity,
                   width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: kSkyBlue,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  margin: bottomleftright(10, 10, 10),
                   padding: paddingall(10),
                   child: ClipRRect(
                     borderRadius: r10,
@@ -169,9 +167,126 @@ class _HistoryPageState extends State<HistoryPage> {
                           children: [
                             Container(
                               width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: kPureWhite,
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                              ),
+                              padding: paddingall(10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 25,
+                                        alignment: Alignment.topLeft,
+                                        child: const Text("1",),
+                                      ),
+                                      const Expanded(
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text("InPayment Claim"),
+                                            hp10,
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 125,
+                                                  child: Text("Medical Visit Date"),
+                                                ),
+                                                wp10,
+                                                Text(":"),
+                                                wp10,
+                                                Expanded(child: Text("31 Jan 2024")),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 125,
+                                                  child: Text("Medical Place"),
+                                                ),
+                                                wp10,
+                                                Text(":"),
+                                                wp10,
+                                                Expanded(child: Text("Budi Asih Hosiptal")),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 125,
+                                                  child: Text("Total Payment"),
+                                                ),
+                                                wp10,
+                                                Text(":"),
+                                                wp10,
+                                                Expanded(child: Text("Rp. 12.345.678")),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 125,
+                                                  child: Text("Total Paid"),
+                                                ),
+                                                wp10,
+                                                Text(":"),
+                                                wp10,
+                                                Expanded(child: Text("Rp. 13.000.000")),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 125,
+                                                  child: Text("Un-Paid"),
+                                                ),
+                                                wp10,
+                                                Text(":"),
+                                                wp10,
+                                                Expanded(child: Text("0")),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 125,
+                                                  child: Text("Doctor In Charge"),
+                                                ),
+                                                wp10,
+                                                Text(":"),
+                                                wp10,
+                                                Expanded(child: Text("Dokter Mariana")),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  hp10,
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      child: const Text("More"),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            hp10,
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: const BorderRadius.all(Radius.circular(10)),
                               ),
                               padding: paddingall(10),
                               child: Column(
@@ -286,9 +401,9 @@ class _HistoryPageState extends State<HistoryPage> {
                             hp10,
                             Container(
                               width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: kPureWhite,
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: const BorderRadius.all(Radius.circular(10)),
                               ),
                               padding: paddingall(10),
                               child: Column(
@@ -403,9 +518,9 @@ class _HistoryPageState extends State<HistoryPage> {
                             hp10,
                             Container(
                               width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: kPureWhite,
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: const BorderRadius.all(Radius.circular(10)),
                               ),
                               padding: paddingall(10),
                               child: Column(
@@ -520,9 +635,9 @@ class _HistoryPageState extends State<HistoryPage> {
                             hp10,
                             Container(
                               width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: kPureWhite,
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: const BorderRadius.all(Radius.circular(10)),
                               ),
                               padding: paddingall(10),
                               child: Column(
@@ -637,126 +752,9 @@ class _HistoryPageState extends State<HistoryPage> {
                             hp10,
                             Container(
                               width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: kPureWhite,
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: paddingall(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 25,
-                                        alignment: Alignment.topLeft,
-                                        child: const Text("1"),
-                                      ),
-                                      const Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("InPayment Claim"),
-                                            hp10,
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Visit Date"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("31 Jan 2024")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Place"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Budi Asih Hosiptal")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Payment"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 12.345.678")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 13.000.000")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Un-Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("0")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Doctor In Charge"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Dokter Mariana")),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  hp10,
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text("More"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            hp10,
-                            Container(
-                              width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: kPureWhite,
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: const BorderRadius.all(Radius.circular(10)),
                               ),
                               padding: paddingall(10),
                               child: Column(

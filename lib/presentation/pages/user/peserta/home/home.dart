@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helathcareapp/common/constant.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
@@ -142,7 +140,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 width: double.infinity,
                 padding: paddingall(10),
                 decoration: const BoxDecoration(
-                  color: kSkyBlue, // Moved the color property to BoxDecoration
+                  color: kSkyBlue,// Moved the color property to BoxDecoration
                   borderRadius: r10, // Adjust the radius as needed
                   // You can also add border, shadow etc. here
                 ),
@@ -152,7 +150,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   children: [
                     Text(
                       "$_timeOfDay,\nLinda",
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),
                     ),
                     const SizedBox(
                       height: 100,
@@ -166,7 +164,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                         const Text(
                           // "Terdaftar sebagai Administration Service Only (ASO)",
-                          "registered di karyawan PT Pacific Place Jakarta",
+                          "registered at PT Pacific Place Jakarta employee",
                           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -271,46 +269,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       // You can also add border, shadow etc. here
                     ),
                     child: ImageSlideShow().build(context),
-                  ),
-                ],
-              ),
-              hp20,
-              // 4th for product
-              Column(
-                children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Feature",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "See All",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  hp10,
-                  Container(
-                    width: double.infinity,
-                    padding: paddingall(10),
-                    decoration: const BoxDecoration(
-                      color: kSkyBlue,// Moved the color property to BoxDecoration
-                      borderRadius: r10, // Adjust the radius as needed
-                      // You can also add border, shadow etc. here
-                    ),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Hotline 24/7",
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                        hp10,
-                        HotlineWidget(),
-                      ],
-                    ),
                   ),
                 ],
               ),

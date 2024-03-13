@@ -12,7 +12,7 @@ class ProviderLocationResponse extends Equatable {
       ProviderLocationResponse(
         ProviderLocation: List<ProviderLocationModel>.from((json["data"]["result"] as List)
             .map((x) => ProviderLocationModel.fromJson(x))
-            .where((element) => element.area != null)),
+            .where((element) => element.id != null)),
       );
 
   Map<String, dynamic> toJson() => {

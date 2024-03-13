@@ -371,7 +371,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kPureWhite,
+
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Column(
@@ -424,36 +424,35 @@ class _SignInScreenState extends State<SignInScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: Padding(
-          padding: horizontal(2.5),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                color: kPureWhite,
-                child: Text(
-                  "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
-                  maxLines: 1,
-                  softWrap: true,
-                  textAlign: TextAlign.center,
-                ),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: vertical(5),
+              width: double.infinity,
+              child: Text(
+                "Copyrights, ${DateTime.now().year} \u00a9 PT Abadi Smilynks. All rights reserved.",
+                style: Theme.of(context).textTheme.labelMedium,
+                maxLines: 1,
+                softWrap: true,
+                textAlign: TextAlign.center,
               ),
-              // Text("${MemberSession().session}"),
-              // Text("${EnterpriseSession().session}"),
-              // Text("${InsuranceSession().session}"),
-              //
-              // Text("$_useMember"),
-              // Text("$_useCompany"),
-              // Text("$_useInsurance")
+            ),
+            // Text("${MemberSession().session}"),
+            // Text("${EnterpriseSession().session}"),
+            // Text("${InsuranceSession().session}"),
+            //
+            // Text("$_useMember"),
+            // Text("$_useCompany"),
+            // Text("$_useInsurance")
 
-              // const SizedBox(height: 4.0),
-              // Text(
-              //   'App Version: $_appVersion',
-              //   style: const TextStyle(fontSize: 12.5, color: Colors.grey),
-              //   textAlign: TextAlign.center,
-              // ),
-            ],
-          ),
+            // const SizedBox(height: 4.0),
+            // Text(
+            //   'App Version: $_appVersion',
+            //   style: const TextStyle(fontSize: 12.5, color: Colors.grey),
+            //   textAlign: TextAlign.center,
+            // ),
+          ],
         ),
       ),
     );
@@ -466,17 +465,18 @@ class _SignInScreenState extends State<SignInScreen> {
         // Member ID
         TextFormField(
           controller: _membermemberController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'Member ID',
-            prefixIcon: Icon(Icons.person_outline_rounded),
+            hintStyle: Theme.of(context).textTheme.labelLarge,
+            prefixIcon: const Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: BorderSide(color: Theme.of(context).dividerColor,),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: BorderSide(color: Theme.of(context).dividerColor,),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: BorderSide(color: Theme.of(context).dividerColor,),
             ),
           ),
           keyboardType: TextInputType.number,
@@ -499,17 +499,18 @@ class _SignInScreenState extends State<SignInScreen> {
           child: AbsorbPointer(
             child: TextFormField(
               controller: _memberdateController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Date of Birth',
-                prefixIcon: Icon(Icons.date_range_outlined),
+                hintStyle: Theme.of(context).textTheme.labelLarge,
+                prefixIcon: const Icon(Icons.date_range_outlined),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: Theme.of(context).dividerColor,),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: Theme.of(context).dividerColor,),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: BorderSide(color: Theme.of(context).dividerColor,),
                 ),
               ),
             ),
@@ -589,7 +590,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                   if (authenticated) {
                     // Biometric authentication successful
-                    if (context.mounted) {
+                    if (mounted) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => const NavBar()),
@@ -765,7 +766,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                   if (authenticated) {
                     // Biometric authentication successful
-                    if (context.mounted) {
+                    if (mounted) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => const EnterpriseNavBar()),
@@ -964,7 +965,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                   if (authenticated) {
                     // Biometric authentication successful
-                    if (context.mounted) {
+                    if (mounted) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => const InsuranceNavBar()),

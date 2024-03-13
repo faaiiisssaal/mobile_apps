@@ -6,35 +6,52 @@ import 'package:helathcareapp/domain/entities/provider_location.dart';
 
 class ProviderLocationModel extends Equatable {
   const ProviderLocationModel({
-    required this.area,
     required this.description,
+    required this.id,
+    required this.producttype,
     required this.name,
+    required this.address,
   });
 
-  final String? area;
   final String? description;
+  final String? id;
+  final String? producttype;
   final String? name;
+  final String? address;
 
   factory ProviderLocationModel.fromJson(Map<String, dynamic> json) => ProviderLocationModel(
-        area          : json['area'],
-        description   : json['description'],
+
+    description   : json['description'],
+        id          : json['id'],
+
+    producttype   : json['producttype'],
         name          : json['name'],
+    address   : json['address'],
       );
 
   Map<String, dynamic> toJson() => {
-        "area": area,
-        "description": description,
+    "description": description,
+        "id": id,
+    "producttype": producttype,
         "name": name,
+    "address": address
       };
 
   ProviderLocation toEntity() {
     return ProviderLocation(
-      area: area,
       description: description,
+      id: id,
+      producttype: producttype,
       name: name,
+      address: address
     );
   }
 
   @override
-  List<Object?> get props => [area, description, name];
+  List<Object?> get props => [
+    description,
+    id,
+    producttype,
+    name,
+    address];
 }

@@ -13,29 +13,39 @@ class ProvLoc extends StatefulWidget {
 
 class _ProvLocState extends State<ProvLoc> {
 
-  String? areaText;
+  String? idText;
   String? nameText;
   String? descText;
+  String? prodtypeText;
+  String? addressText;
 
   @override
   void initState() {
     super.initState();
-    areaText = widget.card.area;
+    idText = widget.card.id;
     nameText = widget.card.name;
     descText = widget.card.description;
+    prodtypeText = widget.card.producttype;
+    addressText = widget.card.address;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: paddingall(10),
-      color: kLightBlue,
+      color: kLightBlack,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-              areaText ?? '-'
+              idText ?? '-'
+          ),
+          Text(
+              idText ?? '-'
+          ),
+          Text(
+              idText ?? '-'
           ),
           hp10,
           Row(

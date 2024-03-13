@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:helathcareapp/presentation/pages/user/peserta/form/form.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:helathcareapp/common/constant.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/profile/about.dart';
@@ -330,6 +331,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const ECardPage()),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.library_books),
+                      title: const Text('Form'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const FormPage()),
                         );
                       },
                     ),

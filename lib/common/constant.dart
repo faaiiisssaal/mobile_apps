@@ -8,7 +8,7 @@ const kPureRed        = Color(0xFFFF0000);
 const kPureGreen      = Color(0xFF00FF00);
 const kPureBlue       = Color(0xFF0000FF);
 
-const kBlack        = Color(0XFF1e1e1e);
+const kBlack          = Color(0XFF1e1e1e);
 
 const kDarkWhite      = Color(0xFFE1D9D1);
 const kLightBlack     = Color(0xFF454545);
@@ -16,7 +16,7 @@ const kLightBlack     = Color(0xFF454545);
 const kDarkBlue       = Color(0xFF00008b);
 const kSeaBlue        = Color(0xFF006994);
 const kSkyBlue        = Color(0xFF87CEEB);
-const kLightBlue      = Color(0xFFADD8E6);
+// const kLightBlue      = Color(0xFFADD8E6);
 const kSapphireBlue   = Color(0XFF0F52BA);
 const kBabyBlue       = Color(0XFF89CFF0);
 
