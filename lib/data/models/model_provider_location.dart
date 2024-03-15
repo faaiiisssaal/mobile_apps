@@ -8,50 +8,32 @@ class ProviderLocationModel extends Equatable {
   const ProviderLocationModel({
     required this.description,
     required this.id,
-    required this.producttype,
     required this.name,
     required this.address,
+    required this.notelp,
   });
 
   final String? description;
   final String? id;
-  final String? producttype;
   final String? name;
   final String? address;
+  final String? notelp;
 
   factory ProviderLocationModel.fromJson(Map<String, dynamic> json) => ProviderLocationModel(
-
-    description   : json['description'],
-        id          : json['id'],
-
-    producttype   : json['producttype'],
-        name          : json['name'],
-    address   : json['address'],
+        description: json['description'],
+        id: json['id'],
+        name: json['name'],
+        address: json['address'],
+        notelp: json['notelp'],
       );
 
-  Map<String, dynamic> toJson() => {
-    "description": description,
-        "id": id,
-    "producttype": producttype,
-        "name": name,
-    "address": address
-      };
+  Map<String, dynamic> toJson() =>
+      {"description": description, "id": id, "name": name, "address": address, "notelp": notelp,};
 
   ProviderLocation toEntity() {
-    return ProviderLocation(
-      description: description,
-      id: id,
-      producttype: producttype,
-      name: name,
-      address: address
-    );
+    return ProviderLocation(description: description, id: id, name: name, address: address, notelp: notelp,);
   }
 
   @override
-  List<Object?> get props => [
-    description,
-    id,
-    producttype,
-    name,
-    address];
+  List<Object?> get props => [description, id, name, address, notelp];
 }

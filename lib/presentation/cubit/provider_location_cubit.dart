@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/foundation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:helathcareapp/domain/entities/provider_location.dart';
 import 'package:helathcareapp/domain/usecase/get/get_provider_loc.dart';
@@ -12,15 +11,28 @@ class ProviderLocationCubit extends Cubit<ProviderLocationState> {
   }) : super(const ProviderLocationInitialState());
 
   final GetProviderLocation getProviderLocation;
+  late List<ProviderLocation> allProviders = []; // Adjusted to ProviderLocation
+
   Future<void> get() async {
     emit(const ProviderLocationLoadingState());
     final result = await getProviderLocation.execute();
-    if (kDebugMode) {
-      print('result: $result');
-    }
     result.fold(
           (failure) => emit(ProviderLocationErrorState(failure.message)),
-          (values) => emit(ProviderLocationLoadedState(items: values)),
+          (values) {
+        allProviders = values;
+        emit(ProviderLocationLoadedState(items: values));
+      },
     );
   }
+
+  void search(String query) {
+    if (query.isEmpty) {
+      emit(ProviderLocationLoadedState(items: allProviders));
+    } else {
+      final filteredProviders = allProviders.where((provider) =>
+      provider.name?.toLowerCase().contains(query.toLowerCase()) ?? false).toList();
+      emit(ProviderLocationLoadedState(items: filteredProviders));
+    }
+  }
+
 }

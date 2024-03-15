@@ -29,20 +29,23 @@ class _MapsPageState extends State<MapsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 100,
-                width: double.infinity,
-                color: kDarkRed,
-                child: const Center(child: Text("provider", style: TextStyle(color: kPureWhite),)),
+        body: Column(
+          children: [
+            Container(
+              height: 100,
+              padding: paddingall(10),
+              width: double.infinity,
+              child: const TextField(
+                
               ),
-              Expanded(child: buildDataProvider(),),
-            ],
-          ),
+            ),
+            Container(
+              height: 50,
+              margin: horizontal(20),
+              color: kSapphireBlue,
+            ),
+            Expanded(child: buildDataProvider(),),
+          ],
         ),
       ),
     );
@@ -60,31 +63,17 @@ class _MapsPageState extends State<MapsPage> {
               if (kDebugMode) {
                 print('API Provider are Loaded: $state');
               }
-              return Scrollbar(
-                interactive: true,
-                controller: trackController,
-                thumbVisibility: true,
-                trackVisibility: true,
-                thickness: 5,
-                radius: const Radius.circular(10),
-                child: ListView.separated(
+              return Padding(
+                padding: horizontal(10),
+                child: ListView.builder(
                   controller: trackController,
-                  padding: paddingall(10),
+                  padding: vertical(10),
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     final card = state.items[index];
                     return ProvLoc(card: card);
                   },
                   itemCount: state.items.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 10),
-                ),
-              );
-            } else if (state is ProviderLocationErrorState) {
-              return Center(
-                key: const Key('error_message'),
-                child: Text(
-                  state.message,
-                  style: const TextStyle(color: Colors.black),
                 ),
               );
             } else {

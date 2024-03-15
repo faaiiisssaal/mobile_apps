@@ -16,7 +16,7 @@ class _ProvLocState extends State<ProvLoc> {
   String? idText;
   String? nameText;
   String? descText;
-  String? prodtypeText;
+  String? notelpText;
   String? addressText;
 
   @override
@@ -25,34 +25,42 @@ class _ProvLocState extends State<ProvLoc> {
     idText = widget.card.id;
     nameText = widget.card.name;
     descText = widget.card.description;
-    prodtypeText = widget.card.producttype;
     addressText = widget.card.address;
+    notelpText = widget.card.notelp;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: paddingall(10),
-      color: kLightBlack,
+      margin: marginall(10),
+      decoration: const BoxDecoration(
+        color: kSkyBlue,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-              idText ?? '-'
+              nameText ?? '-',
+            style: const TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold
+            ),
           ),
+          hp10,
           Text(
-              idText ?? '-'
-          ),
-          Text(
-              idText ?? '-'
+              addressText ?? '-',
+            style: const TextStyle(
+              fontSize: 12
+            ),
           ),
           hp10,
           Row(
             children: [
               Expanded(
                 child: Text(
-                    "$nameText - $descText",
+                    "$descText",
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
                   maxLines: 2,
@@ -60,6 +68,11 @@ class _ProvLocState extends State<ProvLoc> {
               ),
             ],
           ),
+          hp10,
+          Text(
+              notelpText ?? '-'
+          ),
+
         ],
       ),
     );
