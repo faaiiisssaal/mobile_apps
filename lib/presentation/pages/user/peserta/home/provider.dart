@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,7 @@ class MapsPage extends StatefulWidget {
 class _MapsPageState extends State<MapsPage> {
 
   final ScrollController trackController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -44,6 +46,7 @@ class _MapsPageState extends State<MapsPage> {
               margin: horizontal(20),
               color: kSapphireBlue,
             ),
+            Container(child: buildCategoryDataProvider(),),
             Expanded(child: buildDataProvider(),),
           ],
         ),
@@ -76,6 +79,14 @@ class _MapsPageState extends State<MapsPage> {
                   itemCount: state.items.length,
                 ),
               );
+            } else if (state is ProviderLocationErrorState) {
+              return Center(
+                key: const Key('error_message'),
+                child: Text(
+                  state.message,
+                  style: const TextStyle(color: kPureBlack),
+                ),
+              );
             } else {
               return const SizedBox(
                 child: Text("Kosong :("),
@@ -84,6 +95,54 @@ class _MapsPageState extends State<MapsPage> {
             }
           },
         );
+  }
+
+  BlocBuilder<ProviderLocationCubit, ProviderLocationState> buildCategoryDataProvider() {
+    return BlocBuilder<ProviderLocationCubit, ProviderLocationState>(
+      builder: (context, state) {
+        if (state is ProviderLocationLoadingState) {
+          if (kDebugMode) {
+            print('API Area Provider are Loading? $state');
+          }
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is ProviderLocationLoadedState) {
+          if (kDebugMode) {
+            print('API Area Provider are Loaded: $state');
+          }
+          return Container(
+            height: 50,
+            margin: horizontal(20),
+            padding: vertical(10),
+            child: ListView.builder(
+              controller: trackController,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final categories = state.items[index];
+                return InkWell(
+                  child: Container(
+                    margin: horizontal(5),
+                    padding: paddingall(5),
+                    decoration: BoxDecoration(
+                      color: kSkyBlue,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Text(
+                      categories.description ?? '-'
+                    ),
+                  ),
+                );
+              },
+              itemCount: state.items.length,
+            ),
+          );
+        } else {
+          return const SizedBox(
+            child: Text("Kosong :("),
+          );
+
+        }
+      },
+    );
   }
 }
 

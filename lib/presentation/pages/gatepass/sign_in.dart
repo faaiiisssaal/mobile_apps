@@ -15,9 +15,11 @@ import 'package:helathcareapp/presentation/pages/user/peserta/home/home.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/navigation/navbar.dart';
 import 'package:helathcareapp/presentation/widgets/biometrics.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../data/data_sources/remote_data_source.dart';
 import '../../../data/models/userdata.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -175,15 +177,15 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
-  void signInMemTemp() {
-    // Navigate to the next screen and pass userData
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const NavBar(),
-      ),
-    );
-  }
+  // void signInMemTemp() {
+  //   // Navigate to the next screen and pass userData
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => const NavBar(),
+  //     ),
+  //   );
+  // }
 
   void signInInsuTemp() {
     // Navigate to the next screen and pass userData
@@ -205,22 +207,102 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void signIn() {
-    final String enteredMemberId = _membermemberController.text.trim();
-    final String enteredDoB = _memberdateController.text.trim();
+  bool _isValid = false;
+
+  void _saveForm() {
+    setState(() {
+      _isValid = _keyform.currentState!.validate();
+    });
+  }
+
+  Map<String?, dynamic> datalogin = {};
+
+  void saveDataloginuser(
+      String companyNo,
+      String policyNo,
+      String cardNo,
+      String empID,
+      String memberID,
+      String memberName,
+      String classNo,
+      String memberSex,
+      String memberPlan,
+      String memberBirthDate,
+      String effectiveDate,
+      String ipDetail,
+      String opDetail,
+      ) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString("companyNo", companyNo);
+    pref.setString("policyNo", policyNo);
+    pref.setString("cardNo", cardNo);
+    pref.setString("empID", empID);
+    pref.setString("memberID", memberID);
+    pref.setString("memberName", memberName);
+    pref.setString("classNo", classNo);
+    pref.setString("memberSex", memberSex);
+    pref.setString("memberPlan", memberPlan);
+    pref.setString("memberBirthDate", memberBirthDate);
+    pref.setString("effectiveDate", effectiveDate);
+    pref.setString("ipDetail", ipDetail);
+    pref.setString("opDetail", opDetail);
+    setState(() {
+      policyNo = policyNo;
+    });
+  }
+
+  RemoteDataSource remoteDataSource = RemoteDataSourceImpl(client: http.Client());
+
+  void signIn(BuildContext context) {
+    final String memberId = _membermemberController.text;
+    final String doB = _memberdateController.text.trim();
 
     // Verify against fake data
-    if (enteredMemberId == "610026424-2" && enteredDoB == "2023-9-30") {
-      // Successful login
+    if (memberId.isNotEmpty && doB.isNotEmpty) {
+      datalogin = {
+        "memberno": memberId,
+        "bdate": doB,
+      };
+
+      remoteDataSource.postLoginUser(datalogin).then((value) {
+        for (int i = 0; i < value.length; i++) {
+          saveDataloginuser(
+            value[i].companyNo.toString(),
+            value[i].policyNo.toString(),
+            value[i].cardNo.toString(),
+            value[i].empID.toString(),
+            value[i].memberID.toString(),
+            value[i].memberName.toString(),
+            value[i].classNo.toString(),
+            value[i].memberSex.toString(),
+            value[i].memberPlan.toString(),
+            value[i].memberBirthDate.toString(),
+            value[i].effectiveDate.toString(),
+            value[i].ipDetail.toString(),
+            value[i].opDetail.toString(),
+          );
+        }
+
+        // Navigate to another page upon successful login
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const NavBar()),
+        );
+      }).catchError((error) {
+        // Handle errors from postLoginUser
+        if (kDebugMode) {
+          print("Error during login: $error");
+        }
+        _showFloatingSnackbar('Error during login');
+      });
+
       if (kDebugMode) {
         print("Member Login Successful");
       }
 
-      // Clear form data
       _membermemberController.clear();
       _memberdateController.clear();
 
-      // Show circular progress while transitioning
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -230,25 +312,15 @@ class _SignInScreenState extends State<SignInScreen> {
           );
         },
       );
-
-      // Simulate some async operation before navigating (replace with your actual logic)
-      Future.delayed(const Duration(seconds: 2), () {
-        Navigator.of(context).pop(); // Close the loading dialog
-        // Navigate to the home screen
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const NavBar()),
-        );
-      });
     } else {
       // Display an error message
       if (kDebugMode) {
         print("Member Login Error: Invalid Member ID or Date of Birth");
       }
-
-      // Show a floating Snackbar for login error
-      _showFloatingSnackbar('Invalid Member ID or Date of Birth. Please try again.');
+      _showFloatingSnackbar('Invalid Member ID or Date of Birth');
     }
   }
+
 
   void _showFloatingSnackbar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -273,18 +345,15 @@ class _SignInScreenState extends State<SignInScreen> {
   void signInInsurance() {
     final String enteredInsuranceID = _insuranceEmailController.text;
     final String enteredInsurancePass = _insurancePassController.text;
-
     // Verify against fake data
     if (enteredInsuranceID == "0987654321" && enteredInsurancePass == "1234567890") {
       // Successful login
       if (kDebugMode) {
         print("Insurance Login Successful");
       }
-
       // Clear form data
       _insuranceEmailController.clear();
       _insurancePassController.clear();
-
       // Show circular progress while transitioning
       showDialog(
         context: context,
@@ -295,7 +364,6 @@ class _SignInScreenState extends State<SignInScreen> {
           );
         },
       );
-
       // Simulate some async operation before navigating (replace with your actual logic)
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.of(context).pop(); // Close the loading dialog
@@ -309,7 +377,6 @@ class _SignInScreenState extends State<SignInScreen> {
       if (kDebugMode) {
         print("Insurance Login Error: Invalid ID or Password");
       }
-
       // Show a floating Snackbar for login error
       _showFloatingSnackbarInsurance('Invalid ID or Password. Please try again.');
     }
@@ -354,6 +421,7 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
+  final _keyform = GlobalKey<FormState>();
   final GlobalKey<ScaffoldMessengerState> _memberScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final GlobalKey<ScaffoldMessengerState> _companyScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final GlobalKey<ScaffoldMessengerState> _insuranceScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
@@ -371,7 +439,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
     return SafeArea(
       child: Scaffold(
-
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Column(
@@ -470,13 +537,19 @@ class _SignInScreenState extends State<SignInScreen> {
             hintStyle: Theme.of(context).textTheme.labelLarge,
             prefixIcon: const Icon(Icons.person_outline_rounded),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).dividerColor,),
+              borderSide: BorderSide(
+                color: Theme.of(context).dividerColor,
+              ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).dividerColor,),
+              borderSide: BorderSide(
+                color: Theme.of(context).dividerColor,
+              ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Theme.of(context).dividerColor,),
+              borderSide: BorderSide(
+                color: Theme.of(context).dividerColor,
+              ),
             ),
           ),
           keyboardType: TextInputType.number,
@@ -504,13 +577,19 @@ class _SignInScreenState extends State<SignInScreen> {
                 hintStyle: Theme.of(context).textTheme.labelLarge,
                 prefixIcon: const Icon(Icons.date_range_outlined),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Theme.of(context).dividerColor,),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).dividerColor,
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Theme.of(context).dividerColor,),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).dividerColor,
+                  ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Theme.of(context).dividerColor,),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).dividerColor,
+                  ),
                 ),
               ),
             ),
@@ -538,13 +617,12 @@ class _SignInScreenState extends State<SignInScreen> {
         // Sign In Button
         ElevatedButton(
           onPressed: () {
-            // if (_membermemberController.text.isEmpty || _memberdateController.text.isEmpty) {
-            //   // Show a Snackbar for missing fields
-            //   _showFloatingSnackbar('Please fill in the form');
-            // } else {
-            //   signIn();
-            // }
-            signInMemTemp();
+            if (_membermemberController.text.isEmpty || _memberdateController.text.isEmpty) {
+              _showFloatingSnackbar('Please fill in the form');
+            } else {
+              signIn(context);
+            }
+            // signInMemTemp();
             saveUser("member");
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.lightBlue, foregroundColor: Colors.white),
@@ -927,33 +1005,33 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(height: 10.0),
         InsuranceQuickLoginStatus.quickLoginActivated == true
             ? const Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Divider(
-                    color: kDarkRed,
-                    height: 7.5,
-                    thickness: 3,
-                    indent: 0,
-                    endIndent: 5,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: kDarkRed,
+                          height: 7.5,
+                          thickness: 3,
+                          indent: 0,
+                          endIndent: 5,
+                        ),
+                      ),
+                      Text("OR"),
+                      Expanded(
+                        child: Divider(
+                          color: kPureBlue,
+                          height: 7.5,
+                          thickness: 3,
+                          indent: 5,
+                          endIndent: 0,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Text("OR"),
-                Expanded(
-                  child: Divider(
-                    color: kPureBlue,
-                    height: 7.5,
-                    thickness: 3,
-                    indent: 5,
-                    endIndent: 0,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10.0),
-          ],
-        )
+                  SizedBox(height: 10.0),
+                ],
+              )
             : Container(),
 
         // Biometrics

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:helathcareapp/common/constant.dart';
 import 'package:helathcareapp/domain/entities/provider_location.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProvLoc extends StatefulWidget {
   final ProviderLocation card;
@@ -18,6 +20,17 @@ class _ProvLocState extends State<ProvLoc> {
   String? descText;
   String? notelpText;
   String? addressText;
+
+  late Uri _url;
+
+  Future<void> _launchUrl(String nameText) async {
+    _url = Uri.parse('https://www.google.com/maps?q=$nameText');
+
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
 
   @override
   void initState() {
@@ -45,7 +58,7 @@ class _ProvLocState extends State<ProvLoc> {
           Text(
               nameText ?? '-',
             style: const TextStyle(
-                fontSize: 12, fontWeight: FontWeight.bold
+                fontSize: 16, fontWeight: FontWeight.bold
             ),
           ),
           hp10,
@@ -72,9 +85,15 @@ class _ProvLocState extends State<ProvLoc> {
           Text(
               notelpText ?? '-'
           ),
-
+          ElevatedButton(
+            onPressed: () {
+              _launchUrl(nameText!);
+            },
+            child: const Text('Maps Here'),
+          ),
         ],
       ),
     );
   }
 }
+

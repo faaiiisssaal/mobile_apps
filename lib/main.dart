@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helathcareapp/presentation/cubit/provider_location_cubit.dart';
-import 'package:helathcareapp/presentation/pages/gatepass/sign_in.dart';
-import 'package:helathcareapp/presentation/pages/onboarding/appwrapper.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -11,11 +7,13 @@ import 'package:helathcareapp/injection.dart' as di;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helathcareapp/common/constant.dart';
 
+import 'package:helathcareapp/presentation/cubit/login_user_cubit.dart';
+import 'package:helathcareapp/presentation/cubit/provider_location_cubit.dart';
+import 'package:helathcareapp/presentation/pages/gatepass/sign_in.dart';
+import 'package:helathcareapp/presentation/pages/onboarding/appwrapper.dart';
+import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
+
 import 'common/utils.dart';
-// import 'package:helathcareapp/presentation/pages/gatepass/sign_in.dart';
-// import 'package:helathcareapp/presentation/pages/onboarding/appwrapper.dart';
-//
-// import 'common/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +47,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProviderLocationCubit>(
           create: (context) => di.locator<ProviderLocationCubit>(),
         ),
+        BlocProvider<LoginUserCubit>(
+          create: (context) => di.locator<LoginUserCubit>(),
+        ),
+
       ],
       child: MaterialApp(
         // builder: (context, child) {

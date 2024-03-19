@@ -11,7 +11,6 @@ class BenefitPage extends StatefulWidget {
 class _BenefitPageState extends State<BenefitPage> {
 
   String dropDownValue1 = "LALA";
-  String dropDownValue2 = "2352352366261116";
 
   @override
   Widget build(BuildContext context) {
@@ -87,44 +86,6 @@ class _BenefitPageState extends State<BenefitPage> {
                 ),
               ),
               hp10,
-              Container(
-                padding: paddingall(10),
-                child: ButtonTheme(
-                  buttonColor: kSeaBlue,
-                  textTheme: ButtonTextTheme.primary,
-                  alignedDropdown: true,
-                  child: DropdownButton<String>(
-                    padding: paddingall(0),
-                    isExpanded: true,
-                    value: dropDownValue1,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropDownValue1 = newValue!;
-                      });
-                    },
-                    items: const [
-                      DropdownMenuItem<String>(
-                        value: "LALA",
-                        child: Text(
-                          "LALA",
-                        ),
-                      ),
-                      DropdownMenuItem(
-                        value: "LILI",
-                        child: Text("LILI"),
-                      ),
-                      DropdownMenuItem(
-                        value: "LULU",
-                        child: Text("LULU"),
-                      ),
-                      DropdownMenuItem(
-                        value: "LELE",
-                        child: Text("LELE"),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               // constant value from constant.dart
               Expanded(
                 child: Container(

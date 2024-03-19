@@ -34,5 +34,4 @@ class ProviderLocationCubit extends Cubit<ProviderLocationState> {
       emit(ProviderLocationLoadedState(items: filteredProviders));
     }
   }
-
 }
