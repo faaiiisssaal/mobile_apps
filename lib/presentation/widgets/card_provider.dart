@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/domain/entities/provider_location.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:helathcareapp/domain/entities/peserta/provider_location.dart';
 
 class ProvLoc extends StatefulWidget {
   final ProviderLocation card;

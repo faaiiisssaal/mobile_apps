@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import 'package:helathcareapp/common/failure.dart';
-import 'package:helathcareapp/domain/entities/login_user.dart';
+import 'package:helathcareapp/domain/entities/peserta/login_user.dart';
 import 'package:helathcareapp/domain/repository/repository.dart';
 
 class PostLoginUser {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:helathcareapp/presentation/cubit/user_family_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -50,7 +51,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginUserCubit>(
           create: (context) => di.locator<LoginUserCubit>(),
         ),
-
+        BlocProvider<FamilyUserCubit>(
+          create: (context) => di.locator<FamilyUserCubit>(),
+        ),
       ],
       child: MaterialApp(
         // builder: (context, child) {

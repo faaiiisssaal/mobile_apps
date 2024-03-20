@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:helathcareapp/common/constant.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
 import 'package:helathcareapp/presentation/widgets/hotline.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/information.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-
   String dropDownValue1 = "LALA";
   String dropDownValue2 = "2352352366261116";
   String dropDownValue3 = "Rawat Jalan";
@@ -43,7 +42,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     var now = DateTime.now();
     var hour = now.hour;
 
-
     if (hour < 12) {
       return 'Selamat Pagi';
     } else if (hour < 16) {
@@ -62,7 +60,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   void _updateTimeOfDay() {
     int? currentHour = _currentTime?.hour;
-    int? currentMin  = _currentTime?.minute;
+    int? currentMin = _currentTime?.minute;
     if (currentHour! >= 6 && currentHour < 12) {
       _timeOfDay = 'Good Morning';
     } else if (currentHour >= 12 && currentHour < 15) {
@@ -76,17 +74,51 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
   }
 
+  String? cP;
+  String? pN;
+  String? cN;
+  String? eI;
+  String? mI;
+  String? mN;
+  String? clN;
+  String? mS;
+  String? mP;
+  String? mBD;
+  String? eD;
+  String? iD;
+  String? oD;
+
+  Future<void> getDataLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      cP = pref.getString("companyName");
+      pN = pref.getString("policyNo");
+      cN = pref.getString("cardNo");
+      eI = pref.getString("empID");
+      mI = pref.getString("memberID");
+      mN = pref.getString("memberName");
+      clN = pref.getString("classNo");
+      mS = pref.getString("memberSex");
+      mP = pref.getString("memberPlan");
+      mBD = pref.getString("memberBirthDate");
+      eD = pref.getString("effectiveDate");
+      iD = pref.getString("ipDetail");
+      oD = pref.getString("opDetail");
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-
+    getDataLogin();
     // Initialize the animation controller
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
     );
     _controller.addListener(() {
-      if (mounted) { // Check if the widget is mounted
+      if (mounted) {
+        // Check if the widget is mounted
         setState(() {
           _currentTime = DateTime.now();
           _updateTimeOfDay();
@@ -116,7 +148,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -126,7 +157,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           scrolledUnderElevation: 0.0,
           automaticallyImplyLeading: false,
           leading: Image.asset(
-              "asset/smilynks.png",
+            "asset/smilynks.png",
             fit: BoxFit.cover,
           ),
           leadingWidth: 120,
@@ -140,7 +171,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 width: double.infinity,
                 padding: paddingall(10),
                 decoration: const BoxDecoration(
-                  color: kSkyBlue,// Moved the color property to BoxDecoration
+                  color: kSkyBlue, // Moved the color property to BoxDecoration
                   borderRadius: r10, // Adjust the radius as needed
                   // You can also add border, shadow etc. here
                 ),
@@ -149,8 +180,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "$_timeOfDay,\nLinda",
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),
+                      "$_timeOfDay,\n$mN",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(
                       height: 100,
@@ -162,9 +196,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           "${_currentTime?.hour.toString().padLeft(2, '0')}:${_currentTime?.minute.toString().padLeft(2, '0')}:${_currentTime?.second.toString().padLeft(2, '0')}",
                           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                         ),
-                        const Text(
+                        Text(
                           // "Terdaftar sebagai Administration Service Only (ASO)",
-                          "registered at PT Pacific Place Jakarta employee",
+                          "registered at $cP",
                           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -186,8 +220,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(
-                              context, MapsPage.routeName);
+                          Navigator.pushNamed(context, MapsPage.routeName);
                         },
                         child: const Text(
                           "See All",
@@ -201,7 +234,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     width: mediawidth(1, context),
                     padding: paddingall(10),
                     decoration: const BoxDecoration(
-                      color: kSkyBlue,// Moved the color property to BoxDecoration
+                      color: kSkyBlue, // Moved the color property to BoxDecoration
                       borderRadius: r10, // Adjust the radius as needed
                       // You can also add border, shadow etc. here
                     ),
@@ -264,7 +297,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   Container(
                     padding: paddingall(10),
                     decoration: const BoxDecoration(
-                      color: kSkyBlue,// Moved the color property to BoxDecoration
+                      color: kSkyBlue, // Moved the color property to BoxDecoration
                       borderRadius: r10, // Adjust the radius as needed
                       // You can also add border, shadow etc. here
                     ),
@@ -278,7 +311,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 width: double.infinity,
                 padding: paddingall(10),
                 decoration: const BoxDecoration(
-                  color: kSkyBlue,// Moved the color property to BoxDecoration
+                  color: kSkyBlue, // Moved the color property to BoxDecoration
                   borderRadius: r10, // Adjust the radius as needed
                   // You can also add border, shadow etc. here
                 ),

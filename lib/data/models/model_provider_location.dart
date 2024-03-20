@@ -1,8 +1,7 @@
 // ignore_for_file: equal_keys_in_map
 
 import 'package:equatable/equatable.dart';
-
-import 'package:helathcareapp/domain/entities/provider_location.dart';
+import 'package:helathcareapp/domain/entities/peserta/provider_location.dart';
 
 class ProviderLocationModel extends Equatable {
   const ProviderLocationModel({

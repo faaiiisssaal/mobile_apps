@@ -1,10 +1,12 @@
 import 'package:helathcareapp/domain/usecase/get/get_provider_loc.dart';
+import 'package:helathcareapp/domain/usecase/post/family_user.dart';
 import 'package:helathcareapp/presentation/cubit/login_user_cubit.dart';
 import 'package:helathcareapp/presentation/cubit/provider_location_cubit.dart';
 import 'package:helathcareapp/data/data_sources/remote_data_source.dart';
 import 'package:helathcareapp/data/repository/repository_impl.dart';
 import 'package:helathcareapp/domain/repository/repository.dart';
 import 'package:helathcareapp/domain/usecase/post/post_login_user.dart';
+import 'package:helathcareapp/presentation/cubit/user_family_cubit.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
@@ -26,6 +28,10 @@ void init() {
     postLoginUser: locator(),
   ));
   locator.registerLazySingleton(() => PostLoginUser(locator()));
+  locator.registerFactory(() => FamilyUserCubit(
+    postFamilyUser: locator(),
+  ));
+  locator.registerLazySingleton(() => PostFamilyUser(locator()));
 
 
   locator.registerLazySingleton<Repository>(

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class LoginUser extends Equatable {
   const LoginUser({
-    required this.companyNo,
+    required this.companyName,
     required this.policyNo,
     required this.cardNo,
     required this.empID,
@@ -17,13 +17,13 @@ class LoginUser extends Equatable {
     required this.opDetail
   });
 
-  final String? companyNo;
+  final String? companyName;
   final String? policyNo;
   final String? cardNo;
   final String? empID;
   final String? memberID;
   final String? memberName;
-  final String? classNo;
+  final int? classNo;
   final String? memberSex;
   final String? memberPlan;
   final String? memberBirthDate;
@@ -34,7 +34,7 @@ class LoginUser extends Equatable {
   @override
   // TODO: implement props
   List<Object?> get props => [
-    companyNo,
+    companyName,
     policyNo,
     cardNo,
     empID,

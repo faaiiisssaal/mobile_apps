@@ -63,7 +63,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (selectedDate != null) {
       setState(() {
-        _memberdateController.text = DateFormat('yyyy-M-dd').format(selectedDate);
+        _memberdateController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
       });
     }
   }
@@ -218,7 +218,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Map<String?, dynamic> datalogin = {};
 
   void saveDataloginuser(
-      String companyNo,
+      String companyName,
       String policyNo,
       String cardNo,
       String empID,
@@ -233,7 +233,7 @@ class _SignInScreenState extends State<SignInScreen> {
       String opDetail,
       ) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("companyNo", companyNo);
+    pref.setString("companyName", companyName);
     pref.setString("policyNo", policyNo);
     pref.setString("cardNo", cardNo);
     pref.setString("empID", empID);
@@ -255,7 +255,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void signIn(BuildContext context) {
     final String memberId = _membermemberController.text;
-    final String doB = _memberdateController.text.trim();
+    final String doB = _memberdateController.text;
 
     // Verify against fake data
     if (memberId.isNotEmpty && doB.isNotEmpty) {
@@ -263,46 +263,10 @@ class _SignInScreenState extends State<SignInScreen> {
         "memberno": memberId,
         "bdate": doB,
       };
-
-      remoteDataSource.postLoginUser(datalogin).then((value) {
-        for (int i = 0; i < value.length; i++) {
-          saveDataloginuser(
-            value[i].companyNo.toString(),
-            value[i].policyNo.toString(),
-            value[i].cardNo.toString(),
-            value[i].empID.toString(),
-            value[i].memberID.toString(),
-            value[i].memberName.toString(),
-            value[i].classNo.toString(),
-            value[i].memberSex.toString(),
-            value[i].memberPlan.toString(),
-            value[i].memberBirthDate.toString(),
-            value[i].effectiveDate.toString(),
-            value[i].ipDetail.toString(),
-            value[i].opDetail.toString(),
-          );
-        }
-
-        // Navigate to another page upon successful login
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const NavBar()),
-        );
-      }).catchError((error) {
-        // Handle errors from postLoginUser
-        if (kDebugMode) {
-          print("Error during login: $error");
-        }
-        _showFloatingSnackbar('Error during login');
-      });
-
       if (kDebugMode) {
-        print("Member Login Successful");
+        print(doB);
+        print(memberId);
       }
-
-      _membermemberController.clear();
-      _memberdateController.clear();
-
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -312,6 +276,55 @@ class _SignInScreenState extends State<SignInScreen> {
           );
         },
       );
+
+      remoteDataSource.postLoginUser(datalogin).then((value) {
+        if (value.isNotEmpty) {
+          // Save data and navigate to another page upon successful login
+          for (int i = 0; i < value.length; i++) {
+            saveDataloginuser(
+              value[i].companyName.toString(),
+              value[i].policyNo.toString(),
+              value[i].cardNo.toString(),
+              value[i].empID.toString(),
+              value[i].memberID.toString(),
+              value[i].memberName.toString(),
+              value[i].classNo.toString(),
+              value[i].memberSex.toString(),
+              value[i].memberPlan.toString(),
+              value[i].memberBirthDate.toString(),
+              value[i].effectiveDate.toString(),
+              value[i].ipDetail.toString(),
+              value[i].opDetail.toString(),
+            );
+          }
+
+          // Navigate to another page after a delay
+          Future.delayed(const Duration(seconds: 2), () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const NavBar()),
+            );
+          });
+
+          if (kDebugMode) {
+            print("Member Login Successful");
+          }
+        } else {
+          // No data found for the provided credentials
+          _showFloatingSnackbar('No data found for the provided credentials');
+          Navigator.pop(context); // Dismiss the dialog
+        }
+      }).catchError((error) {
+        // Handle errors from postLoginUser
+        if (kDebugMode) {
+          print("Error during login: $error");
+        }
+        _showFloatingSnackbar('Error during login');
+        Navigator.pop(context); // Dismiss the dialog
+      });
+
+      _membermemberController.clear();
+      _memberdateController.clear();
     } else {
       // Display an error message
       if (kDebugMode) {
@@ -320,6 +333,7 @@ class _SignInScreenState extends State<SignInScreen> {
       _showFloatingSnackbar('Invalid Member ID or Date of Birth');
     }
   }
+
 
 
   void _showFloatingSnackbar(String message) {

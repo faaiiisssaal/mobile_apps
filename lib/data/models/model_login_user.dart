@@ -1,31 +1,31 @@
 // ignore_for_file: equal_keys_in_map
 
 import 'package:equatable/equatable.dart';
-import 'package:helathcareapp/domain/entities/login_user.dart';
+import 'package:helathcareapp/domain/entities/peserta/login_user.dart';
 
 class LoginUserModel extends Equatable {
-  const LoginUserModel(
-      {required this.companyNo,
-      required this.policyNo,
-      required this.cardNo,
-      required this.empID,
-      required this.memberID,
-      required this.memberName,
-      required this.classNo,
-      required this.memberSex,
-      required this.memberPlan,
-      required this.memberBirthDate,
-      required this.effectiveDate,
-      required this.ipDetail,
-      required this.opDetail});
+  const LoginUserModel({
+    required this.companyName,
+    required this.policyNo,
+    required this.cardNo,
+    required this.empID,
+    required this.memberID,
+    required this.memberName,
+    required this.classNo,
+    required this.memberSex,
+    required this.memberPlan,
+    required this.memberBirthDate,
+    required this.effectiveDate,
+    required this.ipDetail,
+    required this.opDetail});
 
-  final String? companyNo;
+  final String? companyName;
   final String? policyNo;
   final String? cardNo;
   final String? empID;
   final String? memberID;
   final String? memberName;
-  final String? classNo;
+  final int? classNo;
   final String? memberSex;
   final String? memberPlan;
   final String? memberBirthDate;
@@ -34,7 +34,7 @@ class LoginUserModel extends Equatable {
   final String? opDetail;
 
   factory LoginUserModel.fromJson(Map<String, dynamic> json) => LoginUserModel(
-        companyNo: json['companyNo'],
+        companyName: json['companyName'],
         policyNo: json['policyNo'],
         cardNo: json['cardNo'],
         empID: json['empID'],
@@ -50,7 +50,7 @@ class LoginUserModel extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
-        "companyNo": companyNo,
+        "companyName": companyName,
         "policyNo": policyNo,
         "cardNo": cardNo,
         "empID": empID,
@@ -67,7 +67,7 @@ class LoginUserModel extends Equatable {
 
   LoginUser toEntity() {
     return LoginUser(
-      companyNo: companyNo,
+      companyName: companyName,
       policyNo: policyNo,
       cardNo: cardNo,
       empID: empID,
@@ -85,7 +85,7 @@ class LoginUserModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        companyNo,
+        companyName,
         policyNo,
         cardNo,
         empID,
