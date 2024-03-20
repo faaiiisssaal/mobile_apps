@@ -6,24 +6,24 @@ import 'package:helathcareapp/domain/entities/peserta/user_family.dart';
 class FamilyUserModel extends Equatable {
   const FamilyUserModel({
     required this.memberno,
-    required this.plan,
+    required this.name,
   });
 
   final String? memberno;
-  final String? plan;
+  final String? name;
 
   factory FamilyUserModel.fromJson(Map<String, dynamic> json) => FamilyUserModel(
     memberno: json['memberno'],
-    plan: json['plan'],
+    name: json['name'],
   );
 
   Map<String, dynamic> toJson() =>
-      {"memberno": memberno, "plan": plan};
+      {"memberno": memberno, "name": name};
 
   FamilyUser toEntity() {
-    return FamilyUser(memberno: memberno, plan: plan,);
+    return FamilyUser(memberno: memberno, name: name,);
   }
 
   @override
-  List<Object?> get props => [memberno, plan, ];
+  List<Object?> get props => [memberno, name, ];
 }

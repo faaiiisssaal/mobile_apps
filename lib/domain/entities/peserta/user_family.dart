@@ -3,15 +3,15 @@ import 'package:equatable/equatable.dart';
 class FamilyUser extends Equatable {
   const FamilyUser({
     required this.memberno,
-    required this.plan,
+    required this.name,
   });
 
   final String? memberno;
-  final String? plan;
+  final String? name;
 
   @override
   List<Object?> get props => [
     memberno,
-    plan,
+    name,
   ];
 }

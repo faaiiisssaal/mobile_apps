@@ -44,7 +44,16 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, List<BenefitUser>>> postBenefitUser(Map databenefit) async {
-    throw UnimplementedError();
+    try {
+      final result = await remoteDataSource.postBenefitUser(databenefit);
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Unable to establish a connection to the network.'));
+    } catch (e) {
+      return Left(CommonFailure(e.toString()));
+    }
   }
 
   @override

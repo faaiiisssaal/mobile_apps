@@ -2,49 +2,34 @@ import 'package:equatable/equatable.dart';
 
 class BenefitUser extends Equatable {
   const BenefitUser({
-    required this.companyName,
-    required this.policyNo,
-    required this.cardNo,
-    required this.empID,
-    required this.memberID,
-    required this.memberName,
-    required this.classNo,
-    required this.memberSex,
-    required this.memberPlan,
-    required this.memberBirthDate,
-    required this.effectiveDate,
-    required this.ipDetail,
-    required this.opDetail
+    required this.no,
+    required this.benefitName,
+    required this.maxAmount,
+    required this.pplan,
+    required this.benefitID,
+    required this.benefitNo,
+    required this.annualLimit,
+    required this.overalllimitamount
   });
 
-  final String? companyName;
-  final String? policyNo;
-  final String? cardNo;
-  final String? empID;
-  final String? memberID;
-  final String? memberName;
-  final int? classNo;
-  final String? memberSex;
-  final String? memberPlan;
-  final String? memberBirthDate;
-  final String? effectiveDate;
-  final String? ipDetail;
-  final String? opDetail;
+  final String? no;
+  final String? benefitName;
+  final String? maxAmount;
+  final String? pplan;
+  final String? benefitID;
+  final int? benefitNo;
+  final String? annualLimit;
+  final int? overalllimitamount;
 
   @override
   List<Object?> get props => [
-    companyName,
-    policyNo,
-    cardNo,
-    empID,
-    memberID,
-    memberName,
-    classNo,
-    memberSex,
-    memberPlan,
-    memberBirthDate,
-    effectiveDate,
-    ipDetail,
-    opDetail,
+    no,
+    benefitName,
+    maxAmount,
+    pplan,
+    benefitID,
+    benefitNo,
+    annualLimit,
+    overalllimitamount,
   ];
 }

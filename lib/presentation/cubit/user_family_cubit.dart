@@ -13,9 +13,9 @@ class FamilyUserCubit extends Cubit<FamilyUserState> {
 
   final PostFamilyUser postFamilyUser;
 
-  Future<void> get(Map datalogin) async {
+  Future<void> post(Map datafamily) async {
     emit(const FamilyUserLoadingState());
-    final result = await postFamilyUser.execute(datalogin);
+    final result = await postFamilyUser.execute(datafamily);
     if (kDebugMode) {
       print('Result: $result');
     }

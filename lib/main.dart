@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helathcareapp/presentation/cubit/user_family_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -8,6 +7,8 @@ import 'package:helathcareapp/injection.dart' as di;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helathcareapp/common/constant.dart';
 
+import 'package:helathcareapp/presentation/cubit/user_benefit_cubit.dart';
+import 'package:helathcareapp/presentation/cubit/user_family_cubit.dart';
 import 'package:helathcareapp/presentation/cubit/login_user_cubit.dart';
 import 'package:helathcareapp/presentation/cubit/provider_location_cubit.dart';
 import 'package:helathcareapp/presentation/pages/gatepass/sign_in.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<FamilyUserCubit>(
           create: (context) => di.locator<FamilyUserCubit>(),
+        ),
+        BlocProvider<BenefitUserCubit>(
+          create: (context) => di.locator<BenefitUserCubit>(),
         ),
       ],
       child: MaterialApp(
