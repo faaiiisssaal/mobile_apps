@@ -20,7 +20,7 @@ abstract class RemoteDataSource {
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  static const baseURL = 'https://10e3-103-119-54-150.ngrok-free.app//src/model';
+  static const baseURL = 'https://10e3-103-119-54-150.ngrok-free.app/src/model';
 
   final http.Client client;
 

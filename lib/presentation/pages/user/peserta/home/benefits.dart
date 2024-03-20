@@ -81,49 +81,22 @@ class _BenefitPageState extends State<BenefitPage> {
                     children: [
                       Row(
                         children: [
-                          const SizedBox(
-                            width: 110,
-                            child: Text("Member Name"),
-                          ),
-                          Container(
-                            padding: onlyleft(5),
-                            width: 5,
-                            child: const Text(":"),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  child: Text("Member Name"),
+                                ),
+                                Container(
+                                  padding: onlyleft(5),
+                                  width: 5,
+                                  child: const Text(":"),
+                                ),
+                              ],
+                            ),
                           ),
                           Expanded(
-                              child: ButtonTheme(
-                                alignedDropdown: true,
-                                child: DropdownButton<String>(
-                                  padding: paddingall(0),
-                                  isExpanded: true,
-                                  value: dropDownValue1,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropDownValue1 = newValue!;
-                                    });
-                                  },
-                                  items: const [
-                                    DropdownMenuItem<String>(
-                                      value: "LALA",
-                                      child: Text(
-                                        "LALA",
-                                      ),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "LILI",
-                                      child: Text("LILI"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "LULU",
-                                      child: Text("LULU"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "LELE",
-                                      child: Text("LELE"),
-                                    ),
-                                  ],
-                                ),
-                              )
+                              child: buildBlocBuilderMenuCategory()
                           )
                         ],
                       ),
@@ -131,8 +104,6 @@ class _BenefitPageState extends State<BenefitPage> {
                   ),
                 ),
               ),
-              hp10,
-              Expanded(child: buildBlocBuilderMenuCategory()),
               hp10,
               // constant value from constant.dart
               Expanded(
@@ -144,6 +115,72 @@ class _BenefitPageState extends State<BenefitPage> {
       ),
     );
   }
+
+  // BlocBuilder<FamilyUserCubit, FamilyUserState> buildBlocBuilderMenuCategory() {
+  //   return BlocBuilder<FamilyUserCubit, FamilyUserState>(
+  //     builder: (context, state) {
+  //       if (state is FamilyUserLoadingState) {
+  //         if (kDebugMode) {
+  //           print('API Family User are Loading $state');
+  //         }
+  //         return const Center(child: CircularProgressIndicator());
+  //       } else if (state is FamilyUserLoadedState) {
+  //         if (kDebugMode) {
+  //           print('API Family User are Loaded: $state');
+  //         }
+  //         return Padding(
+  //           padding: horizontal(10),
+  //           child: ListView.builder(
+  //             controller: scrollController,
+  //             padding: vertical(10),
+  //             scrollDirection: Axis.vertical,
+  //             itemBuilder: (context, index) {
+  //               final card = state.items[index];
+  //               return Container(
+  //                 padding: paddingall(10),
+  //                 margin: vertical(5),
+  //                 decoration: const BoxDecoration(
+  //                   color: kSkyBlue,
+  //                   borderRadius: r15,
+  //                 ),
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                   children: [
+  //                     Column(
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: [
+  //                         Text((index + 1).toString()),
+  //                         Text(card.name ?? ''),
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //               );
+  //             },
+  //             itemCount: state.items.length,
+  //           ),
+  //         );
+  //       } else if (state is FamilyUserErrorState) {
+  //         return Center(
+  //           key: const Key('error_message'),
+  //           child: Text(
+  //             state.message,
+  //             style: const TextStyle(color: kPureBlack),
+  //           ),
+  //         );
+  //       } else {
+  //         return const Center(
+  //           key: Key('error_message'),
+  //           child: Text(
+  //             'error',
+  //             style: TextStyle(color: kPureBlack),
+  //           ),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
 
   BlocBuilder<FamilyUserCubit, FamilyUserState> buildBlocBuilderMenuCategory() {
     return BlocBuilder<FamilyUserCubit, FamilyUserState>(
@@ -159,35 +196,17 @@ class _BenefitPageState extends State<BenefitPage> {
           }
           return Padding(
             padding: horizontal(10),
-            child: ListView.builder(
-              controller: scrollController,
-              padding: vertical(10),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                final card = state.items[index];
-                return Container(
-                  padding: paddingall(10),
-                  margin: vertical(5),
-                  decoration: const BoxDecoration(
-                    color: kSkyBlue,
-                    borderRadius: r15,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text((index + 1).toString()),
-                          Text(card.name ?? ''),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
+            child: DropdownButton<String>(
+              value: state.items.isNotEmpty ? state.items.first.name : null,
+              onChanged: (newValue) {
+                // Implement logic to handle dropdown item change if needed
               },
-              itemCount: state.items.length,
+              items: state.items.map((card) {
+                return DropdownMenuItem<String>(
+                  value: card.name,
+                  child: Text(card.name ?? ''),
+                );
+              }).toList(),
             ),
           );
         } else if (state is FamilyUserErrorState) {
@@ -210,7 +229,6 @@ class _BenefitPageState extends State<BenefitPage> {
       },
     );
   }
-
 
 
   BlocBuilder<BenefitUserCubit, BenefitUserState> buildDataProvider() {
