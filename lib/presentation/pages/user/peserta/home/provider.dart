@@ -19,6 +19,7 @@ class _MapsPageState extends State<MapsPage> {
 
   final ScrollController trackController = ScrollController();
   final ScrollController scrollController = ScrollController();
+  String? dropDownValue1;
 
   @override
   void initState() {
@@ -38,19 +39,32 @@ class _MapsPageState extends State<MapsPage> {
         body: Column(
           children: [
             Container(
-              height: 100,
-              padding: paddingall(10),
-              width: double.infinity,
-              child: const TextField(
-                
+              margin: horizontal(20),
+              child: Row(
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(
+                        child: Text("Pilih Kota"),
+                      ),
+                      Container(
+                        padding: onlyleft(5),
+                        width: 5,
+                        child: const Text(":"),
+                      ),
+                    ],
+                  ),
+                  wp10,
+                  Expanded(child: buildCategoryDataProvider())
+                ],
               ),
             ),
             Container(
-              height: 50,
-              margin: horizontal(20),
-              color: kSapphireBlue,
+              padding: paddingall(10),
+              width: double.infinity,
+              child: const TextField(
+              ),
             ),
-            Container(child: buildCategoryDataProvider(),),
             Expanded(child: buildDataProvider(),),
           ],
         ),
@@ -113,30 +127,26 @@ class _MapsPageState extends State<MapsPage> {
           if (kDebugMode) {
             print('API Area Provider are Loaded: $state');
           }
-          return Container(
-            height: 50,
-            margin: horizontal(20),
-            padding: vertical(10),
-            child: ListView.builder(
-              controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final categories = state.items[index];
-                return InkWell(
-                  child: Container(
-                    margin: horizontal(5),
-                    padding: paddingall(5),
-                    decoration: BoxDecoration(
-                      color: kSkyBlue,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Text(
-                      categories.description ?? '-'
-                    ),
-                  ),
-                );
+          return Padding(
+            padding: horizontal(10),
+            child: DropdownButton<String>(
+              isExpanded: true,
+              hint: const Text("Pilih Kota"),
+              value: dropDownValue1,
+              onChanged: (value) {
+                setState(() {
+                  dropDownValue1 = value;
+                });
+                if (kDebugMode) {
+                  print(value);
+                }
               },
-              itemCount: state.items.length,
+              items: state.items.map((card) {
+                return DropdownMenuItem<String>(
+                  value: card.area,
+                  child: Text(card.description ?? ''),
+                );
+              }).toList(),
             ),
           );
         } else if (state is ProviderAreaErrorState) {
@@ -151,10 +161,12 @@ class _MapsPageState extends State<MapsPage> {
           return const SizedBox(
             child: Text("Kosong :("),
           );
-
         }
       },
     );
   }
 }
+
+
+
 
