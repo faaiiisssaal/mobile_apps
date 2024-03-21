@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helathcareapp/common/constant.dart';
+import 'package:helathcareapp/presentation/cubit/provider_area_cubit.dart';
 
 import 'package:helathcareapp/presentation/cubit/provider_location_cubit.dart';
 import 'package:helathcareapp/presentation/widgets/card_provider.dart';
@@ -18,12 +18,16 @@ class MapsPage extends StatefulWidget {
 class _MapsPageState extends State<MapsPage> {
 
   final ScrollController trackController = ScrollController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     Future.microtask(
           () => context.read<ProviderLocationCubit>().get(),
+    );
+    Future.microtask(
+          () => context.read<ProviderAreaCubit>().get(),
     );
   }
 
@@ -97,15 +101,15 @@ class _MapsPageState extends State<MapsPage> {
         );
   }
 
-  BlocBuilder<ProviderLocationCubit, ProviderLocationState> buildCategoryDataProvider() {
-    return BlocBuilder<ProviderLocationCubit, ProviderLocationState>(
+  BlocBuilder<ProviderAreaCubit, ProviderAreaState> buildCategoryDataProvider() {
+    return BlocBuilder<ProviderAreaCubit, ProviderAreaState>(
       builder: (context, state) {
-        if (state is ProviderLocationLoadingState) {
+        if (state is ProviderAreaLoadingState) {
           if (kDebugMode) {
             print('API Area Provider are Loading? $state');
           }
           return const Center(child: CircularProgressIndicator());
-        } else if (state is ProviderLocationLoadedState) {
+        } else if (state is ProviderAreaLoadedState) {
           if (kDebugMode) {
             print('API Area Provider are Loaded: $state');
           }
@@ -114,7 +118,7 @@ class _MapsPageState extends State<MapsPage> {
             margin: horizontal(20),
             padding: vertical(10),
             child: ListView.builder(
-              controller: trackController,
+              controller: scrollController,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 final categories = state.items[index];
@@ -133,6 +137,14 @@ class _MapsPageState extends State<MapsPage> {
                 );
               },
               itemCount: state.items.length,
+            ),
+          );
+        } else if (state is ProviderAreaErrorState) {
+          return Center(
+            key: const Key('error_message'),
+            child: Text(
+              state.message,
+              style: const TextStyle(color: kPureBlack),
             ),
           );
         } else {

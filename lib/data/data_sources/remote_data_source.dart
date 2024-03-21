@@ -23,7 +23,7 @@ abstract class RemoteDataSource {
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  static const baseURL = 'https://d877-103-119-54-150.ngrok-free.app/src/model';
+  static const baseURL = 'https://0498-103-119-54-150.ngrok-free.app/src/model';
 
   final http.Client client;
 
@@ -50,7 +50,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<ProviderAreaModel>> getProviderArea() async {
-    final response = await client.get(Uri.parse('$baseURL/provider'));
+    final response = await client.get(Uri.parse('$baseURL/area'));
 
     if (response.statusCode == 200) {
       if (kDebugMode) {

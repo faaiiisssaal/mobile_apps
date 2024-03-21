@@ -2,7 +2,6 @@ part of 'provider_area_cubit.dart';
 
 abstract class ProviderAreaState extends Equatable {
   const ProviderAreaState();
-  @override
   List<Object> get props => [];
 }
 

@@ -11,7 +11,6 @@ class ProviderAreaCubit extends Cubit<ProviderAreaState> {
   }) : super(const ProviderAreaInitialState());
 
   final GetProviderArea getProviderArea;
-  late List<ProviderArea> allProviders = []; // Adjusted to ProviderArea
 
   Future<void> get() async {
     emit(const ProviderAreaLoadingState());

@@ -16,7 +16,6 @@ class ProviderLocation extends Equatable {
   final String? notelp;
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
     description,
     id,
