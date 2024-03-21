@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/common/constant.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/form/form.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/history/history.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/home/home.dart';
@@ -31,17 +30,13 @@ class _NavBarState extends State<NavBar> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: kPureWhite,
-          contentPadding: paddingall(20),
-          actionsPadding: paddingall(10),
-          // title: const Text('Are you sure?'),
+          title: const Text('Are you sure?'),
           content: const Text(
             'Are you sure you want to leave this page?',
           ),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                alignment: Alignment.centerRight,
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
               child: const Text('No'),
@@ -51,13 +46,13 @@ class _NavBarState extends State<NavBar> {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                alignment: Alignment.centerRight,
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
               child: const Text('Yes'),
               onPressed: () {
-                // Navigator.pop(context);
-                SystemNavigator.pop();
+
+                Navigator.pop(context);
+                SystemChannels.platform.invokeMethod('SystemNavigator.pop');
               },
             ),
           ],
@@ -74,6 +69,7 @@ class _NavBarState extends State<NavBar> {
         if (didPop) {
           return;
         }
+
         _showBackDialog();
       },
       child: SafeArea(

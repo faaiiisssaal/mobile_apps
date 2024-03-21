@@ -18,26 +18,25 @@ class BenefitPage extends StatefulWidget {
 }
 
 class _BenefitPageState extends State<BenefitPage> {
-
   ScrollController scrollController = ScrollController();
-  String dropDownValue1 = "LALA";
+  String? dropDownValue1;
 
   String? memberNo;
   Map<String?, dynamic> databenefit = {};
-  void loadData() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    memberNo = pref.getString("memberID");
-    if (kDebugMode) {
-      print(memberNo);
-    }
-    databenefit = {
-      "memberno": "$memberNo",
-      "plan": "%%"
-    };
-    Future.microtask(
-          () => context.read<BenefitUserCubit>().post(databenefit),
-    );
-  }
+  // void loadData() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   memberNo = pref.getString("memberID");
+  //   if (kDebugMode) {
+  //     print(memberNo);
+  //   }
+  //   databenefit = {
+  //     "memberno": "$memberNo",
+  //     "plan": "%%"
+  //   };
+  //   Future.microtask(
+  //         () => context.read<BenefitUserCubit>().post(databenefit),
+  //   );
+  // }
 
   String? memberID;
   Map<String?, dynamic> datafamily = {};
@@ -51,15 +50,19 @@ class _BenefitPageState extends State<BenefitPage> {
       "empid": "$memberNo",
     };
     Future.microtask(
-          () => context.read<FamilyUserCubit>().post(datafamily),
+      () => context.read<FamilyUserCubit>().post(datafamily),
     );
   }
 
   @override
   void initState() {
     super.initState();
-    loadData();
     loadDataFamily();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -71,8 +74,7 @@ class _BenefitPageState extends State<BenefitPage> {
           body: Column(
             children: [
               Container(
-                padding: paddingall(10),
-                height: 75,
+                padding: horizontal(10),
                 decoration: const BoxDecoration(
                   color: kSkyBlue,
                   borderRadius: r15,
@@ -85,23 +87,20 @@ class _BenefitPageState extends State<BenefitPage> {
                     children: [
                       Row(
                         children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                const SizedBox(
-                                  child: Text("Member Name"),
-                                ),
-                                Container(
-                                  padding: onlyleft(5),
-                                  width: 5,
-                                  child: const Text(":"),
-                                ),
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              const SizedBox(
+                                child: Text("Member Name"),
+                              ),
+                              Container(
+                                padding: onlyleft(5),
+                                width: 5,
+                                child: const Text(":"),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                              child: buildBlocBuilderMenuCategory()
-                          )
+                          wp10,
+                          Expanded(child: buildBlocBuilderMenuCategory())
                         ],
                       ),
                     ],
@@ -132,19 +131,27 @@ class _BenefitPageState extends State<BenefitPage> {
           if (kDebugMode) {
             print('API Family User are Loaded: $state');
           }
-          String? naMe = state.items.first.name;
-          print(naMe);
           return Padding(
             padding: horizontal(10),
             child: DropdownButton<String>(
               isExpanded: true,
-              value: state.items.first.name,
-              onChanged: (newValue) {
-                naMe = newValue;
+              hint: const Text("Pilih Member"),
+              value: dropDownValue1,
+              onChanged: (value) {
+                setState(() {
+                  dropDownValue1 = value;
+                  databenefit = {"memberno": "$value", "plan": "%%"};
+                  Future.microtask(
+                    () => context.read<BenefitUserCubit>().post(databenefit),
+                  );
+                });
+                if (kDebugMode) {
+                  print(value);
+                }
               },
               items: state.items.map((card) {
                 return DropdownMenuItem<String>(
-                  value: card.name,
+                  value: card.memberno,
                   child: Text(card.name ?? ''),
                 );
               }).toList(),
@@ -170,7 +177,6 @@ class _BenefitPageState extends State<BenefitPage> {
       },
     );
   }
-
 
   BlocBuilder<BenefitUserCubit, BenefitUserState> buildDataProvider() {
     return BlocBuilder<BenefitUserCubit, BenefitUserState>(
@@ -217,11 +223,13 @@ class _BenefitPageState extends State<BenefitPage> {
                         title: Text(pplan),
                         children: [
                           SingleChildScrollView(
-                            child: SizedBox( // Adjusted width
+                            child: SizedBox(
+                              // Adjusted width
                               width: double.infinity,
                               child: DataTable(
                                 decoration: BoxDecoration(
-                                  border: Border.all(width: 0), // Hide table borders
+                                  border: Border.all(width: 0),
+                                  borderRadius: r15, // Hide table borders
                                 ),
                                 headingRowColor: MaterialStateColor.resolveWith((states) => kSkyBlue),
                                 columns: const [
@@ -261,7 +269,7 @@ class _BenefitPageState extends State<BenefitPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16), // Add space between ExpansionTiles
+                  hp20, // Add space between ExpansionTiles
                 ],
               ),
             );
@@ -271,7 +279,6 @@ class _BenefitPageState extends State<BenefitPage> {
               children: tables,
             ),
           );
-
         } else if (state is BenefitUserErrorState) {
           return Center(
             key: const Key('error_message'),
@@ -281,12 +288,13 @@ class _BenefitPageState extends State<BenefitPage> {
             ),
           );
         } else {
-          return const SizedBox(
-            child: Text("Kosong :("),
+          return const Center(
+            child: SizedBox(
+              child: Text("Kosong :("),
+            ),
           );
         }
       },
     );
   }
-
 }
