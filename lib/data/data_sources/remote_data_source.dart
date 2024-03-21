@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:helathcareapp/data/models/model_provider_area.dart';
 import 'package:helathcareapp/data/models/model_user_benefit.dart';
 import 'package:helathcareapp/data/models/model_user_family.dart';
+import 'package:helathcareapp/data/models/response/response_provider_area.dart';
 import 'package:helathcareapp/data/models/response/response_user_benefit.dart';
 import 'package:helathcareapp/data/models/response/response_user_family.dart';
 import 'package:http/http.dart' as http;
@@ -14,13 +16,14 @@ import 'package:helathcareapp/data/models/response/response_login_user.dart';
 
 abstract class RemoteDataSource {
   Future<List<ProviderLocationModel>>         getProviderLocation();
+  Future<List<ProviderAreaModel>>             getProviderArea();
   Future<List<LoginUserModel>>                postLoginUser(Map datalogin);
   Future<List<FamilyUserModel>>               postFamilyUser(Map datafamily);
   Future<List<BenefitUserModel>>              postBenefitUser(Map databenefit);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  static const baseURL = 'https://10e3-103-119-54-150.ngrok-free.app/src/model';
+  static const baseURL = 'https://d877-103-119-54-150.ngrok-free.app/src/model';
 
   final http.Client client;
 
@@ -35,6 +38,25 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         print("Response Body: ${json.decode(response.body)}");
       }
       return ProviderLocationResponse.fromJson(json.decode(response.body)).ProviderLocation;
+    } else {
+      if (kDebugMode) {
+        print('Response status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+      throw ServerException();
+    }
+  }
+
+
+  @override
+  Future<List<ProviderAreaModel>> getProviderArea() async {
+    final response = await client.get(Uri.parse('$baseURL/provider'));
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("Response Body: ${json.decode(response.body)}");
+      }
+      return ProviderAreaResponse.fromJson(json.decode(response.body)).ProviderArea;
     } else {
       if (kDebugMode) {
         print('Response status code: ${response.statusCode}');

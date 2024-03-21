@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helathcareapp/common/constant.dart';
+import 'package:helathcareapp/presentation/pages/user/peserta/form/form.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/history/history.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/home/home.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/profile/profile.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/qr/qrcode.dart';
-
-import '../home/benefits.dart';
-
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -22,7 +20,7 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const BenefitPage(),
+    const FormPage(),
     const QRViewExample(),
     const HistoryPage(),
     const ProfilePage(),
@@ -117,9 +115,9 @@ class _NavBarState extends State<NavBar> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.shield_outlined,
+                    Icons.my_library_books_rounded,
                   ),
-                  label: 'Benefit',
+                  label: 'Form',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:helathcareapp/common/constant.dart';
+import 'package:helathcareapp/presentation/pages/user/peserta/home/benefits.dart';
 import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
 import 'package:helathcareapp/presentation/widgets/hotline.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -152,20 +153,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          primary: false,
-          scrolledUnderElevation: 0.0,
-          automaticallyImplyLeading: false,
-          leading: Image.asset(
-            "asset/smilynks.png",
-            fit: BoxFit.cover,
-          ),
-          leadingWidth: 120,
-        ),
         body: SingleChildScrollView(
           padding: paddingall(20),
           child: Column(
             children: [
+              Column(
+                children: [
+                  hp10,
+                  Container(
+                    padding: paddingall(10),
+                    decoration: const BoxDecoration(
+                      color: kSkyBlue, // Moved the color property to BoxDecoration
+                      borderRadius: r10, // Adjust the radius as needed
+                      // You can also add border, shadow etc. here
+                    ),
+                    child: ImageSlideShow().build(context),
+                  ),
+                ],
+              ),
+              hp20,
               // 1st row for username
               Container(
                 width: double.infinity,
@@ -180,130 +186,115 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "$_timeOfDay,\n$mN",
+                      "$_timeOfDay, $mN",
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(
-                      height: 100,
+                    hp20,
+                    Text(
+                      // "Terdaftar sebagai Administration Service Only (ASO)",
+                      "registered at $cP",
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${_currentTime?.hour.toString().padLeft(2, '0')}:${_currentTime?.minute.toString().padLeft(2, '0')}:${_currentTime?.second.toString().padLeft(2, '0')}",
-                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          // "Terdaftar sebagai Administration Service Only (ASO)",
-                          "registered at $cP",
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     // Text(
+                    //     //   "${_currentTime?.hour.toString().padLeft(2, '0')}:${_currentTime?.minute.toString().padLeft(2, '0')}:${_currentTime?.second.toString().padLeft(2, '0')}",
+                    //     //   style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    //     // ),
+                    //
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
               hp20,
               // 2nd row for nearby
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, MapsPage.routeName);
+                },
+                child: Container(
+                  width: mediawidth(1, context),
+                  padding: paddingall(10),
+                  decoration: const BoxDecoration(
+                    color: kSkyBlue, // Moved the color property to BoxDecoration
+                    borderRadius: r10, // Adjust the radius as needed
+                    // You can also add border, shadow etc. here
+                  ),
+                  child: Row(
                     children: [
-                      const Text(
-                        "Nearby",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      Image.asset(
+                        "asset/placeholder.png",
+                        height: mediawidth(0.085, context),
+                        width: mediawidth(0.085, context),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, MapsPage.routeName);
-                        },
-                        child: const Text(
-                          "See All",
-                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      wp10,
+                      const Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
+                              maxLines: 2,
+                              softWrap: true,
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              "Salemba, Jakarta Selatan",
+                              maxLines: 2,
+                              softWrap: true,
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  hp10,
-                  Container(
-                    width: mediawidth(1, context),
-                    padding: paddingall(10),
-                    decoration: const BoxDecoration(
-                      color: kSkyBlue, // Moved the color property to BoxDecoration
-                      borderRadius: r10, // Adjust the radius as needed
-                      // You can also add border, shadow etc. here
-                    ),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          "asset/placeholder.png",
-                          height: mediawidth(0.085, context),
-                          width: mediawidth(0.085, context),
-                        ),
-                        wp10,
-                        const Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "RUMAH SAKIT DR. CIPTO MANGUKUSUMO",
-                                maxLines: 2,
-                                softWrap: true,
-                                overflow: TextOverflow.clip,
-                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Text(
-                                "Salemba, Jakarta Selatan",
-                                maxLines: 2,
-                                softWrap: true,
-                                overflow: TextOverflow.clip,
-                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
               hp20,
-              // 3rd row for Information
-              Column(
-                children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Information",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              Container(
+                padding: vertical(20),
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: kSkyBlue, // Moved the color property to BoxDecoration
+                  borderRadius: r10, // Adjust the radius as needed
+                  // You can also add border, shadow etc. here
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, BenefitPage.routeName);
+                      },
+                      child: Column(
+                        children: [
+                          Image.asset(
+                              'asset/benefit.png',
+                            scale: 5,
+                          ),
+                          const Text(
+                              "Benefit",
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
-                      Text(
-                        "See All",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  hp10,
-                  Container(
-                    padding: paddingall(10),
-                    decoration: const BoxDecoration(
-                      color: kSkyBlue, // Moved the color property to BoxDecoration
-                      borderRadius: r10, // Adjust the radius as needed
-                      // You can also add border, shadow etc. here
                     ),
-                    child: ImageSlideShow().build(context),
-                  ),
-                ],
+                    const Text("Other",
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),)
+                  ],
+                ),
               ),
               hp20,
               // 5th for hotline

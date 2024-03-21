@@ -1,12 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helathcareapp/common/constant.dart';
+import 'package:helathcareapp/domain/entities/peserta/benefit_user.dart';
 import 'package:helathcareapp/presentation/cubit/user_benefit_cubit.dart';
 import 'package:helathcareapp/presentation/cubit/user_family_cubit.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BenefitPage extends StatefulWidget {
+  static const routeName = "/benefit";
   const BenefitPage({super.key});
 
   @override
@@ -116,72 +120,6 @@ class _BenefitPageState extends State<BenefitPage> {
     );
   }
 
-  // BlocBuilder<FamilyUserCubit, FamilyUserState> buildBlocBuilderMenuCategory() {
-  //   return BlocBuilder<FamilyUserCubit, FamilyUserState>(
-  //     builder: (context, state) {
-  //       if (state is FamilyUserLoadingState) {
-  //         if (kDebugMode) {
-  //           print('API Family User are Loading $state');
-  //         }
-  //         return const Center(child: CircularProgressIndicator());
-  //       } else if (state is FamilyUserLoadedState) {
-  //         if (kDebugMode) {
-  //           print('API Family User are Loaded: $state');
-  //         }
-  //         return Padding(
-  //           padding: horizontal(10),
-  //           child: ListView.builder(
-  //             controller: scrollController,
-  //             padding: vertical(10),
-  //             scrollDirection: Axis.vertical,
-  //             itemBuilder: (context, index) {
-  //               final card = state.items[index];
-  //               return Container(
-  //                 padding: paddingall(10),
-  //                 margin: vertical(5),
-  //                 decoration: const BoxDecoration(
-  //                   color: kSkyBlue,
-  //                   borderRadius: r15,
-  //                 ),
-  //                 child: Column(
-  //                   crossAxisAlignment: CrossAxisAlignment.start,
-  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                   children: [
-  //                     Column(
-  //                       crossAxisAlignment: CrossAxisAlignment.start,
-  //                       children: [
-  //                         Text((index + 1).toString()),
-  //                         Text(card.name ?? ''),
-  //                       ],
-  //                     ),
-  //                   ],
-  //                 ),
-  //               );
-  //             },
-  //             itemCount: state.items.length,
-  //           ),
-  //         );
-  //       } else if (state is FamilyUserErrorState) {
-  //         return Center(
-  //           key: const Key('error_message'),
-  //           child: Text(
-  //             state.message,
-  //             style: const TextStyle(color: kPureBlack),
-  //           ),
-  //         );
-  //       } else {
-  //         return const Center(
-  //           key: Key('error_message'),
-  //           child: Text(
-  //             'error',
-  //             style: TextStyle(color: kPureBlack),
-  //           ),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
-
   BlocBuilder<FamilyUserCubit, FamilyUserState> buildBlocBuilderMenuCategory() {
     return BlocBuilder<FamilyUserCubit, FamilyUserState>(
       builder: (context, state) {
@@ -194,12 +132,15 @@ class _BenefitPageState extends State<BenefitPage> {
           if (kDebugMode) {
             print('API Family User are Loaded: $state');
           }
+          String? naMe = state.items.first.name;
+          print(naMe);
           return Padding(
             padding: horizontal(10),
             child: DropdownButton<String>(
-              value: state.items.isNotEmpty ? state.items.first.name : null,
+              isExpanded: true,
+              value: state.items.first.name,
               onChanged: (newValue) {
-                // Implement logic to handle dropdown item change if needed
+                naMe = newValue;
               },
               items: state.items.map((card) {
                 return DropdownMenuItem<String>(
@@ -243,42 +184,94 @@ class _BenefitPageState extends State<BenefitPage> {
           if (kDebugMode) {
             print('API Provider are Loaded: $state');
           }
-          return Padding(
-            padding: horizontal(10),
-            child: ListView.builder(
-              controller: scrollController,
-              padding: vertical(10),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                final card = state.items[index];
-                return Container(
-                  padding: paddingall(10),
-                  margin: vertical(5),
-                  decoration: const BoxDecoration(
-                    color: kSkyBlue,
-                    borderRadius: r15,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+
+          // Group items by pplan value
+          Map<String, List<BenefitUser>> groupedItems = {};
+          for (var item in state.items) {
+            String pplan = item.planName ?? '';
+            groupedItems.putIfAbsent(pplan, () => []);
+            groupedItems[pplan]?.add(item);
+            if (kDebugMode) {
+              print(pplan);
+            }
+          }
+
+          List<Widget> tables = [];
+          groupedItems.forEach((pplan, items) {
+            tables.add(
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0), // Hide table borders
+                      ),
+                      child: ExpansionTile(
+                        collapsedShape: const RoundedRectangleBorder(
+                          side: BorderSide.none,
+                        ),
+                        shape: const RoundedRectangleBorder(
+                          side: BorderSide.none,
+                        ),
+                        title: Text(pplan),
                         children: [
-                          Text((index + 1).toString()),
-                          Text(card.pplan ?? ''),
-                          Text(card.benefitName ?? ''),
+                          SingleChildScrollView(
+                            child: SizedBox( // Adjusted width
+                              width: double.infinity,
+                              child: DataTable(
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 0), // Hide table borders
+                                ),
+                                headingRowColor: MaterialStateColor.resolveWith((states) => kSkyBlue),
+                                columns: const [
+                                  DataColumn(label: Text('No')),
+                                  DataColumn(label: Text('Jenis Manfaat')),
+                                  DataColumn(label: Text('Batas\nSantunan')),
+                                ],
+                                columnSpacing: 10,
+                                dataRowMaxHeight: double.infinity,
+                                horizontalMargin: 10,
+                                // Removed Expanded widget
+                                rows: items.map((card) {
+                                  return DataRow(cells: [
+                                    DataCell(Text((items.indexOf(card) + 1).toString())),
+                                    DataCell(
+                                      Padding(
+                                        padding: vertical(5),
+                                        child: Text(
+                                          card.benefitName ?? '-',
+                                          maxLines: 8,
+                                        ),
+                                      ),
+                                    ),
+                                    DataCell(
+                                      Text(
+                                        card.maxAmount != null && card.maxAmount == "Sesuai Tagihan"
+                                            ? "Sesuai Tagihan"
+                                            : 'Rp. ${card.maxAmount != null ? NumberFormat("#,##0", "id_ID").format(double.parse(card.maxAmount ?? '')) : '-'}',
+                                      ),
+                                    ),
+                                  ]);
+                                }).toList(),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                      hp10,
-                      Text(card.maxAmount ?? ''),
-                    ],
+                    ),
                   ),
-                );
-              },
-              itemCount: state.items.length,
+                  const SizedBox(height: 16), // Add space between ExpansionTiles
+                ],
+              ),
+            );
+          });
+          return SingleChildScrollView(
+            child: Column(
+              children: tables,
             ),
           );
+
         } else if (state is BenefitUserErrorState) {
           return Center(
             key: const Key('error_message'),
@@ -291,9 +284,9 @@ class _BenefitPageState extends State<BenefitPage> {
           return const SizedBox(
             child: Text("Kosong :("),
           );
-
         }
       },
     );
   }
+
 }

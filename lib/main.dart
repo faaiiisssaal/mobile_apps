@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:helathcareapp/presentation/cubit/provider_area_cubit.dart';
+import 'package:helathcareapp/presentation/pages/user/peserta/home/benefits.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -58,6 +60,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<BenefitUserCubit>(
           create: (context) => di.locator<BenefitUserCubit>(),
         ),
+        BlocProvider<ProviderAreaCubit>(
+          create: (context) => di.locator<ProviderAreaCubit>(),
+        ),
       ],
       child: MaterialApp(
         // builder: (context, child) {
@@ -105,6 +110,11 @@ class MyApp extends StatelessWidget {
             case MapsPage.routeName:
               return MaterialPageRoute(
                 builder: (_) => const MapsPage(),
+                settings: settings,
+              );
+            case BenefitPage.routeName:
+              return MaterialPageRoute(
+                builder: (_) => const BenefitPage(),
                 settings: settings,
               );
 

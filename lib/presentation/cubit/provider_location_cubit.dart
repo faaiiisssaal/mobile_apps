@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:helathcareapp/domain/entities/peserta/provider_location.dart';
-import 'package:helathcareapp/domain/usecase/get/get_provider_loc.dart';
+import 'package:helathcareapp/domain/usecase/get/provider_loc.dart';
 
 part 'provider_location_state.dart';
 
