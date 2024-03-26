@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:healthcareapp/data/models/mode_claim_info.dart';
 import 'package:healthcareapp/data/models/model_provider_area.dart';
 import 'package:healthcareapp/data/models/model_user_benefit.dart';
 import 'package:healthcareapp/data/models/model_user_family.dart';
+import 'package:healthcareapp/data/models/response/response_claim_info.dart';
 import 'package:healthcareapp/data/models/response/response_provider_area.dart';
 import 'package:healthcareapp/data/models/response/response_user_benefit.dart';
 import 'package:healthcareapp/data/models/response/response_user_family.dart';
@@ -20,6 +22,7 @@ abstract class RemoteDataSource {
   Future<List<LoginUserModel>>                postLoginUser(Map datalogin);
   Future<List<FamilyUserModel>>               postFamilyUser(Map datafamily);
   Future<List<BenefitUserModel>>              postBenefitUser(Map databenefit);
+  Future<List<ClaimInfoUserModel>>            postClaimInfoUser(Map dataclaiminfo);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -123,7 +126,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  @override
   Future<List<BenefitUserModel>> postBenefitUser(Map databenefit) async {
     final response = await client.post(
       Uri.parse('$baseURL/benefituser'),
@@ -139,6 +141,31 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         print('Response status code: ${response.statusCode}');
       }
       return BenefitUserResponse.fromJson(json.decode(response.body)).BenefitUser;
+    } else {
+      if (kDebugMode) {
+        print('Response status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<ClaimInfoUserModel>> postClaimInfoUser(Map dataclaiminfo) async {
+    final response = await client.post(
+      Uri.parse('$baseURL/benefituser'),
+      body: jsonEncode(dataclaiminfo), // Encode your .... map to JSON format
+      headers: {
+        'Content-Type': 'application/json', // Specify the content type as JSON
+      },
+    );
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("Response Body: ${json.decode(response.body)}");
+        print('Response status code: ${response.statusCode}');
+      }
+      return ClaimInfoUserResponse.fromJson(json.decode(response.body)).ClaimInfoUser;
     } else {
       if (kDebugMode) {
         print('Response status code: ${response.statusCode}');
