@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/domain/entities/peserta/benefit_user.dart';
-import 'package:helathcareapp/presentation/cubit/user_benefit_cubit.dart';
-import 'package:helathcareapp/presentation/cubit/user_family_cubit.dart';
+import 'package:healthcareapp/common/constant.dart';
+import 'package:healthcareapp/domain/entities/peserta/benefit_user.dart';
+import 'package:healthcareapp/presentation/cubit/user_benefit_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/user_family_cubit.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,24 +19,26 @@ class BenefitPage extends StatefulWidget {
 
 class _BenefitPageState extends State<BenefitPage> {
   ScrollController scrollController = ScrollController();
+  TextEditingController searchController = TextEditingController();
+  List<dynamic> filteredItems = [];
   String? dropDownValue1;
 
   String? memberNo;
   Map<String?, dynamic> databenefit = {};
-  // void loadData() async {
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   memberNo = pref.getString("memberID");
-  //   if (kDebugMode) {
-  //     print(memberNo);
-  //   }
-  //   databenefit = {
-  //     "memberno": "$memberNo",
-  //     "plan": "%%"
-  //   };
-  //   Future.microtask(
-  //         () => context.read<BenefitUserCubit>().post(databenefit),
-  //   );
-  // }
+  void loadData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    memberNo = pref.getString("memberID");
+    if (kDebugMode) {
+      print(memberNo);
+    }
+    databenefit = {
+      "memberno": "%%",
+      "plan": "%%"
+    };
+    Future.microtask(
+          () => context.read<BenefitUserCubit>().post(databenefit),
+    );
+  }
 
   String? memberID;
   Map<String?, dynamic> datafamily = {};
@@ -57,6 +59,7 @@ class _BenefitPageState extends State<BenefitPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     loadDataFamily();
   }
 
@@ -74,13 +77,14 @@ class _BenefitPageState extends State<BenefitPage> {
           body: Column(
             children: [
               Container(
-                padding: horizontal(10),
+                height: 100,
                 decoration: const BoxDecoration(
                   color: kSkyBlue,
-                  borderRadius: r15,
+                  borderRadius: r10,
                 ),
                 margin: topleftright(10, 10, 10),
                 child: SingleChildScrollView(
+                  padding: paddingall(10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -107,7 +111,7 @@ class _BenefitPageState extends State<BenefitPage> {
                   ),
                 ),
               ),
-              hp10,
+              hp20,
               // constant value from constant.dart
               Expanded(
                 child: buildDataProvider(),
@@ -126,36 +130,33 @@ class _BenefitPageState extends State<BenefitPage> {
           if (kDebugMode) {
             print('API Family User are Loading $state');
           }
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: SizedBox(height: 15, width: 15, child: CircularProgressIndicator()));
         } else if (state is FamilyUserLoadedState) {
           if (kDebugMode) {
             print('API Family User are Loaded: $state');
           }
-          return Padding(
-            padding: horizontal(10),
-            child: DropdownButton<String>(
-              isExpanded: true,
-              hint: const Text("Pilih Member"),
-              value: dropDownValue1,
-              onChanged: (value) {
-                setState(() {
-                  dropDownValue1 = value;
-                  databenefit = {"memberno": "$value", "plan": "%%"};
-                  Future.microtask(
-                    () => context.read<BenefitUserCubit>().post(databenefit),
-                  );
-                });
-                if (kDebugMode) {
-                  print(value);
-                }
-              },
-              items: state.items.map((card) {
-                return DropdownMenuItem<String>(
-                  value: card.memberno,
-                  child: Text(card.name ?? ''),
+          return DropdownButton<String>(
+            isExpanded: true,
+            hint: const Text("Pilih Member"),
+            value: dropDownValue1,
+            onChanged: (value) {
+              setState(() {
+                dropDownValue1 = value;
+                databenefit = {"memberno": "$value", "plan": "%%"};
+                Future.microtask(
+                  () => context.read<BenefitUserCubit>().post(databenefit),
                 );
-              }).toList(),
-            ),
+              });
+              if (kDebugMode) {
+                print(value);
+              }
+            },
+            items: state.items.map((card) {
+              return DropdownMenuItem<String>(
+                value: card.memberno,
+                child: Text(card.name ?? ''),
+              );
+            }).toList(),
           );
         } else if (state is FamilyUserErrorState) {
           return Center(
@@ -209,11 +210,17 @@ class _BenefitPageState extends State<BenefitPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 0), // Hide table borders
+                    child: Card(
+                      elevation: 0,
+                      color: kPureWhite,
+                      shadowColor: kLightGrey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      clipBehavior: Clip.antiAlias,
+                      margin: vertical(5),
                       child: ExpansionTile(
+
                         collapsedShape: const RoundedRectangleBorder(
                           side: BorderSide.none,
                         ),

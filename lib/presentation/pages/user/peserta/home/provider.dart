@@ -1,11 +1,12 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/presentation/cubit/provider_area_cubit.dart';
-
-import 'package:helathcareapp/presentation/cubit/provider_location_cubit.dart';
-import 'package:helathcareapp/presentation/widgets/card_provider.dart';
+import 'package:healthcareapp/common/constant.dart';
+import 'package:healthcareapp/presentation/cubit/provider_area_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/provider_location_cubit.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/provider_search.dart';
+import 'package:healthcareapp/presentation/widgets/card_provider.dart';
 
 class MapsPage extends StatefulWidget {
   static const routeName = "/maps";
@@ -16,26 +17,58 @@ class MapsPage extends StatefulWidget {
 }
 
 class _MapsPageState extends State<MapsPage> {
-
   final ScrollController trackController = ScrollController();
   final ScrollController scrollController = ScrollController();
   String? dropDownValue1;
+  late TextEditingController searchController;
+  late FocusNode searchFocusNode; // Add FocusNode
+  Timer? _debounce; // Add debounce timer
+
+  Map<String?, dynamic> datafilter = {};
+  void loadDataProvider() async {
+    datafilter = {
+      "name": "%%",
+      "description": "%%"
+    };
+    Future.microtask(
+          () => context.read<ProviderLocationCubit>().post(datafilter),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-          () => context.read<ProviderLocationCubit>().get(),
-    );
+    searchController = TextEditingController();
+    searchFocusNode = FocusNode(); // Initialize FocusNode
+    loadDataProvider();
     Future.microtask(
           () => context.read<ProviderAreaCubit>().get(),
     );
   }
 
   @override
+  void dispose() {
+    searchFocusNode.dispose(); // Dispose FocusNode
+    _debounce?.cancel(); // Cancel debounce timer
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Provider"),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, ProviderSearch.routeName);
+                },
+                icon: Icon(Icons.search)
+            )
+          ],
+        ),
         body: Column(
           children: [
             Container(
@@ -55,64 +88,18 @@ class _MapsPageState extends State<MapsPage> {
                     ],
                   ),
                   wp10,
-                  Expanded(child: buildCategoryDataProvider())
+                  Expanded(child: buildCategoryDataProvider()),
                 ],
               ),
             ),
-            Container(
-              padding: paddingall(10),
-              width: double.infinity,
-              child: const TextField(
-              ),
+            Expanded(
+              child: buildDataProvider(),
             ),
-            Expanded(child: buildDataProvider(),),
           ],
         ),
+
       ),
     );
-  }
-
-  BlocBuilder<ProviderLocationCubit, ProviderLocationState> buildDataProvider() {
-    return BlocBuilder<ProviderLocationCubit, ProviderLocationState>(
-          builder: (context, state) {
-            if (state is ProviderLocationLoadingState) {
-              if (kDebugMode) {
-                print('API Provider are Loading? $state');
-              }
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is ProviderLocationLoadedState) {
-              if (kDebugMode) {
-                print('API Provider are Loaded: $state');
-              }
-              return Padding(
-                padding: horizontal(10),
-                child: ListView.builder(
-                  controller: trackController,
-                  padding: vertical(10),
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    final card = state.items[index];
-                    return ProvLoc(card: card);
-                  },
-                  itemCount: state.items.length,
-                ),
-              );
-            } else if (state is ProviderLocationErrorState) {
-              return Center(
-                key: const Key('error_message'),
-                child: Text(
-                  state.message,
-                  style: const TextStyle(color: kPureBlack),
-                ),
-              );
-            } else {
-              return const SizedBox(
-                child: Text("Kosong :("),
-              );
-
-            }
-          },
-        );
   }
 
   BlocBuilder<ProviderAreaCubit, ProviderAreaState> buildCategoryDataProvider() {
@@ -136,6 +123,16 @@ class _MapsPageState extends State<MapsPage> {
               onChanged: (value) {
                 setState(() {
                   dropDownValue1 = value;
+                  datafilter = {
+                    "name": "%%",
+                    "description": "%$value"
+                  };
+                  if (kDebugMode) {
+                    print(value);
+                  }
+                  Future.microtask(
+                        () => context.read<ProviderLocationCubit>().post(datafilter),
+                  );
                 });
                 if (kDebugMode) {
                   print(value);
@@ -143,13 +140,49 @@ class _MapsPageState extends State<MapsPage> {
               },
               items: state.items.map((card) {
                 return DropdownMenuItem<String>(
-                  value: card.area,
+                  value: card.description,
                   child: Text(card.description ?? ''),
                 );
               }).toList(),
             ),
           );
         } else if (state is ProviderAreaErrorState) {
+          return Center(
+            key: const Key('error_message'),
+            child: Text(
+              state.message,
+              style: const TextStyle(color: kPureBlack),
+            ),
+          );
+        } else {
+          return const SizedBox(
+            child: Text("Kosong :("),
+          );
+        }
+      },
+    );
+  }
+
+  BlocBuilder<ProviderLocationCubit, ProviderLocationState> buildDataProvider() {
+    return BlocBuilder<ProviderLocationCubit, ProviderLocationState>(
+      builder: (context, state) {
+        if (state is ProviderLocationLoadingState) {
+          if (kDebugMode) {
+            print('API Area Provider are Loading? $state');
+          }
+          return const Center();
+        } else if (state is ProviderLocationLoadedState) {
+          return ListView.builder(
+            controller: trackController,
+            padding: vertical(10),
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              final card = state.items[index];
+              return ProvLoc(card: card);
+            },
+            itemCount: state.items.length,
+          );
+        } else if (state is ProviderLocationErrorState) {
           return Center(
             key: const Key('error_message'),
             child: Text(

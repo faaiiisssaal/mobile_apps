@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/common/constant.dart';
+import 'package:healthcareapp/common/constant.dart';
 
 class InsuranceMemberPage extends StatefulWidget {
   const InsuranceMemberPage({super.key});

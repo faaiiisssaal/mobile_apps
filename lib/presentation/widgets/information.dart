@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:helathcareapp/common/constant.dart';
+import 'package:healthcareapp/common/constant.dart';
 
 
 class ImageSlideShow {

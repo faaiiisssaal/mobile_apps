@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/presentation/widgets/hotline.dart';
-import 'package:helathcareapp/presentation/widgets/information.dart';
+import 'package:healthcareapp/common/constant.dart';
+import 'package:healthcareapp/presentation/widgets/hotline.dart';
+import 'package:healthcareapp/presentation/widgets/information.dart';
 class InsuranceHomePage extends StatefulWidget {
   const InsuranceHomePage({super.key});
 

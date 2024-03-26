@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/presentation/pages/user/badanusaha/home/home.dart';
-import 'package:helathcareapp/presentation/pages/user/badanusaha/member/member.dart';
-import 'package:helathcareapp/presentation/pages/user/badanusaha/policy/policy.dart';
-import 'package:helathcareapp/presentation/pages/user/badanusaha/profile/profile.dart';
+import 'package:healthcareapp/presentation/pages/user/badanusaha/home/home.dart';
+import 'package:healthcareapp/presentation/pages/user/badanusaha/member/member.dart';
+import 'package:healthcareapp/presentation/pages/user/badanusaha/policy/policy.dart';
+import 'package:healthcareapp/presentation/pages/user/badanusaha/profile/profile.dart';
 
 
 class EnterpriseNavBar extends StatefulWidget {

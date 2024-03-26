@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/common/constant.dart';
+import 'package:healthcareapp/common/constant.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -10,7 +10,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
 
-  String dropDownValue1 = "LALA";
+  String? dropDownValue1;
   String dropDownValue2 = "2352352366261116";
 
   @override
@@ -146,732 +146,6 @@ class _HistoryPageState extends State<HistoryPage> {
                     ],
                   ),
                 ),
-              ),// constant value from constant.dart
-              Expanded(
-                child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  padding: paddingall(10),
-                  child: ClipRRect(
-                    borderRadius: r10,
-                    child: Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
-                                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: paddingall(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 25,
-                                        alignment: Alignment.topLeft,
-                                        child: const Text("1",),
-                                      ),
-                                      const Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("InPayment Claim"),
-                                            hp10,
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Visit Date"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("31 Jan 2024")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Place"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Budi Asih Hosiptal")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Payment"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 12.345.678")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 13.000.000")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Un-Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("0")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Doctor In Charge"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Dokter Mariana")),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  hp10,
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text("More"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            hp10,
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
-                                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: paddingall(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 25,
-                                        alignment: Alignment.topLeft,
-                                        child: const Text("1"),
-                                      ),
-                                      const Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("InPayment Claim"),
-                                            hp10,
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Visit Date"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("31 Jan 2024")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Place"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Budi Asih Hosiptal")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Payment"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 12.345.678")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 13.000.000")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Un-Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("0")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Doctor In Charge"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Dokter Mariana")),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  hp10,
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text("More"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            hp10,
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
-                                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: paddingall(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 25,
-                                        alignment: Alignment.topLeft,
-                                        child: const Text("1"),
-                                      ),
-                                      const Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("InPayment Claim"),
-                                            hp10,
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Visit Date"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("31 Jan 2024")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Place"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Budi Asih Hosiptal")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Payment"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 12.345.678")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 13.000.000")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Un-Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("0")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Doctor In Charge"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Dokter Mariana")),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  hp10,
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text("More"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            hp10,
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
-                                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: paddingall(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 25,
-                                        alignment: Alignment.topLeft,
-                                        child: const Text("1"),
-                                      ),
-                                      const Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("InPayment Claim"),
-                                            hp10,
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Visit Date"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("31 Jan 2024")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Place"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Budi Asih Hosiptal")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Payment"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 12.345.678")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 13.000.000")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Un-Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("0")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Doctor In Charge"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Dokter Mariana")),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  hp10,
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text("More"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            hp10,
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
-                                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: paddingall(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 25,
-                                        alignment: Alignment.topLeft,
-                                        child: const Text("1"),
-                                      ),
-                                      const Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("InPayment Claim"),
-                                            hp10,
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Visit Date"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("31 Jan 2024")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Place"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Budi Asih Hosiptal")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Payment"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 12.345.678")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 13.000.000")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Un-Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("0")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Doctor In Charge"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Dokter Mariana")),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  hp10,
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text("More"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            hp10,
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
-                                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: paddingall(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 25,
-                                        alignment: Alignment.topLeft,
-                                        child: const Text("1"),
-                                      ),
-                                      const Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("InPayment Claim"),
-                                            hp10,
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Visit Date"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("31 Jan 2024")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Medical Place"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Budi Asih Hosiptal")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Payment"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 12.345.678")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Total Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Rp. 13.000.000")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Un-Paid"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("0")),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 125,
-                                                  child: Text("Doctor In Charge"),
-                                                ),
-                                                wp10,
-                                                Text(":"),
-                                                wp10,
-                                                Expanded(child: Text("Dokter Mariana")),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  hp10,
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text("More"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ],
           ),
@@ -879,4 +153,60 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
     );
   }
+
+  // BlocBuilder<FamilyUserCubit, FamilyUserState> buildBlocBuilderMenuCategory() {
+  //   return BlocBuilder<FamilyUserCubit, FamilyUserState>(
+  //     builder: (context, state) {
+  //       if (state is FamilyUserLoadingState) {
+  //         if (kDebugMode) {
+  //           print('API Family User are Loading $state');
+  //         }
+  //         return const Center(child: SizedBox(height: 15, width: 15, child: CircularProgressIndicator()));
+  //       } else if (state is FamilyUserLoadedState) {
+  //         if (kDebugMode) {
+  //           print('API Family User are Loaded: $state');
+  //         }
+  //         return DropdownButton<String>(
+  //           isExpanded: true,
+  //           hint: const Text("Pilih Member"),
+  //           value: dropDownValue1,
+  //           onChanged: (value) {
+  //             setState(() {
+  //               dropDownValue1 = value;
+  //               databenefit = {"memberno": "$value", "plan": "%%"};
+  //               Future.microtask(
+  //                     () => context.read<BenefitUserCubit>().post(databenefit),
+  //               );
+  //             });
+  //             if (kDebugMode) {
+  //               print(value);
+  //             }
+  //           },
+  //           items: state.items.map((card) {
+  //             return DropdownMenuItem<String>(
+  //               value: card.memberno,
+  //               child: Text(card.name ?? ''),
+  //             );
+  //           }).toList(),
+  //         );
+  //       } else if (state is FamilyUserErrorState) {
+  //         return Center(
+  //           key: const Key('error_message'),
+  //           child: Text(
+  //             state.message,
+  //             style: const TextStyle(color: kPureBlack),
+  //           ),
+  //         );
+  //       } else {
+  //         return const Center(
+  //           key: Key('error_message'),
+  //           child: Text(
+  //             'error',
+  //             style: TextStyle(color: kPureBlack),
+  //           ),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
 }

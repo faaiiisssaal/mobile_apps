@@ -1,33 +1,19 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
-import 'package:helathcareapp/domain/entities/peserta/benefit_user.dart';
-import 'package:helathcareapp/domain/entities/peserta/login_user.dart';
-import 'package:helathcareapp/domain/entities/peserta/provider_area.dart';
-import 'package:helathcareapp/domain/entities/peserta/provider_location.dart';
-import 'package:helathcareapp/domain/entities/peserta/user_family.dart';
-import 'package:helathcareapp/domain/repository/repository.dart';
-import 'package:helathcareapp/data/data_sources/remote_data_source.dart';
-import 'package:helathcareapp/common/failure.dart';
-import 'package:helathcareapp/common/exception.dart';
+import 'package:healthcareapp/domain/entities/peserta/benefit_user.dart';
+import 'package:healthcareapp/domain/entities/peserta/login_user.dart';
+import 'package:healthcareapp/domain/entities/peserta/provider_area.dart';
+import 'package:healthcareapp/domain/entities/peserta/provider_location.dart';
+import 'package:healthcareapp/domain/entities/peserta/user_family.dart';
+import 'package:healthcareapp/domain/repository/repository.dart';
+import 'package:healthcareapp/data/data_sources/remote_data_source.dart';
+import 'package:healthcareapp/common/failure.dart';
+import 'package:healthcareapp/common/exception.dart';
 
 class RepositoryImpl implements Repository {
   final RemoteDataSource remoteDataSource;
 
   RepositoryImpl({required this.remoteDataSource});
-
-  @override
-  Future<Either<Failure, List<ProviderLocation>>> getProviderLocation() async {
-    try {
-      final result = await remoteDataSource.getProviderLocation();
-      return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return const Left(ServerFailure(''));
-    } on SocketException {
-      return const Left(ConnectionFailure('Unable to establish a connection to the network.'));
-    } catch (e) {
-      return Left(CommonFailure(e.toString()));
-    }
-  }
 
   @override
   Future<Either<Failure, List<LoginUser>>> postLoginUser(Map datalogin) async {
@@ -75,6 +61,20 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<ProviderArea>>> getProviderArea() async {
     try {
       final result = await remoteDataSource.getProviderArea();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Unable to establish a connection to the network.'));
+    } catch (e) {
+      return Left(CommonFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProviderLocation>>> postProviderLocation(Map datafilter) async {
+    try {
+      final result = await remoteDataSource.postProviderLocation(datafilter);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return const Left(ServerFailure(''));

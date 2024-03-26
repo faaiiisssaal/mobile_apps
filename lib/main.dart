@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helathcareapp/presentation/cubit/provider_area_cubit.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/home/benefits.dart';
-import 'package:provider/provider.dart';
+import 'package:healthcareapp/presentation/cubit/provider_area_cubit.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/benefits.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/provider_search.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:helathcareapp/injection.dart' as di;
+import 'package:healthcareapp/injection.dart' as di;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/common/constant.dart';
+import 'package:healthcareapp/common/constant.dart';
 
-import 'package:helathcareapp/presentation/cubit/user_benefit_cubit.dart';
-import 'package:helathcareapp/presentation/cubit/user_family_cubit.dart';
-import 'package:helathcareapp/presentation/cubit/login_user_cubit.dart';
-import 'package:helathcareapp/presentation/cubit/provider_location_cubit.dart';
-import 'package:helathcareapp/presentation/pages/gatepass/sign_in.dart';
-import 'package:helathcareapp/presentation/pages/onboarding/appwrapper.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
+import 'package:healthcareapp/presentation/cubit/user_benefit_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/user_family_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/login_user_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/provider_location_cubit.dart';
+import 'package:healthcareapp/presentation/pages/gatepass/sign_in.dart';
+import 'package:healthcareapp/presentation/pages/onboarding/appwrapper.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/provider.dart';
 
 import 'common/utils.dart';
 
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         statusBarIconBrightness: isDarkMode ? Brightness.dark : Brightness.light,
       ),
     );
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
         BlocProvider<ProviderLocationCubit>(
           create: (context) => di.locator<ProviderLocationCubit>(),
@@ -115,6 +115,12 @@ class MyApp extends StatelessWidget {
             case BenefitPage.routeName:
               return MaterialPageRoute(
                 builder: (_) => const BenefitPage(),
+                settings: settings,
+              );
+
+            case ProviderSearch.routeName:
+              return MaterialPageRoute(
+                builder: (_) => const ProviderSearch(),
                 settings: settings,
               );
 

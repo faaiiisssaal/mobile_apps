@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/company/company.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/home/home.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/member/member.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/profile/profile.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/company/company.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/home/home.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/member/member.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/profile/profile.dart';
 class InsuranceNavBar extends StatefulWidget {
   const InsuranceNavBar({super.key});
 

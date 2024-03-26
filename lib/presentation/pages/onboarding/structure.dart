@@ -1,8 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/presentation/pages/onboarding/data.dart';
+import 'package:healthcareapp/common/constant.dart';
+import 'package:healthcareapp/presentation/pages/onboarding/data.dart';
 
 class Structure extends StatefulWidget {
   final VoidCallback onDone;

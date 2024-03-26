@@ -1,10 +1,10 @@
-name: helathcareapp
+name: healthcareapp
 description: "the healthcare management app uder PT Abadi Smilynks"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 2.0.2+1
+version: 1.0.0
 
 environment:
   sdk: '>=2.17.0 <4.0.0'
@@ -90,6 +90,7 @@ flutter:
     - asset/claim.png
     - asset/placeholder.png
     - asset/office.jpg
+    - asset/address.png
 
   # fonts:
   #   - family: Schyler

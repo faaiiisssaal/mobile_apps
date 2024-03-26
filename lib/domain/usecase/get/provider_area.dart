@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
-import 'package:helathcareapp/common/failure.dart';
-import 'package:helathcareapp/domain/entities/peserta/provider_area.dart';
+import 'package:healthcareapp/common/failure.dart';
+import 'package:healthcareapp/domain/entities/peserta/provider_area.dart';
 import '../../repository/repository.dart';
 
 class GetProviderArea {

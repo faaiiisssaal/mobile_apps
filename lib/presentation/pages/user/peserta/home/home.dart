@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/home/benefits.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/home/provider.dart';
-import 'package:helathcareapp/presentation/widgets/hotline.dart';
+import 'package:healthcareapp/common/constant.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/benefits.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/provider.dart';
+import 'package:healthcareapp/presentation/widgets/hotline.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/information.dart';

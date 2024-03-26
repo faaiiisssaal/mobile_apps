@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:equatable/equatable.dart';
-import 'package:helathcareapp/data/models/model_user_benefit.dart';
+import 'package:healthcareapp/data/models/model_user_benefit.dart';
 
 class BenefitUserResponse extends Equatable {
   final List<BenefitUserModel> BenefitUser;

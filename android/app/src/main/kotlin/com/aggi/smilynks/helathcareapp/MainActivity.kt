@@ -1,4 +1,4 @@
-package com.aggi.smilynks.helathcareapp
+package com.aggi.smilynks.healthcareapp
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

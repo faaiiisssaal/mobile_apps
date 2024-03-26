@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:equatable/equatable.dart';
-import 'package:helathcareapp/data/models/model_provider_location.dart';
+import 'package:healthcareapp/data/models/model_provider_location.dart';
 
 class ProviderLocationResponse extends Equatable {
   final List<ProviderLocationModel> ProviderLocation;

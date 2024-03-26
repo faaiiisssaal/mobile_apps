@@ -1,7 +1,7 @@
 // ignore_for_file: equal_keys_in_map
 
 import 'package:equatable/equatable.dart';
-import 'package:helathcareapp/domain/entities/peserta/user_family.dart';
+import 'package:healthcareapp/domain/entities/peserta/user_family.dart';
 
 class FamilyUserModel extends Equatable {
   const FamilyUserModel({

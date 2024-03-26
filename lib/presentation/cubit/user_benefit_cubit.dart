@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:helathcareapp/domain/entities/peserta/benefit_user.dart';
+import 'package:healthcareapp/domain/entities/peserta/benefit_user.dart';
 
 import '../../domain/usecase/post/benefit_user.dart';
 

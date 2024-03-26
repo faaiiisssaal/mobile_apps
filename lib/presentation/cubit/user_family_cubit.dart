@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:helathcareapp/domain/entities/peserta/user_family.dart';
-import 'package:helathcareapp/domain/usecase/post/family_user.dart';
+import 'package:healthcareapp/domain/entities/peserta/user_family.dart';
+import 'package:healthcareapp/domain/usecase/post/family_user.dart';
 
 part 'user_family_state.dart';
 

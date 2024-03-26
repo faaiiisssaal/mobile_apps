@@ -2,11 +2,11 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/home/home.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/profile/about.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/profile/guide.dart';
-import 'package:helathcareapp/presentation/widgets/biometrics.dart';
+import 'package:healthcareapp/common/constant.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/home/home.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/profile/about.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/profile/guide.dart';
+import 'package:healthcareapp/presentation/widgets/biometrics.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import the biometric_utils.dart file
 

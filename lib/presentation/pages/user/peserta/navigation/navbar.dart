@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/form/form.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/history/history.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/home/home.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/profile/profile.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/qr/qrcode.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/form/form.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/history/history.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/home.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/profile/profile.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/qr/qrcode.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});

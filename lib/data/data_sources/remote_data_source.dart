@@ -1,21 +1,21 @@
 import 'dart:convert';
-import 'package:helathcareapp/data/models/model_provider_area.dart';
-import 'package:helathcareapp/data/models/model_user_benefit.dart';
-import 'package:helathcareapp/data/models/model_user_family.dart';
-import 'package:helathcareapp/data/models/response/response_provider_area.dart';
-import 'package:helathcareapp/data/models/response/response_user_benefit.dart';
-import 'package:helathcareapp/data/models/response/response_user_family.dart';
+import 'package:healthcareapp/data/models/model_provider_area.dart';
+import 'package:healthcareapp/data/models/model_user_benefit.dart';
+import 'package:healthcareapp/data/models/model_user_family.dart';
+import 'package:healthcareapp/data/models/response/response_provider_area.dart';
+import 'package:healthcareapp/data/models/response/response_user_benefit.dart';
+import 'package:healthcareapp/data/models/response/response_user_family.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/foundation.dart';
-import 'package:helathcareapp/data/models/model_provider_location.dart';
-import 'package:helathcareapp/common/exception.dart';
-import 'package:helathcareapp/data/models/response/response_provider_location.dart';
-import 'package:helathcareapp/data/models/model_login_user.dart';
-import 'package:helathcareapp/data/models/response/response_login_user.dart';
+import 'package:healthcareapp/data/models/model_provider_location.dart';
+import 'package:healthcareapp/common/exception.dart';
+import 'package:healthcareapp/data/models/response/response_provider_location.dart';
+import 'package:healthcareapp/data/models/model_login_user.dart';
+import 'package:healthcareapp/data/models/response/response_login_user.dart';
 
 abstract class RemoteDataSource {
-  Future<List<ProviderLocationModel>>         getProviderLocation();
+  Future<List<ProviderLocationModel>>         postProviderLocation(Map datafilter);
   Future<List<ProviderAreaModel>>             getProviderArea();
   Future<List<LoginUserModel>>                postLoginUser(Map datalogin);
   Future<List<FamilyUserModel>>               postFamilyUser(Map datafamily);
@@ -23,19 +23,26 @@ abstract class RemoteDataSource {
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  static const baseURL = 'https://0498-103-119-54-150.ngrok-free.app/src/model';
+  static const baseURL = 'https://3966-103-119-54-150.ngrok-free.app/src/model';
 
   final http.Client client;
 
   RemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<ProviderLocationModel>> getProviderLocation() async {
-    final response = await client.get(Uri.parse('$baseURL/provider'));
+  Future<List<ProviderLocationModel>> postProviderLocation(Map datafilter) async {
+    final response = await client.post(
+      Uri.parse('$baseURL/provider'),
+      body: jsonEncode(datafilter), // Encode your .... map to JSON format
+      headers: {
+        'Content-Type': 'application/json', // Specify the content type as JSON
+      },
+    );
 
     if (response.statusCode == 200) {
       if (kDebugMode) {
         print("Response Body: ${json.decode(response.body)}");
+        print('Response status code: ${response.statusCode}');
       }
       return ProviderLocationResponse.fromJson(json.decode(response.body)).ProviderLocation;
     } else {

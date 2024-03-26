@@ -1,19 +1,19 @@
 // ignore_for_file: unused_field, unused_element
 
-import 'package:helathcareapp/common/constant.dart';
+import 'package:healthcareapp/common/constant.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:helathcareapp/presentation/pages/gatepass/forgot%20_member.dart';
-import 'package:helathcareapp/presentation/pages/gatepass/forgot_insurance.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/home/home.dart';
-import 'package:helathcareapp/presentation/pages/user/asuransi/navigation/navbar.dart';
-import 'package:helathcareapp/presentation/pages/user/badanusaha/home/home.dart';
-import 'package:helathcareapp/presentation/pages/user/badanusaha/navigation/navbar.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/home/home.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/navigation/navbar.dart';
-import 'package:helathcareapp/presentation/widgets/biometrics.dart';
+import 'package:healthcareapp/presentation/pages/gatepass/forgot%20_member.dart';
+import 'package:healthcareapp/presentation/pages/gatepass/forgot_insurance.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/home/home.dart';
+import 'package:healthcareapp/presentation/pages/user/asuransi/navigation/navbar.dart';
+import 'package:healthcareapp/presentation/pages/user/badanusaha/home/home.dart';
+import 'package:healthcareapp/presentation/pages/user/badanusaha/navigation/navbar.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/home.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/navigation/navbar.dart';
+import 'package:healthcareapp/presentation/widgets/biometrics.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';

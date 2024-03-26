@@ -1,17 +1,18 @@
 // profile.dart
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/form/form.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/form/form.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:helathcareapp/common/constant.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/profile/about.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/home/home.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/profile/ecard.dart';
-import 'package:helathcareapp/presentation/pages/user/peserta/profile/guide.dart';
+import 'package:healthcareapp/common/constant.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/profile/about.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/home/home.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/profile/ecard.dart';
+import 'package:healthcareapp/presentation/pages/user/peserta/profile/guide.dart';
 
-import 'package:helathcareapp/presentation/widgets/biometrics.dart';
+import 'package:healthcareapp/presentation/widgets/biometrics.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import the biometric_utils.dart file
 
 class ProfilePage extends StatefulWidget {
@@ -28,6 +29,39 @@ class _ProfilePageState extends State<ProfilePage> {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     setState(() {
       _appVersion = packageInfo.version;
+    });
+  }
+
+  String? companyName;
+  String? policyNo;
+  String? cardNo;
+  String? empID;
+  String? memberID;
+  String? memberName;
+  String? classNo;
+  String? memberSex;
+  String? memberPlan;
+  String? memberBirthDate;
+  String? effectiveDate;
+  String? ipDetail;
+  String? opDetail;
+
+  Future<void> getDataLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      companyName = pref.getString("companyName");
+      policyNo = pref.getString("policyNo");
+      cardNo = pref.getString("cardNo");
+      empID = pref.getString("empID");
+      memberID = pref.getString("memberID");
+      memberName = pref.getString("memberName");
+      classNo = pref.getString("classNo");
+      memberSex = pref.getString("memberSex");
+      memberPlan = pref.getString("memberPlan");
+      memberBirthDate = pref.getString("memberBirthDate");
+      effectiveDate = pref.getString("effectiveDate");
+      ipDetail = pref.getString("ipDetail");
+      opDetail = pref.getString("opDetail");
     });
   }
 
@@ -66,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void _showAccountInfoDialog(BuildContext context) {
+  void _showAccountInfoDialog(BuildContext context, String name, String memID, String fam, String policyNo, String dOB, String eP, String plan) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -75,210 +109,223 @@ class _ProfilePageState extends State<ProfilePage> {
           actionsPadding: paddingall(10),
           contentPadding: paddingall(10),
           title: const Text('Account Information'),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // name
-              Row(
+          content: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(
-                    width: 80,
-                    child: Text(
-                      "Name",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  Container(
-                    padding: onlyleft(5),
-                    width: 5,
-                    child: const Text(":"),
-                  ),
-                  Container(
-                      padding: onlyleft(10),
-                      child: const Text(
-                        "Faisal Setiadi",
-                        maxLines: 2,
-                        style: TextStyle(fontSize: 12),
-                      ))
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 80,
-                    child: Text(
-                      "No.",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  Container(
-                    padding: onlyleft(5),
-                    width: 5,
-                    child: const Text(":"),
-                  ),
-                  Container(
-                      padding: onlyleft(10),
-                      child: const Text(
-                        "610026424",
-                        maxLines: 2,
-                        style: TextStyle(fontSize: 12),
-                      ))
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 80,
-                    child: Text(
-                      "Family",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  Container(
-                    padding: onlyleft(5),
-                    width: 5,
-                    child: const Text(":"),
-                  ),
-                  Container(
-                      padding: onlyleft(10),
-                      child: const Text(
-                        "2",
-                        maxLines: 2,
-                        style: TextStyle(fontSize: 12),
-                      ))
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 80,
-                    child: Text(
-                      "Policy No.",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  Container(
-                    padding: onlyleft(5),
-                    width: 5,
-                    child: const Text(":"),
-                  ),
-                  Container(
-                      padding: onlyleft(10),
-                      child: const Text(
-                        "01008615000123",
-                        maxLines: 2,
-                        style: TextStyle(fontSize: 12),
-                      ))
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 80,
-                    child: Text(
-                      "Date of Birth",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  Container(
-                    padding: onlyleft(5),
-                    width: 5,
-                    child: const Text(":"),
-                  ),
-                  Container(
-                      padding: onlyleft(10),
-                      child: const Text(
-                        "September 3, 1996",
-                        maxLines: 2,
-                        style: TextStyle(fontSize: 12),
-                      ))
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 80,
-                    child: Text(
-                      "Effective Plan",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  Container(
-                    padding: onlyleft(5),
-                    width: 5,
-                    child: const Text(":"),
-                  ),
-                  Expanded(
-                    child: Container(
-                        padding: onlyleft(10),
-                        child: const Text(
-                          "Jan 01 2024 to Dec 31 2024",
+                  // name
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        child: Text(
+                          "Name",
+                          maxLines: 3,
                           style: TextStyle(fontSize: 12),
-                        )),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
+                        ),
+                      ),
+                      Container(
+                        padding: onlyleft(5),
+                        width: 5,
+                        child: const Text(":"),
+                      ),
+                      Expanded(
+                        child: Container(
+                            padding: onlyleft(10),
+                            child: Text(
+                              name,
+                              maxLines: 2,
+                              style: const TextStyle(fontSize: 12),
+                            )
+                        ),
+                      )
+                    ],
+                  ),
                   const SizedBox(
-                    width: 80,
-                    child: Text(
-                      "Plan",
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 12),
-                    ),
+                    height: 10,
                   ),
-                  Container(
-                    padding: onlyleft(5),
-                    width: 5,
-                    child: const Text(":"),
-                  ),
-                  Expanded(
-                    child: Container(
-                        padding: onlyleft(10),
-                        child: const Text(
-                          "II",
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        child: Text(
+                          "No.",
                           maxLines: 2,
                           style: TextStyle(fontSize: 12),
-                        )),
-                  )
+                        ),
+                      ),
+                      Container(
+                        padding: onlyleft(5),
+                        width: 5,
+                        child: const Text(":"),
+                      ),
+                      Expanded(
+                        child: Container(
+                            padding: onlyleft(10),
+                            child: Text(
+                              memID,
+                              maxLines: 2,
+                              style: const TextStyle(fontSize: 12),
+                            )),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        child: Text(
+                          "Family",
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      Container(
+                        padding: onlyleft(5),
+                        width: 5,
+                        child: const Text(":"),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: onlyleft(10),
+                          child: Text(
+                            fam,
+                            maxLines: 2,
+                            style: const TextStyle(fontSize: 12),
+                          ))
+                      )],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        child: Text(
+                          "Policy No.",
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      Container(
+                        padding: onlyleft(5),
+                        width: 5,
+                        child: const Text(":"),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: onlyleft(10),
+                          child: Text(
+                            policyNo,
+                            maxLines: 2,
+                            style: const TextStyle(fontSize: 12),
+                          ))
+                      )],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        child: Text(
+                          "Date of Birth",
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      Container(
+                        padding: onlyleft(5),
+                        width: 5,
+                        child: const Text(":"),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: onlyleft(10),
+                          child: Text(
+                            dOB,
+                            maxLines: 2,
+                            style: const TextStyle(fontSize: 12),
+                          ))
+                      )],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        child: Text(
+                          "Effective Plan",
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      Container(
+                        padding: onlyleft(5),
+                        width: 5,
+                        child: const Text(":"),
+                      ),
+                      Expanded(
+                        child: Container(
+                            padding: onlyleft(10),
+                            child: Text(
+                              eP,
+                              style: const TextStyle(fontSize: 12),
+                            )),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        child: Text(
+                          "Plan",
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      Container(
+                        padding: onlyleft(5),
+                        width: 5,
+                        child: const Text(":"),
+                      ),
+                      Expanded(
+                        child: Container(
+                            padding: onlyleft(10),
+                            child: Text(
+                              plan,
+                              maxLines: 2,
+                              style: const TextStyle(fontSize: 12),
+                            )),
+                      )
+                    ],
+                  ),
+                  // Add more information here
                 ],
               ),
-              // Add more information here
-            ],
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Close'),
+              child: const Text('No'),
             ),
           ],
         );
@@ -290,6 +337,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     _getAppVersion();
+    getDataLogin();
     // Call the function to check biometric availability
     checkBiometricAvailability();
   }
@@ -321,7 +369,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       leading: const Icon(Icons.perm_identity_outlined),
                       title: const Text('My Account'),
                       onTap: () {
-                        _showAccountInfoDialog(context);
+                        _showAccountInfoDialog(context, memberName!, empID!, classNo!, policyNo!, memberBirthDate!, effectiveDate!, memberPlan!);
                       },
                     ),
                     ListTile(

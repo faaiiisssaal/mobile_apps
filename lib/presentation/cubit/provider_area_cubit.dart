@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:helathcareapp/domain/entities/peserta/provider_area.dart';
-import 'package:helathcareapp/domain/usecase/get/provider_area.dart';
+import 'package:healthcareapp/domain/entities/peserta/provider_area.dart';
+import 'package:healthcareapp/domain/usecase/get/provider_area.dart';
 
 part 'provider_area_state.dart';
 

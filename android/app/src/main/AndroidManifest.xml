@@ -20,7 +20,7 @@
     </queries>
     <!--suppress AndroidDomInspection, AndroidUnknownAttribute -->
     <application
-        android:label="helathcareapp"
+        android:label="healthcareapp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <!--suppress AndroidDomInspection, AndroidUnknownAttribute -->
