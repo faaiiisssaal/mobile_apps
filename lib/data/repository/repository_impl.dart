@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:healthcareapp/domain/entities/peserta/benefit_user.dart';
 import 'package:healthcareapp/domain/entities/peserta/claim_info.dart';
+import 'package:healthcareapp/domain/entities/peserta/claim_list.dart';
 import 'package:healthcareapp/domain/entities/peserta/login_user.dart';
 import 'package:healthcareapp/domain/entities/peserta/provider_area.dart';
 import 'package:healthcareapp/domain/entities/peserta/provider_location.dart';
@@ -106,9 +107,17 @@ class RepositoryImpl implements Repository {
     }
   }
 
-  // @override
-  // Future<Either<Failure, List<dynamic>>> postClaimListUser(Map dataclaimlist) {
-  //   // TODO: implement postClaimListUser
-  //   throw UnimplementedError();
-  // }
+  @override
+  Future<Either<Failure, List<ClaimListUser>>> postClaimListUser(Map dataclaimlist) async {
+    try {
+      final result = await remoteDataSource.postClaimListUser(dataclaimlist);
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Unable to establish a connection to the network.'));
+    } catch (e) {
+      return Left(CommonFailure(e.toString()));
+    }
+  }
 }

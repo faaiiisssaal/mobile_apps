@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:healthcareapp/data/models/mode_claim_info.dart';
+import 'package:healthcareapp/data/models/model_claim_list.dart';
 import 'package:healthcareapp/data/models/model_provider_area.dart';
 import 'package:healthcareapp/data/models/model_user_benefit.dart';
 import 'package:healthcareapp/data/models/model_user_family.dart';
 import 'package:healthcareapp/data/models/response/response_claim_info.dart';
+import 'package:healthcareapp/data/models/response/response_claim_list.dart';
 import 'package:healthcareapp/data/models/response/response_provider_area.dart';
 import 'package:healthcareapp/data/models/response/response_user_benefit.dart';
 import 'package:healthcareapp/data/models/response/response_user_family.dart';
@@ -23,10 +25,11 @@ abstract class RemoteDataSource {
   Future<List<FamilyUserModel>>               postFamilyUser(Map datafamily);
   Future<List<BenefitUserModel>>              postBenefitUser(Map databenefit);
   Future<List<ClaimInfoUserModel>>            postClaimInfoUser(Map dataclaiminfo);
+  Future<List<ClaimListUserModel>>            postClaimListUser(Map dataclaimlist);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  static const baseURL = 'https://3966-103-119-54-150.ngrok-free.app/src/model';
+  static const baseURL = 'https://d23b-103-119-54-150.ngrok-free.app/src/model';
 
   final http.Client client;
 
@@ -126,6 +129,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
+  @override
   Future<List<BenefitUserModel>> postBenefitUser(Map databenefit) async {
     final response = await client.post(
       Uri.parse('$baseURL/benefituser'),
@@ -166,6 +170,31 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         print('Response status code: ${response.statusCode}');
       }
       return ClaimInfoUserResponse.fromJson(json.decode(response.body)).ClaimInfoUser;
+    } else {
+      if (kDebugMode) {
+        print('Response status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<ClaimListUserModel>> postClaimListUser(Map dataclaimlist) async {
+    final response = await client.post(
+      Uri.parse('$baseURL/benefituser'),
+      body: jsonEncode(dataclaimlist), // Encode your .... map to JSON format
+      headers: {
+        'Content-Type': 'application/json', // Specify the content type as JSON
+      },
+    );
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("Response Body: ${json.decode(response.body)}");
+        print('Response status code: ${response.statusCode}');
+      }
+      return ClaimListUserResponse.fromJson(json.decode(response.body)).ClaimListUser;
     } else {
       if (kDebugMode) {
         print('Response status code: ${response.statusCode}');

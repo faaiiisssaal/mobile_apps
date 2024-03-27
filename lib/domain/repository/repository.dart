@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:healthcareapp/common/failure.dart';
 import 'package:healthcareapp/domain/entities/peserta/benefit_user.dart';
 import 'package:healthcareapp/domain/entities/peserta/claim_info.dart';
+import 'package:healthcareapp/domain/entities/peserta/claim_list.dart';
 import 'package:healthcareapp/domain/entities/peserta/login_user.dart';
 import 'package:healthcareapp/domain/entities/peserta/provider_area.dart';
 import 'package:healthcareapp/domain/entities/peserta/provider_location.dart';
@@ -17,5 +18,5 @@ abstract class Repository {
   Future<Either<Failure, List<FamilyUser>>>              postFamilyUser(Map datafamily);
   // Future<Either<Failure, List<ClaimDetailUser>>>         postClaimDetailUser(Map dataclaimdetail);
   Future<Either<Failure, List<ClaimInfoUser>>>           postClaimInfoUser(Map dataclaiminfo);
-  // Future<Either<Failure, List<ClaimListuser>>>           postClaimListUser(Map dataclaimlist);
+  Future<Either<Failure, List<ClaimListUser>>>           postClaimListUser(Map dataclaimlist);
 }
