@@ -219,6 +219,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void saveDataloginuser(
       String companyName,
+      String clientID,
       String policyNo,
       String cardNo,
       String empID,
@@ -234,6 +235,7 @@ class _SignInScreenState extends State<SignInScreen> {
       ) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString("companyName", companyName);
+    pref.setString("clientID", clientID);
     pref.setString("policyNo", policyNo);
     pref.setString("cardNo", cardNo);
     pref.setString("empID", empID);
@@ -283,6 +285,7 @@ class _SignInScreenState extends State<SignInScreen> {
           for (int i = 0; i < value.length; i++) {
             saveDataloginuser(
               value[i].companyName.toString(),
+              value[i].clientID.toString(),
               value[i].policyNo.toString(),
               value[i].cardNo.toString(),
               value[i].empID.toString(),

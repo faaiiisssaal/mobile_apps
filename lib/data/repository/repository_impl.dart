@@ -4,6 +4,8 @@ import 'package:healthcareapp/domain/entities/peserta/benefit_user.dart';
 import 'package:healthcareapp/domain/entities/peserta/claim_info.dart';
 import 'package:healthcareapp/domain/entities/peserta/claim_list.dart';
 import 'package:healthcareapp/domain/entities/peserta/login_user.dart';
+import 'package:healthcareapp/domain/entities/peserta/policy_check.dart';
+import 'package:healthcareapp/domain/entities/peserta/policy_num.dart';
 import 'package:healthcareapp/domain/entities/peserta/provider_area.dart';
 import 'package:healthcareapp/domain/entities/peserta/provider_location.dart';
 import 'package:healthcareapp/domain/entities/peserta/user_family.dart';
@@ -111,6 +113,34 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<ClaimListUser>>> postClaimListUser(Map dataclaimlist) async {
     try {
       final result = await remoteDataSource.postClaimListUser(dataclaimlist);
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Unable to establish a connection to the network.'));
+    } catch (e) {
+      return Left(CommonFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Policy>>> postPolicy(Map datapolicy) async {
+    try {
+      final result = await remoteDataSource.postPolicy(datapolicy);
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Unable to establish a connection to the network.'));
+    } catch (e) {
+      return Left(CommonFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PolicyCheck>>> postPolicyCheck(Map datapolicycheck) async {
+    try {
+      final result = await remoteDataSource.postPolicyCheck(datapolicycheck);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return const Left(ServerFailure(''));

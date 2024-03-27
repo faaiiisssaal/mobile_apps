@@ -6,6 +6,7 @@ import 'package:healthcareapp/domain/entities/peserta/login_user.dart';
 class LoginUserModel extends Equatable {
   const LoginUserModel({
     required this.companyName,
+    required this.clientID,
     required this.policyNo,
     required this.cardNo,
     required this.empID,
@@ -20,6 +21,7 @@ class LoginUserModel extends Equatable {
     required this.opDetail});
 
   final String? companyName;
+  final String? clientID;
   final String? policyNo;
   final String? cardNo;
   final String? empID;
@@ -35,6 +37,7 @@ class LoginUserModel extends Equatable {
 
   factory LoginUserModel.fromJson(Map<String, dynamic> json) => LoginUserModel(
         companyName: json['companyName'],
+        clientID: json['clientID'],
         policyNo: json['policyNo'],
         cardNo: json['cardNo'],
         empID: json['empID'],
@@ -51,6 +54,7 @@ class LoginUserModel extends Equatable {
 
   Map<String, dynamic> toJson() => {
         "companyName": companyName,
+        "clientID": clientID,
         "policyNo": policyNo,
         "cardNo": cardNo,
         "empID": empID,
@@ -68,6 +72,7 @@ class LoginUserModel extends Equatable {
   LoginUser toEntity() {
     return LoginUser(
       companyName: companyName,
+      clientID: clientID,
       policyNo: policyNo,
       cardNo: cardNo,
       empID: empID,
@@ -86,6 +91,7 @@ class LoginUserModel extends Equatable {
   @override
   List<Object?> get props => [
         companyName,
+        clientID,
         policyNo,
         cardNo,
         empID,

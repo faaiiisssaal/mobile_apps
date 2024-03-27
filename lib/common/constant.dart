@@ -116,14 +116,17 @@ EdgeInsetsGeometry bottomleftright(double bottom, double left, double right) {
 }
 
 EdgeInsetsGeometry topbottomleft(double top, double bottom, double left) {
-  return EdgeInsets.only(top: top, bottom: bottom, right: left);
+  return EdgeInsets.only(top: top, bottom: bottom, left: left);
 }
 
 EdgeInsetsGeometry topbottomright(double top, double bottom, double right) {
-  return EdgeInsets.only(top: top, bottom: bottom, left: right);
+  return EdgeInsets.only(top: top, bottom: bottom, right: right);
 }
 // 3 margin/padding
 
+EdgeInsetsGeometry topbottomrightleft(double top, double bottom, double right, double left) {
+  return EdgeInsets.only(top: top, bottom: bottom, right: right, left: left);
+}
 
 // Widget Size
 double mediaheight(double height, BuildContext context) {

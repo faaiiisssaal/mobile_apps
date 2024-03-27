@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'package:healthcareapp/data/models/mode_claim_info.dart';
 import 'package:healthcareapp/data/models/model_claim_list.dart';
+import 'package:healthcareapp/data/models/model_policy_check.dart';
+import 'package:healthcareapp/data/models/model_policy_num.dart';
 import 'package:healthcareapp/data/models/model_provider_area.dart';
 import 'package:healthcareapp/data/models/model_user_benefit.dart';
 import 'package:healthcareapp/data/models/model_user_family.dart';
 import 'package:healthcareapp/data/models/response/response_claim_info.dart';
 import 'package:healthcareapp/data/models/response/response_claim_list.dart';
+import 'package:healthcareapp/data/models/response/response_policy_check.dart';
+import 'package:healthcareapp/data/models/response/response_policy_num.dart';
 import 'package:healthcareapp/data/models/response/response_provider_area.dart';
 import 'package:healthcareapp/data/models/response/response_user_benefit.dart';
 import 'package:healthcareapp/data/models/response/response_user_family.dart';
@@ -23,13 +27,15 @@ abstract class RemoteDataSource {
   Future<List<ProviderAreaModel>>             getProviderArea();
   Future<List<LoginUserModel>>                postLoginUser(Map datalogin);
   Future<List<FamilyUserModel>>               postFamilyUser(Map datafamily);
+  Future<List<PolicyModel>>                   postPolicy(Map datapolicy);
+  Future<List<PolicyCheckModel>>              postPolicyCheck(Map datapolicycheck);
   Future<List<BenefitUserModel>>              postBenefitUser(Map databenefit);
   Future<List<ClaimInfoUserModel>>            postClaimInfoUser(Map dataclaiminfo);
   Future<List<ClaimListUserModel>>            postClaimListUser(Map dataclaimlist);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  static const baseURL = 'https://d23b-103-119-54-150.ngrok-free.app/src/model';
+  static const baseURL = 'https://5526-103-119-54-150.ngrok-free.app/src/model';
 
   final http.Client client;
 
@@ -59,7 +65,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       throw ServerException();
     }
   }
-
 
   @override
   Future<List<ProviderAreaModel>> getProviderArea() async {
@@ -195,6 +200,56 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         print('Response status code: ${response.statusCode}');
       }
       return ClaimListUserResponse.fromJson(json.decode(response.body)).ClaimListUser;
+    } else {
+      if (kDebugMode) {
+        print('Response status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<PolicyModel>> postPolicy(Map datapolicy) async {
+    final response = await client.post(
+      Uri.parse('$baseURL/policysort'),
+      body: jsonEncode(datapolicy), // Encode your .... map to JSON format
+      headers: {
+        'Content-Type': 'application/json', // Specify the content type as JSON
+      },
+    );
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("Response Body: ${json.decode(response.body)}");
+        print('Response status code: ${response.statusCode}');
+      }
+      return PolicyResponse.fromJson(json.decode(response.body)).Policy;
+    } else {
+      if (kDebugMode) {
+        print('Response status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<PolicyCheckModel>> postPolicyCheck(Map datapolicycheck) async {
+    final response = await client.post(
+      Uri.parse('$baseURL/policysort'),
+      body: jsonEncode(datapolicycheck), // Encode your .... map to JSON format
+      headers: {
+        'Content-Type': 'application/json', // Specify the content type as JSON
+      },
+    );
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("Response Body: ${json.decode(response.body)}");
+        print('Response status code: ${response.statusCode}');
+      }
+      return PolicyCheckResponse.fromJson(json.decode(response.body)).PolicyCheck;
     } else {
       if (kDebugMode) {
         print('Response status code: ${response.statusCode}');

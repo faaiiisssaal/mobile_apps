@@ -1,5 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcareapp/common/constant.dart';
+import 'package:healthcareapp/domain/entities/peserta/policy_check.dart';
+import 'package:healthcareapp/presentation/cubit/policy_check_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/user_family_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -11,7 +17,48 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
 
   String? dropDownValue1;
-  String dropDownValue2 = "2352352366261116";
+  String? dropDownValue2;
+
+  String? memberID;
+  Map<String?, dynamic> datafamily = {};
+  void loadDataFamily() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    memberID = pref.getString("empID");
+    datafamily = {
+      "empid": "$memberID",
+    };
+    if (kDebugMode) {
+      print(datafamily);
+      print(memberID);
+    }
+    Future.microtask(
+          () => context.read<FamilyUserCubit>().post(datafamily),
+    );
+  }
+
+  String? clientID;
+  Map<String?, dynamic> datapolicycheck = {};
+  void loadDataPolicyCheckSort() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    clientID = pref.getString("clientID");
+    datapolicycheck = {
+      "clientID": "C01PP00005",
+    };
+    if (kDebugMode) {
+      print(clientID);
+      print(datapolicycheck);
+    }
+    Future.microtask(
+          () => context.read<PolicyCheckCubit>().post(datapolicycheck),
+    );
+  }
+
+  @override
+  void initState() {
+    loadDataFamily();
+    loadDataPolicyCheckSort();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +69,16 @@ class _HistoryPageState extends State<HistoryPage> {
           body: Column(
             children: [
               Container(
-                padding: paddingall(10),
-                height: 200,
+                padding: topbottomrightleft(10, 25, 15, 15),
                 decoration: const BoxDecoration(
                   color: kSkyBlue,
                   borderRadius: r10,
                 ),
-                margin: topleftright(10, 10, 10),
+                margin: paddingall(10),
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
@@ -49,40 +95,9 @@ class _HistoryPageState extends State<HistoryPage> {
                             width: 5,
                             child: const Text(":"),
                           ),
+                          wp10,
                           Expanded(
-                            child: ButtonTheme(
-                              alignedDropdown: true,
-                              child: DropdownButton<String>(
-                                padding: paddingall(0),
-                                isExpanded: true,
-                                value: dropDownValue1,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    dropDownValue1 = newValue!;
-                                  });
-                                },
-                                items: const [
-                                  DropdownMenuItem<String>(
-                                    value: "LALA",
-                                    child: Text(
-                                        "LALA",
-                                    ),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: "LILI",
-                                    child: Text("LILI"),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: "Ni Made Raysita Iswari Nuramanda Pande",
-                                    child: Text("Ni Made Raysita Iswari Nuramanda Pande"),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: "LELE",
-                                    child: Text("LELE"),
-                                  ),
-                                ],
-                              ),
-                            )
+                            child: buildBlocBuilderUserCategory()
                           )
                         ],
                       ),
@@ -97,34 +112,13 @@ class _HistoryPageState extends State<HistoryPage> {
                             width: 5,
                             child: const Text(":"),
                           ),
+                          wp10,
                           Expanded(
-                              child: ButtonTheme(
-                                alignedDropdown: true,
-                                child: DropdownButton<String>(
-                                  padding: paddingall(0),
-                                  isExpanded: true,
-                                  value: dropDownValue2,
-                                  onChanged: (String? newValue2) {
-                                    setState(() {
-                                      dropDownValue2 = newValue2!;
-                                    });
-                                  },
-                                  items: const [
-                                    DropdownMenuItem<String>(
-                                      value: "2352352366261116",
-                                      child: Text("2352352366261116"),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: "2352352366260000",
-                                      child: Text("2352352366260000"),
-                                    ),
-                                  ],
-                                ),
-                              )
+                              child: buildBlocBuilderPolicyCheckCategory()
                           )
                         ],
                       ),
-                      hp10,
+                      hp20,
                       Row(
                         children: [
                           const SizedBox(
@@ -136,10 +130,30 @@ class _HistoryPageState extends State<HistoryPage> {
                             width: 5,
                             child: const Text(":"),
                           ),
+                          wp10,
                           Expanded(
-                              child: Container(
-                                padding: onlyleft(15),
-                                  child: const Text("Jan 01 2024 to Dec 01 2024"))
+                            child: BlocBuilder<PolicyCheckCubit, PolicyCheckState>(
+                              builder: (context, state) {
+                                if (state is PolicyCheckLoadedState) {
+                                  // Check if dropDownValue2 is not null
+                                  if (dropDownValue2 != null) {
+                                    // Find the selected policy item
+                                    var selectedPolicy = state.items.firstWhere(
+                                          (item) => item.policyID == dropDownValue2,
+                                      orElse: () => const PolicyCheck(effectiveDate: '', renewalDate: '', policyID: '', clientID: ''),
+                                    );
+
+                                    // If the selected policy is found, display the effective policy
+                                    return Text("${selectedPolicy.effectiveDate} to ${selectedPolicy.renewalDate}");
+                                                                    }
+                                }
+                                // If no policy is selected or not found, display default text
+                                return Container(
+                                  padding: onlyleft(15),
+                                  child: const Text("Jan 01 2024 to Dec 01 2024"),
+                                );
+                              },
+                            ),
                           )
                         ],
                       )
@@ -154,59 +168,114 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
-  // BlocBuilder<FamilyUserCubit, FamilyUserState> buildBlocBuilderMenuCategory() {
-  //   return BlocBuilder<FamilyUserCubit, FamilyUserState>(
-  //     builder: (context, state) {
-  //       if (state is FamilyUserLoadingState) {
-  //         if (kDebugMode) {
-  //           print('API Family User are Loading $state');
-  //         }
-  //         return const Center(child: SizedBox(height: 15, width: 15, child: CircularProgressIndicator()));
-  //       } else if (state is FamilyUserLoadedState) {
-  //         if (kDebugMode) {
-  //           print('API Family User are Loaded: $state');
-  //         }
-  //         return DropdownButton<String>(
-  //           isExpanded: true,
-  //           hint: const Text("Pilih Member"),
-  //           value: dropDownValue1,
-  //           onChanged: (value) {
-  //             setState(() {
-  //               dropDownValue1 = value;
-  //               databenefit = {"memberno": "$value", "plan": "%%"};
-  //               Future.microtask(
-  //                     () => context.read<BenefitUserCubit>().post(databenefit),
-  //               );
-  //             });
-  //             if (kDebugMode) {
-  //               print(value);
-  //             }
-  //           },
-  //           items: state.items.map((card) {
-  //             return DropdownMenuItem<String>(
-  //               value: card.memberno,
-  //               child: Text(card.name ?? ''),
-  //             );
-  //           }).toList(),
-  //         );
-  //       } else if (state is FamilyUserErrorState) {
-  //         return Center(
-  //           key: const Key('error_message'),
-  //           child: Text(
-  //             state.message,
-  //             style: const TextStyle(color: kPureBlack),
-  //           ),
-  //         );
-  //       } else {
-  //         return const Center(
-  //           key: Key('error_message'),
-  //           child: Text(
-  //             'error',
-  //             style: TextStyle(color: kPureBlack),
-  //           ),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
+  BlocBuilder<FamilyUserCubit, FamilyUserState> buildBlocBuilderUserCategory() {
+    return BlocBuilder<FamilyUserCubit, FamilyUserState>(
+      builder: (context, state) {
+        if (state is FamilyUserLoadingState) {
+          if (kDebugMode) {
+            print('API Family User are Loading $state');
+          }
+          return Container();
+        } else if (state is FamilyUserLoadedState) {
+          if (kDebugMode) {
+            print('API Family User are Loaded: $state');
+          }
+          return DropdownButton<String>(
+            isExpanded: true,
+            hint: const Text("Pilih Member"),
+            value: dropDownValue1,
+            onChanged: (value) {
+              setState(() {
+                dropDownValue1 = value;
+                // databenefit = {"memberno": "$value", "plan": "%%"};
+                // Future.microtask(
+                //       () => context.read<BenefitUserCubit>().post(databenefit),
+                // );
+              });
+              if (kDebugMode) {
+                print(value);
+              }
+            },
+            items: state.items.map((card) {
+              return DropdownMenuItem<String>(
+                value: card.memberno,
+                child: Text(card.name ?? ''),
+              );
+            }).toList(),
+          );
+        } else if (state is FamilyUserErrorState) {
+          return Center(
+            key: const Key('error_message'),
+            child: Text(
+              state.message,
+              style: const TextStyle(color: kPureBlack),
+            ),
+          );
+        } else {
+          return const Center(
+            key: Key('error_message'),
+            child: Text(
+              'error',
+              style: TextStyle(color: kPureBlack),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  BlocBuilder<PolicyCheckCubit, PolicyCheckState> buildBlocBuilderPolicyCheckCategory() {
+    return BlocBuilder<PolicyCheckCubit, PolicyCheckState>(
+      builder: (context, state) {
+        if (state is PolicyCheckLoadingState) {
+          if (kDebugMode) {
+            print('API PolicyCheck User are Loading $state');
+          }
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is PolicyCheckLoadedState) {
+          if (kDebugMode) {
+            print('API PolicyCheck User are Loaded: $state');
+          }
+          return DropdownButton<String>(
+            isExpanded: true,
+            value: dropDownValue2,
+            onChanged: (value) {
+              setState(() {
+                dropDownValue2 = value;
+                // databenefit = {"memberno": "$value", "plan": "%%"};
+                // Future.microtask(
+                //       () => context.read<BenefitUserCubit>().post(databenefit),
+                // );
+              });
+              if (kDebugMode) {
+                print(value);
+              }
+            },
+            items: state.items.map((card) {
+              return DropdownMenuItem<String>(
+                value: card.policyID,
+                child: Text(card.policyID ?? ''),
+              );
+            }).toList(),
+          );
+        } else if (state is PolicyCheckErrorState) {
+          return Center(
+            key: const Key('error_message'),
+            child: Text(
+              state.message,
+              style: const TextStyle(color: kPureBlack),
+            ),
+          );
+        } else {
+          return const Center(
+            key: Key('error_message'),
+            child: Text(
+              'error',
+              style: TextStyle(color: kPureBlack),
+            ),
+          );
+        }
+      },
+    );
+  }
 }

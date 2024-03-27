@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthcareapp/presentation/cubit/claim_info_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/claim_list_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/policy_check_cubit.dart';
+import 'package:healthcareapp/presentation/cubit/policy_num_cubit.dart';
 import 'package:healthcareapp/presentation/cubit/provider_area_cubit.dart';
 import 'package:healthcareapp/presentation/pages/user/peserta/home/benefits.dart';
 import 'package:healthcareapp/presentation/pages/user/peserta/home/provider_search.dart';
@@ -48,6 +52,9 @@ class MyApp extends StatelessWidget {
     );
     return MultiBlocProvider(
       providers: [
+        BlocProvider<ProviderAreaCubit>(
+          create: (context) => di.locator<ProviderAreaCubit>(),
+        ),
         BlocProvider<ProviderLocationCubit>(
           create: (context) => di.locator<ProviderLocationCubit>(),
         ),
@@ -60,8 +67,17 @@ class MyApp extends StatelessWidget {
         BlocProvider<BenefitUserCubit>(
           create: (context) => di.locator<BenefitUserCubit>(),
         ),
-        BlocProvider<ProviderAreaCubit>(
-          create: (context) => di.locator<ProviderAreaCubit>(),
+        BlocProvider<ClaimListUserCubit>(
+          create: (context) => di.locator<ClaimListUserCubit>(),
+        ),
+        BlocProvider<ClaimInfoUserCubit>(
+          create: (context) => di.locator<ClaimInfoUserCubit>(),
+        ),
+        BlocProvider<PolicyCubit>(
+          create: (context) => di.locator<PolicyCubit>(),
+        ),
+        BlocProvider<PolicyCheckCubit>(
+          create: (context) => di.locator<PolicyCheckCubit>(),
         ),
       ],
       child: MaterialApp(
