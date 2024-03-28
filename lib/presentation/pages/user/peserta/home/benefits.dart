@@ -45,12 +45,12 @@ class _BenefitPageState extends State<BenefitPage> {
   Map<String?, dynamic> datafamily = {};
   void loadDataFamily() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    memberNo = pref.getString("empID");
+    memberID = pref.getString("empID");
     if (kDebugMode) {
-      print(memberNo);
+      print('empid: ${memberID!}');
     }
     datafamily = {
-      "empid": "$memberNo",
+      "empid": "$memberID",
     };
     Future.microtask(
       () => context.read<FamilyUserCubit>().post(datafamily),
@@ -60,6 +60,10 @@ class _BenefitPageState extends State<BenefitPage> {
   @override
   void initState() {
     super.initState();
+    databenefit = {"memberno": "$memberID", "plan": "%%"};
+    Future.microtask(
+          () => context.read<BenefitUserCubit>().post(databenefit),
+    );
     loadData();
     loadDataFamily();
   }
@@ -140,28 +144,31 @@ class _BenefitPageState extends State<BenefitPage> {
           if (kDebugMode) {
             print('API Family User are Loaded: $state');
           }
-          return DropdownButton<String>(
-            isExpanded: true,
-            hint: const Text("Pilih Member"),
-            value: dropDownValue1,
-            onChanged: (value) {
-              setState(() {
-                dropDownValue1 = value;
-                databenefit = {"memberno": "$value", "plan": "%%"};
-                Future.microtask(
-                  () => context.read<BenefitUserCubit>().post(databenefit),
-                );
-              });
-              if (kDebugMode) {
-                print(value);
-              }
-            },
-            items: state.items.map((card) {
-              return DropdownMenuItem<String>(
-                value: card.memberno,
-                child: Text(card.name ?? ''),
+          return FutureBuilder<String>(
+            future: _getStoredDropDownValue(),
+            builder: (context, snapshot) {
+              final initialDropDownValue =
+                  snapshot.data ?? state.items.first.memberno;
+              return DropdownButton<String>(
+                isExpanded: true,
+                value: dropDownValue1 ?? initialDropDownValue,
+                onChanged: (value) async {
+                  setState(() {
+                    dropDownValue1 = value;
+                    databenefit = {"memberno": "$value", "plan": "%%"};
+                    Future.microtask(
+                          () => context.read<BenefitUserCubit>().post(databenefit),
+                    );
+                  });
+                },
+                items: state.items.map((card) {
+                  return DropdownMenuItem<String>(
+                    value: card.memberno,
+                    child: Text(card.name ?? ''),
+                  );
+                }).toList(),
               );
-            }).toList(),
+            },
           );
         } else if (state is FamilyUserErrorState) {
           return Center(
@@ -182,6 +189,11 @@ class _BenefitPageState extends State<BenefitPage> {
         }
       },
     );
+  }
+
+  Future<String> _getStoredDropDownValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('member')!;
   }
 
   BlocBuilder<BenefitUserCubit, BenefitUserState> buildDataProvider() {
